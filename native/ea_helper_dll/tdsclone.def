@@ -1,0 +1,10 @@
+; Module 4 — bảng export cho tdsclone.dll
+; __stdcall trên x86 bị MSVC "decorate" thành _TDS_SpreadAt@4 ... DEF file ép tên
+; export "sạch" để MQL4 #import tìm đúng symbol.
+LIBRARY tdsclone
+EXPORTS
+    TDS_Load
+    TDS_SpreadAt
+    TDS_SlippageAt
+    TDS_SetSlippage
+    TDS_Count

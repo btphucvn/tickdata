@@ -1,0 +1,51 @@
+# =============================================================================
+#  TDS-Clone — pyproject.toml
+# -----------------------------------------------------------------------------
+#  Bộ công cụ tải tick-data, lưu trữ, và convert sang định dạng MT4 Strategy
+#  Tester (.fxt / .hst) với hỗ trợ variable-spread. Xem TDS_CLONE_ARCHITECTURE.md.
+#
+#  THIẾT KẾ PHỤ THUỘC:
+#    * Phần lõi (Module 1/2/3) chỉ dùng STANDARD LIBRARY của Python  -> chạy ngay,
+#      không cần `pip install` gì cả (urllib, lzma, struct, sqlite3, threading...).
+#    * Các phụ thuộc "nặng" là TUỲ CHỌN (optional extras):
+#        - [gui]     : PySide6   -> Module 6 (giao diện desktop).
+#        - [parquet] : pyarrow   -> lưu Tick Store dưới dạng Parquet thay vì .tickbin.
+#        - [fast]    : polars     -> tăng tốc query khi data lớn.
+#        - [dev]     : pytest     -> chạy test (test cũng chạy được bằng `python -m`).
+# =============================================================================
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tdsclone"
+version = "0.1.0"
+description = "Tick Data Suite functional clone — downloader, tick store, FXT/HST builder, variable-spread."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "phuc" }]
+keywords = ["forex", "tick-data", "mt4", "metatrader", "backtest", "fxt", "dukascopy"]
+
+# Lõi không cần dependency runtime nào — tất cả là stdlib.
+dependencies = []
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.5"]
+parquet = ["pyarrow>=14"]
+fast = ["polars>=0.20"]
+dev = ["pytest>=7"]
+# Cài tất cả: pip install -e ".[gui,parquet,fast,dev]"
+all = ["PySide6>=6.5", "pyarrow>=14", "polars>=0.20", "pytest>=7"]
+
+[project.scripts]
+# Sau khi `pip install -e .` sẽ có 2 lệnh CLI:
+tdsclone = "tdsclone.cli:main"          # orchestrator dòng lệnh (download/convert/...)
+tdsclone-gui = "tdsclone.gui.app:main"  # mở giao diện PySide6
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.pytest.ini_options]
+testpaths = ["python/tests"]
