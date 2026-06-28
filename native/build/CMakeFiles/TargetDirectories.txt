@@ -1,0 +1,15 @@
+C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/third_party/minhook/CMakeFiles/minhook.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/third_party/minhook/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/third_party/minhook/CMakeFiles/ALL_BUILD.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/ea_helper_dll/CMakeFiles/tdsclone.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/ea_helper_dll/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/injector/CMakeFiles/injector.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/injector/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/CMakeFiles/sigscan_lib.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/CMakeFiles/sigscan.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/hook/CMakeFiles/tdshook.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/hook/CMakeFiles/INSTALL.dir

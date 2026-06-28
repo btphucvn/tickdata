@@ -1,0 +1,12 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Phuc/Desktop/tickdata/native/build/cmake_install.cmake",
+		"C:/Users/Phuc/Desktop/tickdata/native/build/third_party/minhook/cmake_install.cmake",
+		"C:/Users/Phuc/Desktop/tickdata/native/build/ea_helper_dll/cmake_install.cmake",
+		"C:/Users/Phuc/Desktop/tickdata/native/build/injector/cmake_install.cmake",
+		"C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/cmake_install.cmake",
+		"C:/Users/Phuc/Desktop/tickdata/native/build/hook/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

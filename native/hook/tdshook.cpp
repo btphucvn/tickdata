@@ -50,8 +50,9 @@ namespace {
     double                 g_point = 0.00001; // point của symbol (orchestrator set)
 
     // --- Con trỏ tới hàm gốc (trampoline do MinHook tạo) -------------------
-    // Chữ ký GIẢ ĐỊNH: hàm thiscall trả giá double theo tickTime.
-    typedef double(__thiscall* GetQuote_t)(void* self, int tickTime);
+    // __thiscall không dùng được trên free function trong MSVC. Workaround chuẩn:
+    // dùng __fastcall — ECX=this (arg1), EDX=dummy (arg2 bỏ qua), rồi args stack.
+    typedef double(__fastcall* GetQuote_t)(void* self, void* edx_unused, int tickTime);
     GetQuote_t orig_GetQuote = nullptr;
 
     // Signature GIẢ ĐỊNH của hàm mục tiêu — THAY bằng signature thật từ Ghidra.
@@ -82,9 +83,9 @@ static float LookupSpread(int unixTime)
 //  Ở đây minh hoạ "giá trả về là BID, ta cộng spread để dựng ASK". Logic THẬT
 //  phụ thuộc hàm bạn hook trả gì (bid? ask? mid?) — điều chỉnh sau khi RE.
 // ----------------------------------------------------------------------------
-static double __thiscall Hook_GetQuote(void* self, int tickTime)
+static double __fastcall Hook_GetQuote(void* self, void* edx_unused, int tickTime)
 {
-    double real = orig_GetQuote(self, tickTime);          // giá gốc của tester
+    double real = orig_GetQuote(self, nullptr, tickTime); // giá gốc của tester
     float  spPts = LookupSpread(tickTime);                 // spread points động
     double ask = real + spPts * g_point;                   // dựng ask = bid + spread
     return ask;
