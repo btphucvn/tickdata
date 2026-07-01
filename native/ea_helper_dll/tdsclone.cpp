@@ -1,142 +1,136 @@
 // ============================================================================
-//  Module 4 — EA Helper DLL  (Cách C2: sạch & dễ, KHÔNG inject)
-//  TDS_CLONE_ARCHITECTURE.md — mục 4.
+// Module 4 — EA Helper DLL  (khong can inject, khong can quyen Admin)
 // ----------------------------------------------------------------------------
-//  DLL export vài hàm cho EA gọi qua `#import`, trả spread/slippage ĐỘNG theo
-//  thời gian tick. Vì MT4 chính thức hỗ trợ #import nên cách này KHÔNG gãy khi
-//  MT4 update (khác hẳn Module 5 hook runtime).
+// MT4 EA goi qua #import de lay spread dong tu Dukascopy (qua shared memory).
+// Shared memory duoc tao boi orchestrator.py.
 //
-//  Calling convention: __stdcall  (BẮT BUỘC cho #import của MQL4).
-//  Bitness:            x86 (32-bit) — cùng MT4.  String MQL4 -> truyền dạng
-//                      char* ANSI khi #import "string"? MQL4 truyền `string` như
-//                      `const char*` (ANSI). Ở đây nhận const char* cho path.
+// MT4 #import:
+//   #import "tdsclone.dll"
+//     int    TDS_Load(string dummy);       // ket noi shared mem (goi 1 lan OnInit)
+//     double TDS_SpreadAt(int time_sec);   // spread (points) tai thoi diem nay
+//     double TDS_Point();                  // pip size
+//     double TDS_SlippageAt(int time_sec); // slippage (0 neu khong co data)
+//   #import
 //
-//  Luồng dùng:
-//    1. Python sinh file .tdspread (xem python/tdsclone/convert/spread_file.py):
-//         magic "TDSSPRD1" | uint32 count | count*{ int32 unixTime; float points }
-//       SẮP XẾP tăng theo unixTime.
-//    2. EA gọi TDS_Load("EURUSD1.tdspread") trong OnInit.
-//    3. Mỗi OnTick gọi TDS_SpreadAt(TimeCurrent()) -> số points -> tự dựng Ask.
+// Shared memory layout (khop orchestrator.py Mode 0):
+//   uint32 magic='TDSS', uint32 count, double point,
+//   count x { int32 unixTime, float spread_pts }
 // ============================================================================
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <cstdint>
-#include <cstdio>
-#include <vector>
-#include <algorithm>
-#include <mutex>
 
-// ---- Bản ghi spread trong bộ nhớ -------------------------------------------
-struct SpreadRecord {
-    int32_t unixTime;     // epoch giây (UTC)
-    float   points;       // spread tính bằng points
+// ---------------------------------------------------------------------------
+// Layout shared memory
+// ---------------------------------------------------------------------------
+#pragma pack(push, 1)
+struct ShmHeader {
+    uint32_t magic;
+    uint32_t count;
+    double   point;
 };
+struct ShmRec {
+    int32_t  time;
+    float    spread;
+};
+#pragma pack(pop)
 
-namespace {
-    // Bảng tra đã nạp, sắp xếp tăng theo unixTime để binary-search O(log n).
-    std::vector<SpreadRecord> g_table;
-    std::mutex                g_mutex;     // bảo vệ g_table (EA đơn luồng nhưng cho chắc)
-    float                     g_slippage = 0.0f;  // slippage points mặc định
-    const char                MAGIC[8] = {'T','D','S','S','P','R','D','1'};
+// ---------------------------------------------------------------------------
+// State
+// ---------------------------------------------------------------------------
+static HANDLE         g_hMap = nullptr;
+static const void*    g_view = nullptr;
+static double         g_slippage = 0.0;
+
+static const ShmHeader* Hdr()
+{
+    return static_cast<const ShmHeader*>(g_view);
+}
+static const ShmRec* Recs()
+{
+    return reinterpret_cast<const ShmRec*>(Hdr() + 1);
 }
 
-// ----------------------------------------------------------------------------
-//  TDS_Load — nạp file .tdspread vào bộ nhớ. Trả số bản ghi (>=0), -1 nếu lỗi.
-// ----------------------------------------------------------------------------
-extern "C" __declspec(dllexport) int __stdcall TDS_Load(const char* spreadFile)
+static double LookupSpread(int32_t ts)
 {
-    if (!spreadFile) return -1;
-
-    FILE* f = nullptr;
-    // fopen_s an toàn hơn fopen trên MSVC.
-    if (fopen_s(&f, spreadFile, "rb") != 0 || !f) return -1;
-
-    char magic[8] = {0};
-    if (fread(magic, 1, 8, f) != 8 || memcmp(magic, MAGIC, 8) != 0) {
-        fclose(f);
-        return -1;  // không đúng định dạng
+    const ShmHeader* h = Hdr();
+    if (!h || h->count == 0) return 0.0;
+    const ShmRec*    r = Recs();
+    uint32_t lo = 0, hi = h->count - 1, ans = 0;
+    while (lo <= hi) {
+        uint32_t mid = (lo + hi) >> 1;
+        if (r[mid].time <= ts) { ans = mid; lo = mid + 1; }
+        else hi = mid - 1;
     }
+    return static_cast<double>(r[ans].spread);
+}
 
-    uint32_t count = 0;
-    if (fread(&count, sizeof(count), 1, f) != 1) { fclose(f); return -1; }
+// ---------------------------------------------------------------------------
+// Exports  (stdcall = bat buoc cho MT4 #import)
+// ---------------------------------------------------------------------------
+extern "C" {
 
-    std::vector<SpreadRecord> table;
-    table.resize(count);
-    // Mỗi record trên đĩa = int32 + float = 8 byte, packed little-endian.
-    // Đọc theo từng record để không phụ thuộc padding của struct.
-    for (uint32_t i = 0; i < count; ++i) {
-        int32_t t; float p;
-        if (fread(&t, sizeof(t), 1, f) != 1 ||
-            fread(&p, sizeof(p), 1, f) != 1) {
-            fclose(f);
-            return -1;
-        }
-        table[i].unixTime = t;
-        table[i].points   = p;
+// Ket noi shared memory do orchestrator.py tao.
+// Tra so ban ghi (>0) = thanh cong; am = loi.
+// dummy: tham so placeholder de MQL4 khong bao loi khi goi TDS_Load("").
+__declspec(dllexport) int __stdcall TDS_Load(const char* /*dummy*/)
+{
+    if (g_view) return (int)Hdr()->count;   // da ket noi roi
+
+    const wchar_t* SHM_NAME = L"Local\\TDSClone_SpreadShm";
+    g_hMap = OpenFileMappingW(FILE_MAP_READ, FALSE, SHM_NAME);
+    if (!g_hMap) return -1;
+
+    g_view = MapViewOfFile(g_hMap, FILE_MAP_READ, 0, 0, 0);
+    if (!g_view) {
+        CloseHandle(g_hMap); g_hMap = nullptr;
+        return -2;
     }
-    fclose(f);
-
-    // Đảm bảo đã sort (file Python vốn sort, nhưng phòng thủ).
-    std::sort(table.begin(), table.end(),
-              [](const SpreadRecord& a, const SpreadRecord& b){
-                  return a.unixTime < b.unixTime;
-              });
-
-    std::lock_guard<std::mutex> lk(g_mutex);
-    g_table.swap(table);
-    return (int)g_table.size();
+    if (Hdr()->magic != 0x53534454u) {
+        UnmapViewOfFile(g_view); g_view = nullptr;
+        CloseHandle(g_hMap);     g_hMap = nullptr;
+        return -3;
+    }
+    return (int)Hdr()->count;
 }
 
-// ----------------------------------------------------------------------------
-//  TDS_SpreadAt — trả spread (points) tại unixTime: bản ghi gần nhất <= unixTime.
-//  Nếu chưa nạp/đứng trước bản ghi đầu -> trả 0.
-// ----------------------------------------------------------------------------
-extern "C" __declspec(dllexport) double __stdcall TDS_SpreadAt(int unixTime)
+// Spread (points) tai thoi diem nay.
+__declspec(dllexport) double __stdcall TDS_SpreadAt(int time_sec)
 {
-    std::lock_guard<std::mutex> lk(g_mutex);
-    if (g_table.empty()) return 0.0;
-
-    // upper_bound tìm phần tử ĐẦU TIÊN > unixTime; lùi 1 = gần nhất <= unixTime.
-    SpreadRecord key{ (int32_t)unixTime, 0.0f };
-    auto it = std::upper_bound(
-        g_table.begin(), g_table.end(), key,
-        [](const SpreadRecord& a, const SpreadRecord& b){
-            return a.unixTime < b.unixTime;
-        });
-    if (it == g_table.begin()) return (double)g_table.front().points;
-    --it;
-    return (double)it->points;
+    return LookupSpread((int32_t)time_sec);
 }
 
-// ----------------------------------------------------------------------------
-//  TDS_SlippageAt — slippage points (đơn giản: hằng số set qua TDS_SetSlippage).
-//  Có thể mở rộng thành mô hình theo thời gian giống spread.
-// ----------------------------------------------------------------------------
-extern "C" __declspec(dllexport) double __stdcall TDS_SlippageAt(int /*unixTime*/)
+// Pip size.
+__declspec(dllexport) double __stdcall TDS_Point()
 {
-    return (double)g_slippage;
+    return g_view ? Hdr()->point : 0.00001;
 }
 
-extern "C" __declspec(dllexport) void __stdcall TDS_SetSlippage(double points)
+// Slippage (mac dinh 0, co the set boi broker sim).
+__declspec(dllexport) double __stdcall TDS_SlippageAt(int /*time_sec*/)
 {
-    g_slippage = (float)points;
+    return g_slippage;
 }
 
-// ----------------------------------------------------------------------------
-//  TDS_Count — số bản ghi đang nạp (debug).
-// ----------------------------------------------------------------------------
-extern "C" __declspec(dllexport) int __stdcall TDS_Count()
+__declspec(dllexport) void __stdcall TDS_SetSlippage(double pts)
 {
-    std::lock_guard<std::mutex> lk(g_mutex);
-    return (int)g_table.size();
+    g_slippage = pts;
 }
 
-// DllMain tối giản — không cần khởi tạo gì đặc biệt.
+// So ban ghi hien tai (debug/check).
+__declspec(dllexport) int __stdcall TDS_Count()
+{
+    return g_view ? (int)Hdr()->count : 0;
+}
+
+} // extern "C"
+
 BOOL APIENTRY DllMain(HMODULE, DWORD reason, LPVOID)
 {
     if (reason == DLL_PROCESS_DETACH) {
-        std::lock_guard<std::mutex> lk(g_mutex);
-        g_table.clear();
+        if (g_view)  UnmapViewOfFile(g_view);
+        if (g_hMap)  CloseHandle(g_hMap);
     }
     return TRUE;
 }

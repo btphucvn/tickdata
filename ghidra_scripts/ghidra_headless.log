@@ -1,0 +1,600 @@
+2026-06-29 21:31:45 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:31:45 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:31:45 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:31:45 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:31:45 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:31:47 INFO  (ClassSearcher) Class search complete (1289 ms)  
+2026-06-29 21:31:47 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:31:47 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:31:47 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:31:47 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:31:48 INFO  (AnalyzeHeadless) Headless startup complete (3626 ms)  
+2026-06-29 21:31:48 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer) Creating project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:31:48 INFO  (DefaultProject) Creating project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer) REPORT: Processing input files:   
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer)      project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:31:48 INFO  (HeadlessAnalyzer) IMPORTING: file:///C:/Program Files (x86)/Dukascopy MetaTrader 4/terminal.exe  
+2026-06-29 21:31:50 INFO  (ProgramLoader) Using Loader: Portable Executable (PE)  
+2026-06-29 21:31:50 INFO  (ProgramLoader) Using Language/Compiler: x86:LE:32:default:windows  
+2026-06-29 21:31:50 INFO  (ProgramLoader) Using Library Search Path: [., C:\Windows\SysWOW64, C:\Program Files\Eclipse Adoptium\jdk-25.0.3.9-hotspot\bin, C:\Windows\Sun\Java\bin, C:\Windows\system32, C:\Windows, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\Program Files (x86)\VMware\VMware Workstation\bin\, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\Windows\System32\Wbem, C:\Windows\System32\WindowsPowerShell\v1.0\, C:\Windows\System32\OpenSSH\, C:\Program Files\Microsoft SQL Server\150\Tools\Binn\, C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\, C:\Program Files\dotnet\, C:\Program Files\PuTTY\, C:\Users\Phuc\AppData\Roaming\nvm, C:\Program Files\nodejs, C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\, C:\Program Files\Microsoft SQL Server\160\Tools\Binn\, C:\Program Files\Microsoft SQL Server\160\DTS\Binn\, C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\, C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Users\Phuc\AppData\Local\Programs\Python\Python313\Scripts\, C:\Users\Phuc\AppData\Local\Programs\Python\Python313\, C:\Users\Phuc\AppData\Local\Programs\Python\Launcher\, C:\Users\Phuc\AppData\Local\Microsoft\WindowsApps, C:\Users\Phuc\AppData\Local\Programs\Microsoft VS Code\bin, C:\Users\Phuc\.dotnet\tools, C:\Users\Phuc\AppData\Roaming\npm, C:\Program Files\Git\cmd, C:\Program Files\nodejs\, C:\Program Files\CMake\bin, C:\Users\Phuc\.cargo\bin, C:\Users\Phuc\AppData\Local\Programs\Python\Python311\Scripts\, C:\Users\Phuc\AppData\Local\Programs\Python\Python311\, C:\Users\Phuc\AppData\Local\Programs\Ollama, C:\Users\Phuc\.lmstudio\bin, C:\rtk-x86_64-pc-windows-msvc, C:\Users\Phuc\AppData\Local\Programs\Antigravity\bin, C:\Users\Phuc\AppData\Local\Programs\Antigravity IDE\bin]  
+2026-06-29 21:31:51 INFO  (TLSDirectory) TLS callbacks at fb33f4  
+2026-06-29 21:31:55 WARN  (ExportDataDirectory) Invalid or missing function at 5bff1b7c  
+2026-06-29 21:31:55 INFO  (TLSDirectory) TLS callbacks at 5cf0be2c  
+2026-06-29 21:31:55 WARN  (ExportDataDirectory) Invalid or missing function at 5cfe847c  
+2026-06-29 21:31:56 WARN  (ExportDataDirectory) Invalid or missing function at 4d513020  
+2026-06-29 21:31:58 INFO  (TLSDirectory) TLS callbacks at 68f051c0  
+2026-06-29 21:31:58 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:31:58 INFO  (TLSDirectory) TLS callbacks at 1000701c  
+2026-06-29 21:31:58 WARN  (ExportDataDirectory) Invalid or missing function at 10085b88  
+2026-06-29 21:31:59 INFO  (TLSDirectory) TLS callbacks at 6982dbe8  
+2026-06-29 21:31:59 WARN  (ExportDataDirectory) Invalid or missing function at 69d616e4  
+2026-06-29 21:32:02 INFO  (TLSDirectory) TLS callbacks at 1a406220  
+2026-06-29 21:32:02 WARN  (ExportDataDirectory) Invalid or missing function at 1a5377ac  
+2026-06-29 21:32:02 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:32:02 WARN  (ExportDataDirectory) Invalid or missing function at 69e9f8f8  
+2026-06-29 21:32:02 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:32:03 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:32:03 INFO  (TLSDirectory) TLS callbacks at 4cc821ac  
+2026-06-29 21:32:03 WARN  (ExportDataDirectory) Invalid or missing function at 4ccd8d54  
+2026-06-29 21:32:03 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:32:03 WARN  (ExportDataDirectory) Invalid or missing function at 4f7c43d4  
+2026-06-29 21:32:04 DEBUG (WEVTResourceDataType) Error processing Provider Element.  
+2026-06-29 21:32:04 WARN  (ExportDataDirectory) Invalid or missing function at 52e82048  
+2026-06-29 21:32:04 INFO  (ProgramLoader) Additional info:
+Loading file:///C:/Program Files (x86)/Dukascopy MetaTrader 4/terminal.exe?MD5=cace18d2b4af8d8aa87a7657b2c889a6...
+[terminal.exe]: failed to create BitmapResource at 02692e0c: Failed to resolve data length for BitmapResource
+[terminal.exe]: failed to create byte[371] at 030d9b20: Conflicting data exists at address 030d92bc to 030d9b25
+------------------------------------------------
+
+Searching 32 paths for library ADVAPI32.DLL...
+Loading file:///C:/Windows/SysWOW64/advapi32.dll?MD5=950c6d7d9ee5088375a96ae8436eaa70...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\advapi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library COMCTL32.DLL...
+Loading file:///C:/Windows/SysWOW64/comctl32.dll?MD5=c2e7629502fe19e0dae65293dbccfda7...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\comctl32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library CRYPT32.DLL...
+Loading file:///C:/Windows/SysWOW64/crypt32.dll?MD5=6dbfaac75fc7788bde552ec756982ca3...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\crypt32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library DBGHELP.DLL...
+Loading file:///C:/Windows/SysWOW64/dbghelp.dll?MD5=7a365edaa1b5c3a3fcdca41ee8fc95e2...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\dbghelp.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library GDI32.DLL...
+Loading file:///C:/Windows/SysWOW64/gdi32.dll?MD5=294936e7ad3113e4281a46be514daf3d...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\gdi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library GDIPLUS.DLL...
+Loading file:///C:/Windows/SysWOW64/GdiPlus.dll?MD5=496de48e927a6bd61bc7cdffcd6091d3...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\gdiplus.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library KERNEL32.DLL...
+Loading file:///C:/Windows/SysWOW64/kernel32.dll?MD5=0ce1f5f3d23f51b9ecfd453e34ca0af7...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\kernel32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library OLE32.DLL...
+Loading file:///C:/Windows/SysWOW64/ole32.dll?MD5=0c99de30cc1bc2997ebf5b7ca4b54fe8...
+[ole32.dll]: failed to create WEVTResource at 68fc5218: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\ole32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library OLEAUT32.DLL...
+Loading file:///C:/Windows/SysWOW64/oleaut32.dll?MD5=96b3f5be7d92458fb909620f918a1f63...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\oleaut32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library OLEDLG.DLL...
+Loading file:///C:/Windows/SysWOW64/oledlg.dll?MD5=b5bb1bfb8e269d0f1d1d93784a2855f3...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\oledlg.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library SECUR32.DLL...
+Loading file:///C:/Windows/SysWOW64/secur32.dll?MD5=f43305d96ef703ac86f5a38f635b6f2f...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\secur32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library SHELL32.DLL...
+Loading file:///C:/Windows/SysWOW64/shell32.dll?MD5=2d8941f8841854eb9705097a01b6f3f3...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\shell32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library SHLWAPI.DLL...
+Loading file:///C:/Windows/SysWOW64/shlwapi.dll?MD5=7955116f6d0ddddab0dab96deaea0b3d...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\shlwapi.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library URLMON.DLL...
+Loading file:///C:/Windows/SysWOW64/urlmon.dll?MD5=215b4fb8b0373d95252e902b94a2eae8...
+[urlmon.dll]: failed to create WEVTResource at 1a54bd50: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\urlmon.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library USER32.DLL...
+Loading file:///C:/Windows/SysWOW64/user32.dll?MD5=0927ed96558e5b2392df6cf7582f2655...
+[user32.dll]: failed to create WEVTResource at 69eb6a70: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\user32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library UXTHEME.DLL...
+Loading file:///C:/Windows/SysWOW64/uxtheme.dll?MD5=cbe8d09eeb82b59772de8322c97172b0...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\uxtheme.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library VERSION.DLL...
+Loading file:///C:/Windows/SysWOW64/version.dll?MD5=e31f494c06f287a189fb063fdd29b03a...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\version.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library WINHTTP.DLL...
+Loading file:///C:/Windows/SysWOW64/winhttp.dll?MD5=30b7c0f1fd0ac72fcd6e7ec02ad16226...
+[winhttp.dll]: failed to create WEVTResource at 761394a8: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\winhttp.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library WINSPOOL.DRV...
+Loading file:///C:/Windows/SysWOW64/winspool.drv?MD5=16c8ebb063088674a56fb3bae5616651...
+[winspool.drv]: failed to create WEVTResource at 4cce14b8: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\winspool.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library WINTRUST.DLL...
+Loading file:///C:/Windows/SysWOW64/wintrust.dll?MD5=07210e81a3fee5c174633898e54d0e9c...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\wintrust.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library WS2_32.DLL...
+Loading file:///C:/Windows/SysWOW64/ws2_32.dll?MD5=fc4a6145ddd1b64983e8700601c71fc6...
+[ws2_32.dll]: failed to create WEVTResource at 4f7cc4b8: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\ws2_32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 32 paths for library WSOCK32.DLL...
+Loading file:///C:/Windows/SysWOW64/wsock32.dll?MD5=8afeeda0f4402a363e9bbe612270554a...
+Using existing exports file: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\wsock32.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\ws2_32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\dbghelp.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\winhttp.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\gdiplus.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\crypt32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\kernel32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\user32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\gdi32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\winspool.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\advapi32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\shell32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\comctl32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\shlwapi.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\uxtheme.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\ole32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\oleaut32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\oledlg.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\urlmon.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\wsock32.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\version.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\wintrust.exports
+Applying C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\symbols\win32\secur32.exports
+Linking the External Programs of 'terminal.exe' to imported libraries...
+  [WS2_32.DLL] -> not found in project
+  [DBGHELP.DLL] -> not found in project
+  [WINHTTP.DLL] -> not found in project
+  [GDIPLUS.DLL] -> not found in project
+  [CRYPT32.DLL] -> not found in project
+  [KERNEL32.DLL] -> not found in project
+  [USER32.DLL] -> not found in project
+  [GDI32.DLL] -> not found in project
+  [WINSPOOL.DRV] -> not found in project
+  [ADVAPI32.DLL] -> not found in project
+  [SHELL32.DLL] -> not found in project
+  [COMCTL32.DLL] -> not found in project
+  [SHLWAPI.DLL] -> not found in project
+  [UXTHEME.DLL] -> not found in project
+  [OLE32.DLL] -> not found in project
+  [OLEAUT32.DLL] -> not found in project
+  [OLEDLG.DLL] -> not found in project
+  [URLMON.DLL] -> not found in project
+  [WSOCK32.DLL] -> not found in project
+  [VERSION.DLL] -> not found in project
+  [WINTRUST.DLL] -> not found in project
+  [SECUR32.DLL] -> not found in project
+------------------------------------------------
+
+  
+2026-06-29 21:32:04 INFO  (HeadlessAnalyzer) IMPORTING: Loaded 0 additional files  
+2026-06-29 21:32:04 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:32:04 ERROR (HeadlessAnalyzer) REPORT SCRIPT ERROR: decompile_candidates.py : Ghidra was not started with PyGhidra. Python is not available ghidra.app.script.GhidraScriptLoadException: Ghidra was not started with PyGhidra. Python is not available
+	at ghidra.pyghidra.PyGhidraScriptProvider.getScriptInstance(PyGhidraScriptProvider.java:75)
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScriptsList(HeadlessAnalyzer.java:927)
+	at ghidra.app.util.headless.HeadlessAnalyzer.analyzeProgram(HeadlessAnalyzer.java:1097)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFileWithImport(HeadlessAnalyzer.java:1595)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithLoader(HeadlessAnalyzer.java:1755)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1696)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1780)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processLocal(HeadlessAnalyzer.java:464)
+	at ghidra.app.util.headless.AnalyzeHeadless.launch(AnalyzeHeadless.java:199)
+	at ghidra.GhidraLauncher.launch(GhidraLauncher.java:81)
+	at ghidra.Ghidra.main(Ghidra.java:54)
+ 
+2026-06-29 21:32:04 INFO  (LocalFileSystem) /terminal.exe: file created (Phuc)  
+2026-06-29 21:32:04 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for: /terminal.exe (MT4Decomp:/terminal.exe)  
+2026-06-29 21:32:04 INFO  (HeadlessAnalyzer) REPORT: Import succeeded  
+2026-06-29 21:33:07 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:33:07 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:33:07 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:33:07 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:33:07 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:33:09 INFO  (ClassSearcher) Class search complete (1284 ms)  
+2026-06-29 21:33:09 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:33:09 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:33:09 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:33:09 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:33:09 INFO  (AnalyzeHeadless) Headless startup complete (3132 ms)  
+2026-06-29 21:33:09 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:33:09 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:33:09 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:33:09 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:33:10 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:33:12 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:33:12 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:33:12 ERROR (HeadlessAnalyzer) Abort due to Headless analyzer error: ghidra.app.script.JythonStubScriptProvider$JythonStubException: Jython script failed. In order to use Jython based scripts, you must install the Jython Ghidra Extension, or (recommended) port your script to PyGhidra or Java. java.lang.Error: ghidra.app.script.JythonStubScriptProvider$JythonStubException: Jython script failed. In order to use Jython based scripts, you must install the Jython Ghidra Extension, or (recommended) port your script to PyGhidra or Java.
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScriptsList(HeadlessAnalyzer.java:970)
+	at ghidra.app.util.headless.HeadlessAnalyzer.analyzeProgram(HeadlessAnalyzer.java:1097)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFileNoImport(HeadlessAnalyzer.java:1195)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFolderNoImport(HeadlessAnalyzer.java:1367)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processNoImport(HeadlessAnalyzer.java:1396)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processLocal(HeadlessAnalyzer.java:461)
+	at ghidra.app.util.headless.AnalyzeHeadless.launch(AnalyzeHeadless.java:199)
+	at ghidra.GhidraLauncher.launch(GhidraLauncher.java:81)
+	at ghidra.Ghidra.main(Ghidra.java:54)
+Caused by: ghidra.app.script.JythonStubScriptProvider$JythonStubException: Jython script failed. In order to use Jython based scripts, you must install the Jython Ghidra Extension, or (recommended) port your script to PyGhidra or Java.
+	at ghidra.app.script.JythonStubScriptProvider.getScriptInstance(JythonStubScriptProvider.java:46)
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScriptsList(HeadlessAnalyzer.java:927)
+	... 8 more
+ 
+2026-06-29 21:34:41 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:34:41 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:34:41 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:34:41 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:34:41 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:34:43 INFO  (ClassSearcher) Class search complete (1240 ms)  
+2026-06-29 21:34:43 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:34:43 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:34:43 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:34:43 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:34:43 INFO  (AnalyzeHeadless) Headless startup complete (3102 ms)  
+2026-06-29 21:34:43 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:34:44 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:34:44 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:34:44 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:34:44 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:34:46 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:34:46 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:34:46 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py  
+2026-06-29 21:34:53 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  
+2026-06-29 21:36:07 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:36:07 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:36:07 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:36:07 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:36:07 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:36:08 INFO  (ClassSearcher) Class search complete (1249 ms)  
+2026-06-29 21:36:08 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:36:08 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:36:08 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:36:08 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:36:09 INFO  (AnalyzeHeadless) Headless startup complete (3125 ms)  
+2026-06-29 21:36:09 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:36:09 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:36:09 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:36:09 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:36:09 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:36:11 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:36:12 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:36:12 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py  
+2026-06-29 21:36:15 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  
+2026-06-29 21:37:43 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:37:43 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:37:43 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:37:43 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:37:43 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:37:44 INFO  (ClassSearcher) Class search complete (1241 ms)  
+2026-06-29 21:37:45 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:37:45 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:37:45 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:37:45 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:37:45 INFO  (AnalyzeHeadless) Headless startup complete (3084 ms)  
+2026-06-29 21:37:45 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:37:45 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:37:45 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:37:45 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:37:45 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:37:48 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:37:48 INFO  (HeadlessAnalyzer) REPORT: Execute script: test_jython.py   
+2026-06-29 21:37:48 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\test_jython.py  
+2026-06-29 21:37:52 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  
+2026-06-29 21:38:48 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:38:48 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:38:48 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:38:48 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:38:48 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:38:49 INFO  (ClassSearcher) Class search complete (1255 ms)  
+2026-06-29 21:38:49 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:38:50 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:38:50 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:38:50 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:38:50 INFO  (AnalyzeHeadless) Headless startup complete (3097 ms)  
+2026-06-29 21:38:50 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:38:50 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:38:50 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:38:50 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:38:50 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:38:53 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:38:53 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:38:53 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py  
+2026-06-29 21:38:57 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  
+2026-06-29 21:40:15 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:40:15 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:40:15 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:40:15 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:40:15 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:40:17 INFO  (ClassSearcher) Class search complete (1276 ms)  
+2026-06-29 21:40:17 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:40:17 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:40:17 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:40:17 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:40:17 INFO  (AnalyzeHeadless) Headless startup complete (3122 ms)  
+2026-06-29 21:40:17 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:40:17 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:40:17 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:40:17 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:40:18 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:40:20 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:40:20 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:40:20 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py  
+2026-06-29 21:40:24 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  
+2026-06-29 21:43:00 INFO  (LoggingInitialization) Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml  
+2026-06-29 21:43:00 INFO  (LoggingInitialization) Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log  
+2026-06-29 21:43:00 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter  
+2026-06-29 21:43:00 INFO  (Preferences) Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences  
+2026-06-29 21:43:00 INFO  (ClassSearcher) Searching for classes...  
+2026-06-29 21:43:01 INFO  (ClassSearcher) Class search complete (1251 ms)  
+2026-06-29 21:43:01 INFO  (DefaultSSLContextInitializer) Initializing SSL Context  
+2026-06-29 21:43:01 INFO  (SecureRandomFactory) Initializing Random Number Generator...  
+2026-06-29 21:43:01 INFO  (SecureRandomFactory) Random Number Generator initialization complete: SHA1PRNG  
+2026-06-29 21:43:01 INFO  (DefaultTrustManagerFactory) Trust manager disabled, cacerts have not been set  
+2026-06-29 21:43:02 INFO  (AnalyzeHeadless) Headless startup complete (3141 ms)  
+2026-06-29 21:43:02 INFO  (ClassSearcher) Class searcher loaded 59 extension points (20 false positives)  
+2026-06-29 21:43:02 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts  
+2026-06-29 21:43:02 INFO  (HeadlessAnalyzer) HEADLESS: execution starts  
+2026-06-29 21:43:02 INFO  (HeadlessAnalyzer) Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:43:02 INFO  (HeadlessProject) Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp  
+2026-06-29 21:43:04 INFO  (HeadlessAnalyzer) REPORT: Processing project file: /terminal.exe  
+2026-06-29 21:43:05 INFO  (HeadlessAnalyzer) REPORT: Execute script: decompile_candidates.py   
+2026-06-29 21:43:05 INFO  (HeadlessAnalyzer) SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py  
+2026-06-29 21:44:27 WARN  (DecompileCallback) Decompiling 00b830e0, pcode error at 42434133: Could not follow disassembly flow into non-existing memory at 42434133  
+2026-06-29 21:44:54 WARN  (DecompileCallback) Decompiling 00b65c30, pcode error at 00b65c36: Unable to resolve constructor at 00b65c36  
+2026-06-29 21:45:06 INFO  (HeadlessAnalyzer) REPORT: Save succeeded for processed file: /terminal.exe  

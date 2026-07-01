@@ -366,6 +366,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\tdshook.cpp" />
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\gui_inject.cpp" />
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\slippage.cpp" />
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_patch.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

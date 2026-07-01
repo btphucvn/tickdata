@@ -13,3 +13,5 @@ C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/CMakeFiles/sigscan.dir
 C:/Users/Phuc/Desktop/tickdata/native/build/sigscan/CMakeFiles/INSTALL.dir
 C:/Users/Phuc/Desktop/tickdata/native/build/hook/CMakeFiles/tdshook.dir
 C:/Users/Phuc/Desktop/tickdata/native/build/hook/CMakeFiles/INSTALL.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/probe/CMakeFiles/probe.dir
+C:/Users/Phuc/Desktop/tickdata/native/build/probe/CMakeFiles/INSTALL.dir

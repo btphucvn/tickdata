@@ -4,6 +4,15 @@
     <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\tdshook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\gui_inject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\slippage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_patch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\Phuc\Desktop\tickdata\native\hook\CMakeLists.txt" />

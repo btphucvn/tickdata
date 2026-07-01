@@ -35,6 +35,7 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -68,6 +69,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -97,7 +100,7 @@ events:
       The output was:
       0
       MSBuild version 17.12.12+1cce77968 for .NET Framework
-      Build started 06/27/2026 11:29:11 PM.
+      Build started 06/29/2026 10:30:52 PM.
       
       Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\4.4.0-rc2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -126,7 +129,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.01
+      Time Elapsed 00:00:00.88
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -159,6 +162,7 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -191,6 +195,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -203,6 +209,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/link.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -236,6 +243,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -272,6 +281,7 @@ events:
       - "lld-link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -304,6 +314,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -315,6 +327,9 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link.exe"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.com"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.exe"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link"
@@ -411,6 +426,12 @@ events:
       - "C:/Program Files/Git/cmd/lld-link.com"
       - "C:/Program Files/Git/cmd/lld-link.exe"
       - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Program Files/CMake/bin/lld-link.com"
+      - "C:/Program Files/CMake/bin/lld-link.exe"
+      - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/Users/Phuc/.cargo/bin/lld-link.com"
+      - "C:/Users/Phuc/.cargo/bin/lld-link.exe"
+      - "C:/Users/Phuc/.cargo/bin/lld-link"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link.com"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link.exe"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link"
@@ -435,6 +456,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -468,6 +490,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -502,6 +526,7 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -534,6 +559,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -546,6 +573,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/link.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -579,6 +607,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -613,6 +643,7 @@ events:
       - "mt"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -645,6 +676,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -656,6 +689,9 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/mt.com"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/mt.exe"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/mt"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/mt.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/mt.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/mt"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt.com"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt.exe"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/mt"
@@ -752,6 +788,12 @@ events:
       - "C:/Program Files/Git/cmd/mt.com"
       - "C:/Program Files/Git/cmd/mt.exe"
       - "C:/Program Files/Git/cmd/mt"
+      - "C:/Program Files/CMake/bin/mt.com"
+      - "C:/Program Files/CMake/bin/mt.exe"
+      - "C:/Program Files/CMake/bin/mt"
+      - "C:/Users/Phuc/.cargo/bin/mt.com"
+      - "C:/Users/Phuc/.cargo/bin/mt.exe"
+      - "C:/Users/Phuc/.cargo/bin/mt"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/mt.com"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/mt.exe"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/mt"
@@ -776,6 +818,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -809,6 +852,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -843,6 +888,7 @@ events:
       - "lib"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -875,6 +921,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -887,6 +935,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -920,6 +969,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -956,6 +1007,7 @@ events:
     names:
       - "rc"
     candidate_directories:
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -988,6 +1040,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -1008,6 +1062,9 @@ events:
       - "C:/Program Files (x86)/tdsclone_native/sbin/"
       - "C:/Program Files (x86)/tdsclone_native/"
     searched_directories:
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/rc.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/rc.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/rc"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc.com"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc.exe"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/rc"
@@ -1104,6 +1161,12 @@ events:
       - "C:/Program Files/Git/cmd/rc.com"
       - "C:/Program Files/Git/cmd/rc.exe"
       - "C:/Program Files/Git/cmd/rc"
+      - "C:/Program Files/CMake/bin/rc.com"
+      - "C:/Program Files/CMake/bin/rc.exe"
+      - "C:/Program Files/CMake/bin/rc"
+      - "C:/Users/Phuc/.cargo/bin/rc.com"
+      - "C:/Users/Phuc/.cargo/bin/rc.exe"
+      - "C:/Users/Phuc/.cargo/bin/rc"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/rc.com"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/rc.exe"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/rc"
@@ -1164,6 +1227,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -1197,6 +1261,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -1225,8 +1291,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq"
-      binary: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq"
+      source: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry"
+      binary: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1237,39 +1303,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: 'C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq'
+        Change Dir: 'C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_8c3d3.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a8e07.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.12.12+1cce77968 for .NET Framework
-        Build started 06/27/2026 11:29:13 PM.
+        Build started 06/29/2026 10:30:53 PM.
         
-        Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\cmTC_8c3d3.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\cmTC_a8e07.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\Debug\\".
-          Creating directory "cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.tlog\\".
+          Creating directory "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\Debug\\".
+          Creating directory "cmTC_a8e07.dir\\Debug\\cmTC_a8e07.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.tlog\\unsuccessfulbuild".
+          Creating "cmTC_a8e07.dir\\Debug\\cmTC_a8e07.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_a8e07.dir\\Debug\\cmTC_a8e07.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_8c3d3.dir\\Debug\\\\" /Fd"cmTC_8c3d3.dir\\Debug\\vc143.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_a8e07.dir\\Debug\\\\" /Fd"cmTC_a8e07.dir\\Debug\\vc143.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.42.34435 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_8c3d3.dir\\Debug\\\\" /Fd"cmTC_8c3d3.dir\\Debug\\vc143.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_a8e07.dir\\Debug\\\\" /Fd"cmTC_a8e07.dir\\Debug\\vc143.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\Debug\\cmTC_8c3d3.exe" /INCREMENTAL /ILK:"cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq/Debug/cmTC_8c3d3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq/Debug/cmTC_8c3d3.lib" /MACHINE:X86  /machine:X86 cmTC_8c3d3.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_8c3d3.vcxproj -> C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\Debug\\cmTC_8c3d3.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\Debug\\cmTC_a8e07.exe" /INCREMENTAL /ILK:"cmTC_a8e07.dir\\Debug\\cmTC_a8e07.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry/Debug/cmTC_a8e07.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry/Debug/cmTC_a8e07.lib" /MACHINE:X86  /machine:X86 cmTC_a8e07.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_a8e07.vcxproj -> C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\Debug\\cmTC_a8e07.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.tlog\\unsuccessfulbuild".
-          Touching "cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.tlog\\cmTC_8c3d3.lastbuildstate".
-        Done Building Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\cmTC_8c3d3.vcxproj" (default targets).
+          Deleting file "cmTC_a8e07.dir\\Debug\\cmTC_a8e07.tlog\\unsuccessfulbuild".
+          Touching "cmTC_a8e07.dir\\Debug\\cmTC_a8e07.tlog\\cmTC_a8e07.lastbuildstate".
+        Done Building Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\cmTC_a8e07.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.51
+        Time Elapsed 00:00:00.50
         
       exitCode: 0
   -
@@ -1282,7 +1348,7 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        link line: [  C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3e59fq\\Debug\\cmTC_8c3d3.exe" /INCREMENTAL /ILK:"cmTC_8c3d3.dir\\Debug\\cmTC_8c3d3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq/Debug/cmTC_8c3d3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-3e59fq/Debug/cmTC_8c3d3.lib" /MACHINE:X86  /machine:X86 cmTC_8c3d3.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe]
+        link line: [  C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-guycry\\Debug\\cmTC_a8e07.exe" /INCREMENTAL /ILK:"cmTC_a8e07.dir\\Debug\\cmTC_a8e07.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry/Debug/cmTC_a8e07.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-guycry/Debug/cmTC_a8e07.lib" /MACHINE:X86  /machine:X86 cmTC_a8e07.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe]
         linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/HostX64/x86/link.exe 
         implicit libs: []
         implicit objs: []
@@ -1328,6 +1394,7 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -1361,6 +1428,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -1396,7 +1465,7 @@ events:
       The output was:
       0
       MSBuild version 17.12.12+1cce77968 for .NET Framework
-      Build started 06/27/2026 11:29:14 PM.
+      Build started 06/29/2026 10:30:54 PM.
       
       Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\4.4.0-rc2\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -1425,7 +1494,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.69
+      Time Elapsed 00:00:00.53
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -1458,6 +1527,7 @@ events:
       - "lld-link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/"
       - "C:/Program Files/Razer Chroma SDK/bin/"
       - "C:/Program Files (x86)/VMware/VMware Workstation/bin/"
@@ -1490,6 +1560,8 @@ events:
       - "C:/Users/Phuc/.dotnet/tools/"
       - "C:/Users/Phuc/AppData/Roaming/npm/"
       - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/Phuc/.cargo/bin/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/"
       - "C:/Users/Phuc/AppData/Local/Programs/Ollama/"
@@ -1513,6 +1585,9 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link.exe"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x86/lld-link"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link.com"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link.exe"
+      - "C:/Program Files/Eclipse Adoptium/jdk-25.0.3.9-hotspot/bin/lld-link"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.com"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link.exe"
       - "C:/Program Files (x86)/Razer Chroma SDK/bin/lld-link"
@@ -1609,6 +1684,12 @@ events:
       - "C:/Program Files/Git/cmd/lld-link.com"
       - "C:/Program Files/Git/cmd/lld-link.exe"
       - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Program Files/CMake/bin/lld-link.com"
+      - "C:/Program Files/CMake/bin/lld-link.exe"
+      - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/Users/Phuc/.cargo/bin/lld-link.com"
+      - "C:/Users/Phuc/.cargo/bin/lld-link.exe"
+      - "C:/Users/Phuc/.cargo/bin/lld-link"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link.com"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link.exe"
       - "C:/Users/Phuc/AppData/Local/Programs/Python/Python311/Scripts/lld-link"
@@ -1669,6 +1750,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
         - "C:\\Program Files (x86)\\Razer Chroma SDK\\bin"
         - "C:\\Program Files\\Razer Chroma SDK\\bin"
         - "C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin\\"
@@ -1702,6 +1784,8 @@ events:
         - "C:\\Users\\Phuc\\AppData\\Roaming\\npm"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\Phuc\\.cargo\\bin"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Programs\\Python\\Python311\\"
         - "C:\\Users\\Phuc\\AppData\\Local\\Microsoft\\WindowsApps"
@@ -1730,8 +1814,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn"
-      binary: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn"
+      source: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w"
+      binary: "C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
@@ -1740,39 +1824,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: 'C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn'
+        Change Dir: 'C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d79b6.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_4e9c0.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.12.12+1cce77968 for .NET Framework
-        Build started 06/27/2026 11:29:15 PM.
+        Build started 06/29/2026 10:30:55 PM.
         
-        Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\cmTC_d79b6.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\cmTC_4e9c0.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\Debug\\".
-          Creating directory "cmTC_d79b6.dir\\Debug\\cmTC_d79b6.tlog\\".
+          Creating directory "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\Debug\\".
+          Creating directory "cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d79b6.dir\\Debug\\cmTC_d79b6.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d79b6.dir\\Debug\\cmTC_d79b6.tlog\\unsuccessfulbuild".
+          Creating "cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_d79b6.dir\\Debug\\\\" /Fd"cmTC_d79b6.dir\\Debug\\vc143.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_4e9c0.dir\\Debug\\\\" /Fd"cmTC_4e9c0.dir\\Debug\\vc143.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.42.34435 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_d79b6.dir\\Debug\\\\" /Fd"cmTC_d79b6.dir\\Debug\\vc143.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_4e9c0.dir\\Debug\\\\" /Fd"cmTC_4e9c0.dir\\Debug\\vc143.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\Debug\\cmTC_d79b6.exe" /INCREMENTAL /ILK:"cmTC_d79b6.dir\\Debug\\cmTC_d79b6.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn/Debug/cmTC_d79b6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn/Debug/cmTC_d79b6.lib" /MACHINE:X86  /machine:X86 cmTC_d79b6.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_d79b6.vcxproj -> C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\Debug\\cmTC_d79b6.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\Debug\\cmTC_4e9c0.exe" /INCREMENTAL /ILK:"cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w/Debug/cmTC_4e9c0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w/Debug/cmTC_4e9c0.lib" /MACHINE:X86  /machine:X86 cmTC_4e9c0.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_4e9c0.vcxproj -> C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\Debug\\cmTC_4e9c0.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_d79b6.dir\\Debug\\cmTC_d79b6.tlog\\unsuccessfulbuild".
-          Touching "cmTC_d79b6.dir\\Debug\\cmTC_d79b6.tlog\\cmTC_d79b6.lastbuildstate".
-        Done Building Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\cmTC_d79b6.vcxproj" (default targets).
+          Deleting file "cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.tlog\\unsuccessfulbuild".
+          Touching "cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.tlog\\cmTC_4e9c0.lastbuildstate".
+        Done Building Project "C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\cmTC_4e9c0.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.67
+        Time Elapsed 00:00:00.60
         
       exitCode: 0
   -
@@ -1785,7 +1869,7 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        link line: [  C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zinegn\\Debug\\cmTC_d79b6.exe" /INCREMENTAL /ILK:"cmTC_d79b6.dir\\Debug\\cmTC_d79b6.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn/Debug/cmTC_d79b6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-zinegn/Debug/cmTC_d79b6.lib" /MACHINE:X86  /machine:X86 cmTC_d79b6.dir\\Debug\\CMakeCCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe]
+        link line: [  C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\Phuc\\Desktop\\tickdata\\native\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eqq29w\\Debug\\cmTC_4e9c0.exe" /INCREMENTAL /ILK:"cmTC_4e9c0.dir\\Debug\\cmTC_4e9c0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w/Debug/cmTC_4e9c0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Phuc/Desktop/tickdata/native/build/CMakeFiles/CMakeScratch/TryCompile-eqq29w/Debug/cmTC_4e9c0.lib" /MACHINE:X86  /machine:X86 cmTC_4e9c0.dir\\Debug\\CMakeCCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x86\\link.exe]
         linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/HostX64/x86/link.exe 
         implicit libs: []
         implicit objs: []

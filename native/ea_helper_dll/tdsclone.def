@@ -8,3 +8,4 @@ EXPORTS
     TDS_SlippageAt
     TDS_SetSlippage
     TDS_Count
+    TDS_Point

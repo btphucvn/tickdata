@@ -1,0 +1,142 @@
+Callers of the 43 candidate functions in terminal.exe
+======================================================================
+
+sub_00647F00                             @ 0x00A47F00  (1 callers)
+    called from: 0x00F80872  [parent_func=0x00F807B0]
+
+sub_007C2266                             @ 0x00BC2266  (0 callers)
+
+sub_008DBEE0                             @ 0x00CDBEE0  (0 callers)
+
+sub_0093BD30                             @ 0x00D3BD30  (0 callers)
+
+sub_009DEEE0                             @ 0x00DDEEE0  (1 callers)
+    called from: 0x00DECF18  [parent_func=0x00DECEF0]
+
+sub_009EC650                             @ 0x00DEC650  (0 callers)
+
+sub_009EC8D0                             @ 0x00DEC8D0  (0 callers)
+
+sub_009F6C00                             @ 0x00DF6C00  (3 callers)
+    called from: 0x00DDED7E  [parent_func=0x00DDEC90]
+    called from: 0x00DE2846  [parent_func=0x00DE2370]
+    called from: 0x00DF6DB6  [parent_func=0x00DF6C00]
+
+sub_009F7370                             @ 0x00DF7370  (1 callers)
+    called from: 0x00DDED41  [parent_func=0x00DDEC90]
+
+sub_009F7680                             @ 0x00DF7680  (2 callers)
+    called from: 0x00DDEC37  [parent_func=0x00DDEB70]
+    called from: 0x00DECDD2  [parent_func=0x00DECD00]
+
+sub_009F8940                             @ 0x00DF8940  (2 callers)
+    called from: 0x00C53ACF  [parent_func=0x00C53A70]
+    called from: 0x00C58A27  [parent_func=0x00C56EB0]
+
+sub_009F8C80                             @ 0x00DF8C80  (6 callers)
+    called from: 0x00C53924  [parent_func=0x00C53890]
+    called from: 0x00D94DDA  [parent_func=0x00D94CD0]
+    called from: 0x00D94E4A  [parent_func=0x00D94CD0]
+    called from: 0x00DE1266  [parent_func=0x00DE0F20]
+    called from: 0x00DF534A  [parent_func=0x00DF5090]
+    called from: 0x00DF82B7  [parent_func=0x00DF8260]
+
+sub_00A2EDA0                             @ 0x00E2EDA0  (2 callers)
+    called from: 0x00F5EE07  [parent_func=0x00F5E580]
+    called from: 0x00F5EF62  [parent_func=0x00F5E580]
+
+sub_00B15FA0                             @ 0x00F15FA0  (0 callers)
+
+sub_00B36920                             @ 0x00F36920  (0 callers)
+
+sub_00B57B40                             @ 0x00F57B40  (2 callers)
+    called from: 0x00F57DC6  [parent_func=0x00F57C70]
+    called from: 0x00F59675  [parent_func=0x00F59570]
+
+sub_00B58610                             @ 0x00F58610  (0 callers)
+
+sub_00B5B700                             @ 0x00F5B700  (0 callers)
+
+sub_00B5C3A0                             @ 0x00F5C3A0  (0 callers)
+
+sub_00B5D440                             @ 0x00F5D440  (2 callers)
+    called from: 0x00F5DBE9  [parent_func=0x00F5DAD0]
+    called from: 0x00F5F666  [parent_func=0x00F5E580]
+
+sub_00B5DDA0                             @ 0x00F5DDA0  (1 callers)
+    called from: 0x00F5F698  [parent_func=0x00F5E580]
+
+sub_00B5FDD0                             @ 0x00F5FDD0  (0 callers)
+
+sub_00B606D0                             @ 0x00F606D0  (8 callers)
+    called from: 0x00D0E45C  [parent_func=0x00D0E410]
+    called from: 0x00D0F4A2  [parent_func=0x00D0F3B0]
+    called from: 0x00F59F6D  [parent_func=0x00F59570]
+    called from: 0x00F5B740  [parent_func=0x00F5B700]
+    called from: 0x00F5BD59  [parent_func=0x00F5B980]
+    called from: 0x00F5C52C  [parent_func=0x00F5C4E0]
+    called from: 0x00F5CBC7  [parent_func=0x00F5CB90]
+    called from: 0x00F605DE  [parent_func=0x00F605C0]
+
+sub_00B60A90                             @ 0x00F60A90  (1 callers)
+    called from: 0x00F596D8  [parent_func=0x00F59570]
+
+sub_00B615F0                             @ 0x00F615F0  (0 callers)
+
+sub_00B65C30                             @ 0x00F65C30  (0 callers)
+
+sub_00B65C80                             @ 0x00F65C80  (2 callers)
+    called from: 0x00A47C76  [parent_func=0x00A47C70]
+    called from: 0x00F5CC42  [parent_func=0x00F5CB90]
+
+sub_00B66400                             @ 0x00F66400  (0 callers)
+
+sub_00B72020                             @ 0x00F72020  (4 callers)
+    called from: 0x00F73362  [parent_func=0x00F73320]
+    called from: 0x00F73648  [parent_func=0x00F73620]
+    called from: 0x00F76A6C  [parent_func=0x00F76A10]
+    called from: 0x00F76F42  [parent_func=0x00F76F20]
+
+sub_00B73220                             @ 0x00F73220  (2 callers)
+    called from: 0x00F749E7  [parent_func=0x00F74920]
+    called from: 0x00F754C9  [parent_func=0x00F74AA0]
+
+sub_00B73320                             @ 0x00F73320  (0 callers)
+
+sub_00B73EC0                             @ 0x00F73EC0  (0 callers)
+
+sub_00B775A0                             @ 0x00F775A0  (1 callers)
+    called from: 0x00F58BA2  [parent_func=0x00F58660]
+
+sub_00B78B10                             @ 0x00F78B10  (1 callers)
+    called from: 0x00F71758  [parent_func=0x00F71170]
+
+sub_00B7B420                             @ 0x00F7B420  (1 callers)
+    called from: 0x00F7F563  [parent_func=0x00F7E3F0]
+
+sub_00B7DA80                             @ 0x00F7DA80  (0 callers)
+
+sub_00B812B0                             @ 0x00F812B0  (1 callers)
+    called from: 0x00F816EC  [parent_func=0x00F81670]
+
+sub_00B830E0                             @ 0x00F830E0  (4 callers)
+    called from: 0x00F84DEB  [parent_func=0x00F84D90]
+    called from: 0x00F84F61  [parent_func=0x00F84D90]
+    called from: 0x00F850E9  [parent_func=0x00F84FB0]
+    called from: 0x00F853AE  [parent_func=0x00F851D0]
+
+sub_00B83330                             @ 0x00F83330  (1 callers)
+    called from: 0x00F84DDC  [parent_func=0x00F84D90]
+
+sub_00B834E0                             @ 0x00F834E0  (1 callers)
+    called from: 0x00F848CC  [parent_func=0x00F83C00]
+
+sub_00B83B40                             @ 0x00F83B40  (0 callers)
+
+sub_00B851D0                             @ 0x00F851D0  (1 callers)
+    called from: 0x00F5FA7D  [parent_func=0x00F5E580]
+
+sub_00B85BD0                             @ 0x00F85BD0  (1 callers)
+    called from: 0x00F863FC  [parent_func=0x00F86380]
+
+Total caller-target pairs: 52

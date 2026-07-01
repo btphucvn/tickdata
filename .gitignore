@@ -1,0 +1,8 @@
+# Chi loai cac file >100MB (GitHub tu choi cung). Moi thu khac VAN commit.
+/data/active.spread
+db.7.gbf
+/data/ticks/BTCUSD/2019-07.bin
+/data/ticks/BTCUSD/2020-03.bin
+/data/ticks/BTCUSD/2020-05.bin
+/data/ticks/XAUUSD/2018-01.bin
+/data/ticks/XAUUSD/2018-02.bin

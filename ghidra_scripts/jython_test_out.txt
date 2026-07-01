@@ -1,0 +1,5 @@
+Jython works!
+Program: terminal.exe
+ImageBase: 00400000
+sys.version: 2.7.4 (tags/v2.7.4:3f256f4a7, Aug 18 2024, 10:30:53)
+[OpenJDK 64-Bit Server VM (Eclipse Adoptium)]

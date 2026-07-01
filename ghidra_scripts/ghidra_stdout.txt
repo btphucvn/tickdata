@@ -1,0 +1,211 @@
+INFO  Using log config file: jar:file:/C:/Users/Phuc/Desktop/tickdata/ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\ghidra_headless.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Phuc\AppData\Roaming\ghidra\ghidra_12.1.2_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1251 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (3141 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Extensions\Jython\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\Phuc\Desktop\tickdata\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp (HeadlessAnalyzer)  
+INFO  Opening project: C:\Users\Phuc\Desktop\tickdata\ghidra_proj_decomp\MT4Decomp (HeadlessProject)  
+INFO  REPORT: Processing project file: /terminal.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: decompile_candidates.py  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompile_candidates.py (HeadlessAnalyzer)  
+=== decompile_candidates.py START ===
+Imports OK
+Program: terminal.exe
+ImageBase: 00400000
+Opening decompiler...
+Decompiler opened: True
+[Bid_00] 0xB36920...
+  created: Bid_00
+  OK (7839 chars)
+[Spread_01] 0xB73EC0...
+  created: Spread_01
+  OK (490 chars)
+[TestGen_02] 0xB83B40...
+  created: TestGen_02
+  OK (311 chars)
+[TestGen_03] 0x647F00...
+  created: TestGen_03
+  FAILED: 
+Low-level Error: Flow exceeded maximum allowable instructions
+[TestGen_04] 0xB812B0...
+  created: TestGen_04
+  OK (1832 chars)
+[TestGen_05] 0xB85BD0...
+  created: TestGen_05
+  OK (132 chars)
+[TestGen_06] 0xB834E0...
+  created: TestGen_06
+  OK (171 chars)
+[TestGen_07] 0xB83330...
+  created: TestGen_07
+  OK (480 chars)
+[TestGen_08] 0xB830E0...
+  created: TestGen_08
+WARN  Decompiling 00b830e0, pcode error at 42434133: Could not follow disassembly flow into non-existing memory at 42434133 (DecompileCallback)  
+  OK (2133 chars)
+[TestGen_09] 0xB851D0...
+  created: TestGen_09
+  OK (783 chars)
+[tester_10] 0xA2EDA0...
+  created: tester_10
+  OK (2233 chars)
+[tester_11] 0xB5FDD0...
+  created: tester_11
+  OK (3899 chars)
+[Tester_12] 0x9DEEE0...
+  created: Tester_12
+  OK (6818 chars)
+[Tester_13] 0x9F6C00...
+  created: Tester_13
+  OK (3503 chars)
+[Tester_14] 0x9F7370...
+[Tester_15] 0x9F7680...
+  created: Tester_15
+  OK (5158 chars)
+[Tester_16] 0x9F8940...
+[Tester_17] 0x9F8C80...
+[Tester_18] 0x9EC650...
+  created: Tester_18
+  OK (8205 chars)
+[Tester_19] 0x9EC8D0...
+  created: Tester_19
+  OK (8151 chars)
+[Tester_20] 0xB15FA0...
+  created: Tester_20
+  OK (339 ch
+s)
+[Tester_21] 0xB5B700...
+  created: Tester_21
+  OK (4124 chars)
+[Tester_22] 0xB58610...
+  created: Tester_22
+  OK (6817 chars)
+[Tester_23] 0xB5C3A0...
+  created: Tester_23
+  OK (10441 chars)
+[Tester_24] 0xB57B40...
+  created: Tester_24
+  OK (1082 chars)
+[Tester_25] 0xB606D0...
+  created: Tester_25
+  OK (904 chars)
+[Tester_26] 0xB60A90...
+  created: Tester_26
+  OK (45 chars)
+[Tester_27] 0xB5D440...
+  created: Tester_27
+  OK (1256 chars)
+[Tester_28] 0xB615F0...
+  created: Tester_28
+  OK (86 chars)
+[Tester_29] 0xB66400...
+  created: Tester_29
+  OK (163 chars)
+[Tester_30] 0xB65C30...
+  created: Tester_30
+WARN  Decompiling 00b65c30, pcode error at 00b65c36: Unable to resolve constructor at 00b65c36 (DecompileCallback)  
+  OK (200 chars)
+[Tester_31] 0xB65C80...
+  created: Tester_31
+  OK (3354 chars)
+[Tester_32] 0xB73220...
+  created: Tester_32
+  OK (10690 chars)
+[Tester_33] 0xB73320...
+[Tester_34] 0xB72020...
+  created: Tester_34
+  OK (6623 chars)
+[Tester_35] 0xB78B10...
+  created: Tester_35
+  OK (67 chars)
+[Tester_36] 0xB7DA80...
+  created: Tester_36
+  OK (879 chars)
+[Tester_37] 0xB5DDA0...
+  created: Tester_37
+  OK (1824 chars)
+[Tester_38] 0xB7B420...
+  created: Tester_38
+  OK (1783 chars)
+[Tester_39] 0x93BD30...
+[Quote_40] 0x7C2266...
+  created: Quote_40
+  FAILED: 
+Low-level Error: Flow exceeded maximum allowable instructions
+[Quote_41] 0x8DBEE0...
+[Quote_42] 0xB775A0...
+  created: Quote_42
+  OK (294 chars)
+[Parent_ticker_orch] 0xF5E580...
+  created: Parent_ticker_orch
+  OK (53346 chars)
+[Parent_tickgen_loop] 0xF84D90...
+  created: Parent_tickgen_loop
+  OK (3756 chars)
+[Parent_tick_dispatch] 0xF59570...
+  created: Parent_tick_dispatch
+  OK (42787 chars)
+[Parent_pertick] 0xF83C00...
+  created: Parent_pertick
+  OK (19664 chars)
+[Parent_cod0_a] 0xD0E410...
+  created: Parent_cod0_a
+  OK (1055 chars)
+[Parent_cod0_b] 0xD0F3B0...
+  created: Parent_cod0_b
+  OK (1499 chars)
+[Parent_tickgen2] 0xF84FB0...
+  created: Parent_tickgen2
+  OK (3950 chars)
+[Parent_tickgen3] 0xF86380...
+  created: Parent_tickgen3
+  OK (9181 chars)
+[Parent_tickgen4] 0xF807B0...
+  created: Parent_tickgen4
+  OK (5716 chars)
+[Parent_tickgen5] 0xF81670...
+  created: Parent_tickgen5
+  OK (8157 chars)
+[Parent_TestD440] 0xF5DAD0...
+  created: Parent_TestD440
+  OK (3562 chars)
+[Parent_Tester12] 0xDECEF0...
+  created: Parent_Tester12
+  OK (480 chars)
+[Parent_Tester1314] 0xDDEC90...
+  created: Parent_Tester1314
+  OK (1372 chars)
+Done: 48 OK, 8 failed -> C:\Users\Phuc\Desktop\tickdata\ghidra_scripts\decompiled_output.txt
+INFO  REPORT: Save succeeded for processed file: /terminal.exe (HeadlessAnalyzer)  

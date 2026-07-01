@@ -38,4 +38,5 @@ add_subdirectory(sigscan)         # Module 5C — sigscan.exe + lib
 
 if(HAVE_MINHOOK)
     add_subdirectory(hook)        # Module 5B — tdshook.dll
+    add_subdirectory(probe)       # Probe DLL — tds_probe.dll
 endif()

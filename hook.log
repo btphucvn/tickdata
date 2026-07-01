@@ -1,0 +1,281 @@
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[combo] Spread combobox hwnd=000C0CE6 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=12180FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581226 bid=8621.8 sp=1500 -> ask=8771.8 off328=150.0
+[spread #6000000] t=1522911648 bid=6683.3 sp=1451 -> ask=6828.4 off328=145.1
+[spread #8000000] t=1525418171 bid=9541.0 sp=1450 -> ask=9686.0 off328=145.0
+[spread #10000000] t=1528376921 bid=7640.9 sp=1301 -> ask=7771.0 off328=130.1
+[spread #12000000] t=1531160244 bid=6665.8 sp=1201 -> ask=6785.9 off328=120.1
+[spread #14000000] t=1533858366 bid=6446.0 sp=1201 -> ask=6566.1 off328=120.1
+[spread #16000000] t=1536925376 bid=6471.2 sp=1200 -> ask=6591.2 off328=120.0
+[spread #18000000] t=1543013171 bid=4163.8 sp=1188 -> ask=4282.6 off328=118.8
+[spread #20000000] t=1545352937 bid=4001.5 sp=1096 -> ask=4111.1 off328=109.6
+[spread #22000000] t=1548291800 bid=3492.9 sp=1187 -> ask=3611.6 off328=118.7
+[spread #24000000] t=1551959624 bid=3788.7 sp=1180 -> ask=3906.7 off328=118.0
+[spread #26000000] t=1557515775 bid=6296.5 sp=1150 -> ask=6411.5 off328=115.0
+[spread #28000000] t=1558854235 bid=7940.8 sp=1151 -> ask=8055.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[combo] Spread combobox hwnd=000D0D4A id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=00B40FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581226 bid=8621.8 sp=1500 -> ask=8771.8 off328=150.0
+[spread #6000000] t=1522911648 bid=6683.3 sp=1451 -> ask=6828.4 off328=145.1
+[spread #8000000] t=1525418171 bid=9541.0 sp=1450 -> ask=9686.0 off328=145.0
+[spread #10000000] t=1528376921 bid=7640.9 sp=1301 -> ask=7771.0 off328=130.1
+[spread #12000000] t=1531160244 bid=6665.8 sp=1201 -> ask=6785.9 off328=120.1
+[spread #14000000] t=1533858366 bid=6446.0 sp=1201 -> ask=6566.1 off328=120.1
+[spread #16000000] t=1536925376 bid=6471.2 sp=1200 -> ask=6591.2 off328=120.0
+[spread #18000000] t=1543013171 bid=4163.8 sp=1188 -> ask=4282.6 off328=118.8
+[spread #20000000] t=1545352937 bid=4001.5 sp=1096 -> ask=4111.1 off328=109.6
+[spread #22000000] t=1548291800 bid=3492.9 sp=1187 -> ask=3611.6 off328=118.7
+[spread #24000000] t=1551959624 bid=3788.7 sp=1180 -> ask=3906.7 off328=118.0
+[spread #26000000] t=1557515775 bid=6296.5 sp=1150 -> ask=6411.5 off328=115.0
+[spread #28000000] t=1558854235 bid=7940.8 sp=1151 -> ask=8055.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[combo] Spread combobox hwnd=00090E36 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=009C0FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581226 bid=8621.8 sp=1500 -> ask=8771.8 off328=150.0
+[spread #6000000] t=1522911648 bid=6683.3 sp=1451 -> ask=6828.4 off328=145.1
+[spread #8000000] t=1525418171 bid=9541.0 sp=1450 -> ask=9686.0 off328=145.0
+[spread #10000000] t=1528376921 bid=7640.9 sp=1301 -> ask=7771.0 off328=130.1
+[spread #12000000] t=1531160244 bid=6665.8 sp=1201 -> ask=6785.9 off328=120.1
+[spread #14000000] t=1533858366 bid=6446.0 sp=1201 -> ask=6566.1 off328=120.1
+[spread #16000000] t=1536925376 bid=6471.2 sp=1200 -> ask=6591.2 off328=120.0
+[spread #18000000] t=1543013171 bid=4163.8 sp=1188 -> ask=4282.6 off328=118.8
+[spread #20000000] t=1545352937 bid=4001.5 sp=1096 -> ask=4111.1 off328=109.6
+[spread #22000000] t=1548291800 bid=3492.9 sp=1187 -> ask=3611.6 off328=118.7
+[spread #24000000] t=1551959624 bid=3788.7 sp=1180 -> ask=3906.7 off328=118.0
+[spread #26000000] t=1557515775 bid=6296.5 sp=1150 -> ask=6411.5 off328=115.0
+[spread #28000000] t=1558854235 bid=7940.8 sp=1151 -> ask=8055.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[spread #30000000] t=1517444927 bid=10010.3 sp=1001 -> ask=10110.4 off328=100.1
+[spread #32000000] t=1519882617 bid=10297.2 sp=1101 -> ask=10407.3 off328=110.1
+[spread #34000000] t=1522402803 bid=7000.9 sp=1450 -> ask=7145.9 off328=145.0
+[spread #36000000] t=1524781737 bid=8775.4 sp=1451 -> ask=8920.5 off328=145.1
+[spread #38000000] t=1527652020 bid=7416.7 sp=1300 -> ask=7546.7 off328=130.0
+[spread #40000000] t=1530507014 bid=6265.8 sp=1201 -> ask=6385.9 off328=120.1
+[spread #42000000] t=1533174481 bid=7518.1 sp=1201 -> ask=7638.2 off328=120.1
+[spread #44000000] t=1536204773 bid=6278.9 sp=1201 -> ask=6399.0 off328=120.1
+[spread #46000000] t=1542700718 bid=4529.9 sp=1181 -> ask=4648.0 off328=118.1
+[spread #48000000] t=1544761785 bid=3189.4 sp=1197 -> ask=3309.1 off328=119.7
+[spread #50000000] t=1547487321 bid=3572.9 sp=1183 -> ask=3691.2 off328=118.3
+[spread #52000000] t=1551111305 bid=3718.2 sp=1199 -> ask=3838.1 off328=119.9
+[spread #54000000] t=1556875029 bid=5444.0 sp=1141 -> ask=5558.1 off328=114.1
+[spread #56000000] t=1558442937 bid=7928.0 sp=1150 -> ask=8043.0 off328=115.0
+[open] Spread file MAPPED: magic=0x53534454 count=28630710 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=05C70FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01201662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00BF0000 rva=0x611662
+[CRASH]   recurse_ret=0150D960 rva=0x91D960  xuat_hien=10 lan (Eip=01201662 Esp=00BDE874)
+[combo] Spread combobox hwnd=00031300 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581228 bid=8620.9 sp=1500 -> ask=8770.9 off328=150.0
+[spread #6000000] t=1522911652 bid=6684.4 sp=1451 -> ask=6829.5 off328=145.1
+[spread #8000000] t=1525418201 bid=9538.6 sp=1451 -> ask=9683.7 off328=145.1
+[spread #10000000] t=1528376978 bid=7640.6 sp=1301 -> ask=7770.7 off328=130.1
+[spread #12000000] t=1531160429 bid=6665.5 sp=1201 -> ask=6785.6 off328=120.1
+[spread #14000000] t=1533858434 bid=6439.4 sp=1201 -> ask=6559.5 off328=120.1
+[spread #16000000] t=1536925513 bid=6471.7 sp=1201 -> ask=6591.8 off328=120.1
+[spread #18000000] t=1543013344 bid=4162.5 sp=1182 -> ask=4280.7 off328=118.2
+[spread #20000000] t=1545352991 bid=3998.3 sp=1108 -> ask=4109.1 off328=110.8
+[spread #22000000] t=1548292089 bid=3492.5 sp=1196 -> ask=3612.1 off328=119.6
+[spread #24000000] t=1551959897 bid=3783.8 sp=1191 -> ask=3902.9 off328=119.1
+[spread #26000000] t=1557515846 bid=6283.7 sp=1150 -> ask=6398.7 off328=115.0
+[spread #28000000] t=1558854420 bid=7968.8 sp=1151 -> ask=8083.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=05B40FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01201662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00BF0000 rva=0x611662
+[CRASH]   recurse_ret=0150D960 rva=0x91D960  xuat_hien=10 lan (Eip=01201662 Esp=03CFE768)
+[combo] Spread combobox hwnd=00130C54 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=00A90FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01201662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00BF0000 rva=0x611662
+[CRASH]   recurse_ret=0150D960 rva=0x91D960  xuat_hien=10 lan (Eip=01201662 Esp=0093E2F4)
+[combo] Spread combobox hwnd=000912BC id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581228 bid=8620.9 sp=1500 -> ask=8770.9 off328=150.0
+[spread #6000000] t=1522911652 bid=6684.4 sp=1451 -> ask=6829.5 off328=145.1
+[spread #8000000] t=1525418201 bid=9538.6 sp=1451 -> ask=9683.7 off328=145.1
+[spread #10000000] t=1528376978 bid=7640.6 sp=1301 -> ask=7770.7 off328=130.1
+[spread #12000000] t=1531160429 bid=6665.5 sp=1201 -> ask=6785.6 off328=120.1
+[spread #14000000] t=1533858434 bid=6439.4 sp=1201 -> ask=6559.5 off328=120.1
+[spread #16000000] t=1536925513 bid=6471.7 sp=1201 -> ask=6591.8 off328=120.1
+[spread #18000000] t=1543013344 bid=4162.5 sp=1182 -> ask=4280.7 off328=118.2
+[spread #20000000] t=1545352991 bid=3998.3 sp=1108 -> ask=4109.1 off328=110.8
+[spread #22000000] t=1548292089 bid=3492.5 sp=1196 -> ask=3612.1 off328=119.6
+[spread #24000000] t=1551959897 bid=3783.8 sp=1191 -> ask=3902.9 off328=119.1
+[spread #26000000] t=1557515846 bid=6283.7 sp=1150 -> ask=6398.7 off328=115.0
+[spread #28000000] t=1558854420 bid=7968.8 sp=1151 -> ask=8083.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[spread #30000000] t=1517445157 bid=10043.5 sp=1001 -> ask=10143.6 off328=100.1
+[spread #32000000] t=1519882884 bid=10290.7 sp=1101 -> ask=10400.8 off328=110.1
+[spread #34000000] t=1522402910 bid=7011.3 sp=1451 -> ask=7156.4 off328=145.1
+[spread #36000000] t=1524781979 bid=8783.1 sp=1450 -> ask=8928.1 off328=145.0
+[spread #38000000] t=1527652281 bid=7416.6 sp=1300 -> ask=7546.6 off328=130.0
+[spread #40000000] t=1530507188 bid=6265.2 sp=1200 -> ask=6385.2 off328=120.0
+[spread #42000000] t=1533174784 bid=7527.2 sp=1201 -> ask=7647.3 off328=120.1
+[spread #44000000] t=1536204847 bid=6293.1 sp=1201 -> ask=6413.2 off328=120.1
+[spread #46000000] t=1542700889 bid=4547.0 sp=1184 -> ask=4665.4 off328=118.4
+[spread #48000000] t=1544762215 bid=3193.7 sp=1193 -> ask=3313.0 off328=119.3
+[spread #50000000] t=1547487389 bid=3606.6 sp=1194 -> ask=3726.0 off328=119.4
+[spread #52000000] t=1551111718 bid=3713.6 sp=1191 -> ask=3832.7 off328=119.1
+[spread #54000000] t=1556875330 bid=5462.4 sp=1151 -> ask=5577.5 off328=115.1
+[spread #56000000] t=1558443223 bid=7938.7 sp=1151 -> ask=8053.8 off328=115.1
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=005E0FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01201662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00BF0000 rva=0x611662
+[CRASH]   recurse_ret=0150D960 rva=0x91D960  xuat_hien=10 lan (Eip=01201662 Esp=004FE584)
+[combo] Spread combobox hwnd=000C0648 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581228 bid=8620.9 sp=1500 -> ask=8770.9 off328=150.0
+[spread #6000000] t=1522911652 bid=6684.4 sp=1451 -> ask=6829.5 off328=145.1
+[spread #8000000] t=1525418201 bid=9538.6 sp=1451 -> ask=9683.7 off328=145.1
+[spread #10000000] t=1528376978 bid=7640.6 sp=1301 -> ask=7770.7 off328=130.1
+[spread #12000000] t=1531160429 bid=6665.5 sp=1201 -> ask=6785.6 off328=120.1
+[spread #14000000] t=1533858434 bid=6439.4 sp=1201 -> ask=6559.5 off328=120.1
+[spread #16000000] t=1536925513 bid=6471.7 sp=1201 -> ask=6591.8 off328=120.1
+[spread #18000000] t=1543013344 bid=4162.5 sp=1182 -> ask=4280.7 off328=118.2
+[spread #20000000] t=1545352991 bid=3998.3 sp=1108 -> ask=4109.1 off328=110.8
+[spread #22000000] t=1548292089 bid=3492.5 sp=1196 -> ask=3612.1 off328=119.6
+[spread #24000000] t=1551959897 bid=3783.8 sp=1191 -> ask=3902.9 off328=119.1
+[spread #26000000] t=1557515846 bid=6283.7 sp=1150 -> ask=6398.7 off328=115.0
+[spread #28000000] t=1558854420 bid=7968.8 sp=1151 -> ask=8083.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[install] base=00BF0000 target=01774FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=03E80FC0 -> EnableHook...
+[install] Hook @ 01774FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01201662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00BF0000 rva=0x611662
+[CRASH]   recurse_ret=0150D960 rva=0x91D960  xuat_hien=10 lan (Eip=01201662 Esp=00B6E28C)
+[combo] Spread combobox hwnd=00580B9C id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=29466083 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 sp=1026 -> ask=13598.7 off328=102.6
+[spread #2] t=1514851275 bid=13497.0 sp=1026 -> ask=13599.6 off328=102.6
+[spread #3] t=1514851275 bid=13496.6 sp=1026 -> ask=13599.2 off328=102.6
+[spread #4] t=1514851276 bid=13496.9 sp=1026 -> ask=13599.5 off328=102.6
+[spread #5] t=1514851277 bid=13495.4 sp=1026 -> ask=13598.0 off328=102.6
+[spread #2000000] t=1518028574 bid=7974.9 sp=1001 -> ask=8075.0 off328=100.1
+[spread #4000000] t=1520581228 bid=8620.9 sp=1500 -> ask=8770.9 off328=150.0
+[spread #6000000] t=1522911652 bid=6684.4 sp=1451 -> ask=6829.5 off328=145.1
+[spread #8000000] t=1525418201 bid=9538.6 sp=1451 -> ask=9683.7 off328=145.1
+[spread #10000000] t=1528376978 bid=7640.6 sp=1301 -> ask=7770.7 off328=130.1
+[spread #12000000] t=1531160429 bid=6665.5 sp=1201 -> ask=6785.6 off328=120.1
+[spread #14000000] t=1533858434 bid=6439.4 sp=1201 -> ask=6559.5 off328=120.1
+[spread #16000000] t=1536925513 bid=6471.7 sp=1201 -> ask=6591.8 off328=120.1
+[spread #18000000] t=1543013344 bid=4162.5 sp=1182 -> ask=4280.7 off328=118.2
+[spread #20000000] t=1545352991 bid=3998.3 sp=1108 -> ask=4109.1 off328=110.8
+[spread #22000000] t=1548292089 bid=3492.5 sp=1196 -> ask=3612.1 off328=119.6
+[spread #24000000] t=1551959897 bid=3783.8 sp=1191 -> ask=3902.9 off328=119.1
+[spread #26000000] t=1557515846 bid=6283.7 sp=1150 -> ask=6398.7 off328=115.0
+[spread #28000000] t=1558854420 bid=7968.8 sp=1151 -> ask=8083.9 off328=115.1
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799

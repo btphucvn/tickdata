@@ -1,88 +1,72 @@
 //+------------------------------------------------------------------+
 //|  TDSCloneTemplate.mq4                                            |
-//|  Module 4 (phía EA) — minh hoạ dùng tdsclone.dll qua #import.    |
-//|  TDS_CLONE_ARCHITECTURE.md — mục 4.3.                           |
+//|  Module 4 (phia EA) — dung tdsclone.dll qua #import.            |
 //|                                                                  |
-//|  MỤC ĐÍCH: trong backtest, MT4 tester thường chỉ có 1 spread cố |
-//|  định. EA này hỏi DLL spread ĐỘNG theo thời gian tick rồi tự     |
-//|  dựng Ask = Bid + spread*Point, mô phỏng variable spread mà      |
-//|  KHÔNG cần inject/hook (đường sạch C2).                          |
+//|  2 che do hoat dong (chon 1):                                    |
+//|    A. Shared memory (khuyen dung): orchestrator.py dang chay     |
+//|       -> EA tu dong lay spread that Dukascopy theo tung tick.    |
+//|    B. Khong can orchestrator: EA dung spread co dinh hoac tu EA. |
 //|                                                                  |
-//|  CHUẨN BỊ:                                                       |
-//|   1. Build tdsclone.dll (native/ea_helper_dll) bản x86.         |
-//|   2. Copy vào <terminal>\MQL4\Libraries\tdsclone.dll            |
-//|   3. Sinh file .tdspread bằng Python:                            |
-//|        tdsclone build EURUSD --period 1 --from ... --to ...      |
-//|      rồi copy file EURUSD1.tdspread vào <terminal>\MQL4\Files\   |
-//|   4. Bật "Allow DLL imports" trong Strategy Tester.             |
+//|  CHUAN BI:                                                        |
+//|   1. Build tdsclone.dll (cmake --build native\build --target tdsclone)
+//|   2. Copy tdsclone.dll vao <terminal>\MQL4\Libraries\            |
+//|   3. Chay: python orchestrator.py --spread-from-ticks ticks.bin  |
+//|   4. Bat "Allow DLL imports" trong Strategy Tester.              |
+//|   5. Chon Model=Every Tick, dung FXT da deploy.                  |
 //+------------------------------------------------------------------+
 #property strict
-#property copyright "TDS-Clone"
+#property copyright "TDS Clone"
+#property version   "1.0"
 
-//--- Khai báo hàm import từ DLL. Tên KHỚP bảng export (tdsclone.def).
-//    Lưu ý: MQL4 truyền `string` cho DLL như con trỏ char* ANSI -> DLL nhận
-//    const char* (xem TDS_Load trong tdsclone.cpp).
 #import "tdsclone.dll"
-   int    TDS_Load(string spreadFile);   // nạp file .tdspread, trả số bản ghi (-1 lỗi)
-   double TDS_SpreadAt(int unixTime);     // spread (points) tại unixTime
-   double TDS_SlippageAt(int unixTime);   // slippage (points)
-   int    TDS_Count();                    // số bản ghi đã nạp (debug)
+   int    TDS_Load(string dummy);         // ket noi shared memory (goi 1 lan OnInit)
+   double TDS_SpreadAt(int time_sec);     // spread (points) tai thoi diem nay
+   double TDS_Point();                    // pip size
+   double TDS_SlippageAt(int time_sec);   // slippage (points)
+   int    TDS_Count();                    // so ban ghi (debug)
 #import
 
-//--- Tham số EA
-input string SpreadFile = "EURUSD1.tdspread"; // nằm trong MQL4\Files
-input bool   UseDynamicSpread = true;          // bật/tắt variable spread
+input bool   UseDynamicSpread = true;   // dung spread dong tu Dukascopy
+input double FallbackSpread   = 2.0;    // spread du phong (pts) neu DLL chua ket noi
 
-//--- Trạng thái
-bool g_loaded = false;
+bool   g_loaded = false;
 
-//+------------------------------------------------------------------+
-//| Khởi tạo: nạp file spread.                                       |
-//+------------------------------------------------------------------+
 int OnInit()
 {
-   // TerminalInfoString(TERMINAL_DATA_PATH) + \MQL4\Files\ là nơi DLL nên đọc.
-   // Ở đây truyền tên tương đối; nếu DLL không tìm thấy, dùng đường dẫn tuyệt đối.
-   int n = TDS_Load(SpreadFile);
-   g_loaded = (n >= 0);
-   if(!g_loaded)
-      Print("TDS_Load THẤT BẠI cho ", SpreadFile,
-            " — kiểm tra DLL imports & đường dẫn file.");
+   int n = TDS_Load("");
+   g_loaded = (n > 0);
+   if (!g_loaded)
+      Print("[TDSClone] Chua ket noi shared memory. Chay orchestrator.py truoc! n=", n);
    else
-      Print("TDS_Load OK: ", n, " bản ghi spread.");
-   return(INIT_SUCCEEDED);
+      Print("[TDSClone] OK: ", n, " records spread, point=", TDS_Point());
+   return INIT_SUCCEEDED;
 }
 
-//+------------------------------------------------------------------+
-//| Mỗi tick: dựng Ask động từ Bid + spread của DLL.                |
-//+------------------------------------------------------------------+
 void OnTick()
 {
-   double bid = Bid;
-   double ask = Ask;   // ask gốc của tester (spread cố định)
+   if (!UseDynamicSpread) return;
 
-   if(UseDynamicSpread && g_loaded)
-   {
-      int    t        = (int)TimeCurrent();          // thời gian tick (giây)
-      double spreadPt = TDS_SpreadAt(t);             // spread points động
-      double dynAsk   = bid + spreadPt * Point;       // tái dựng Ask
-      double slipPt   = TDS_SlippageAt(t);            // (tuỳ chọn) slippage points
+   int    t  = (int)TimeCurrent();
+   double sp = g_loaded ? TDS_SpreadAt(t) : FallbackSpread;
+   double pt = g_loaded ? TDS_Point()     : Point;
 
-      // ====== DÙNG dynAsk / spreadPt / slipPt trong logic giao dịch của bạn ======
-      // Vì MT4 không cho ghi đè Ask của tester, ở C2 ta TỰ tính giá vào lệnh dựa
-      // trên dynAsk thay vì biến Ask dựng sẵn. Ví dụ minh hoạ:
-      //    - khi BUY:  giá vào = dynAsk (+ slippage)
-      //    - khi SELL: giá ra  = dynAsk
-      // (Phần đặt lệnh thực tế tuỳ chiến lược của bạn — đây chỉ là khung.)
-      Comment("Bid=", DoubleToString(bid, Digits),
-              "  dynAsk=", DoubleToString(dynAsk, Digits),
-              "  spread(pts)=", DoubleToString(spreadPt, 1));
-   }
+   double dynBid = Bid;
+   double dynAsk = dynBid + sp * pt;
+
+   // --- Su dung dynBid / dynAsk thay vi Bid/Ask trong logic cua EA ---
+   //   Ex: khi BUY  -> gia vao = dynAsk
+   //       khi SELL -> gia vao = dynBid (khong can spread)
+   //
+   // (Tich hop vao EA cua ban: thay the Bid/Ask bang dynBid/dynAsk)
+
+   Comment(
+      "TDS Clone | Bid=", DoubleToStr(dynBid, Digits),
+      "  Ask=",           DoubleToStr(dynAsk, Digits),
+      "  Spread=",        DoubleToStr(sp, 1), " pts",
+      "  [", TimeToStr(TimeCurrent(), TIME_DATE|TIME_SECONDS), "]"
+   );
 }
 
-//+------------------------------------------------------------------+
-//| Dọn dẹp.                                                        |
-//+------------------------------------------------------------------+
 void OnDeinit(const int reason)
 {
    Comment("");

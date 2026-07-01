@@ -1,0 +1,346 @@
+[
+  {
+    "name": "sub_00B36920",
+    "entry": "0x00F36920",
+    "entry_rva": "0x00B36920",
+    "anchor_string": "Bid",
+    "pattern": "55 8B EC 83 E4 F8 81 EC 1C 09 00 00 53 56 57 8B 7D 0C 8B D9 33 C9 8D B3 98 03 00 00 8B 47 04 89",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B73EC0",
+    "entry": "0x00F73EC0",
+    "entry_rva": "0x00B73EC0",
+    "anchor_string": "Spread",
+    "pattern": "55 8B EC 6A FF 68 ?? ?? ?? ?? 64 A1 00 00 00 00 50 64 89 25 00 00 00 00 ?? ?? ?? ?? 00 00 56 8B",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B83B40",
+    "entry": "0x00F83B40",
+    "entry_rva": "0x00B83B40",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC 8B 45 08 53 56 8B F1 57 85 C0 ?? ?? ?? ?? 00 00 80 78 20 00 ?? ?? ?? ?? 00 00 83 78 2C",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00647F00",
+    "entry": "0x00A47F00",
+    "entry_rva": "0x00647F00",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC 56 8B F1 83 BE 68 1E 00 00 64 7D 17 FF 75 08 68 ?? ?? ?? ?? 6A 01 68 ?? ?? ?? ?? E8 8D",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B812B0",
+    "entry": "0x00F812B0",
+    "entry_rva": "0x00B812B0",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 53 56 57 8B 7D 14 8B F1 C7 45 14 00 00 00 00 85 FF 0F 84 93 03 00 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B85BD0",
+    "entry": "0x00F85BD0",
+    "entry_rva": "0x00B85BD0",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 53 56 57 8B 7D 14 8B D9 ?? ?? ?? ?? 00 00 00 85 FF 0F 84 84 07 00 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B834E0",
+    "entry": "0x00F834E0",
+    "entry_rva": "0x00B834E0",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 E8 23 BE C1 FF 53 56 57 68 ?? ?? ?? ?? 8B D9 FF 15 ?? ?? ?? ?? B9 89 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B83330",
+    "entry": "0x00F83330",
+    "entry_rva": "0x00B83330",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 56 8B F1 57 ?? ?? ?? ?? 00 00 01 7C 0D ?? ?? ?? ?? 00 00 FF 0F 85 FF",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B830E0",
+    "entry": "0x00F830E0",
+    "entry_rva": "0x00B830E0",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC 51 53 56 8B F1 57 ?? ?? ?? ?? 00 00 85 C0 7E 15 ?? ?? ?? ?? 00 00 00 74 0C ?? ?? ?? ??",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B851D0",
+    "entry": "0x00F851D0",
+    "entry_rva": "0x00B851D0",
+    "anchor_string": "TestGenerator",
+    "pattern": "55 8B EC 83 E4 F8 51 53 56 8B F1 57 ?? ?? ?? ?? 00 00 00 ?? ?? ?? ?? 00 00 ?? ?? ?? ?? 00 00 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00A2EDA0",
+    "entry": "0x00E2EDA0",
+    "entry_rva": "0x00A2EDA0",
+    "anchor_string": "tester",
+    "pattern": "55 8B EC 51 83 3D ?? ?? ?? ?? 00 ?? ?? ?? ?? 00 00 8B 4D 08 B8 C5 B3 A2 91 F7 E9 03 D1 C1 FA 0B",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B5FDD0",
+    "entry": "0x00F5FDD0",
+    "entry_rva": "0x00B5FDD0",
+    "anchor_string": "tester",
+    "pattern": "55 8B EC 51 83 7D 08 00 74 2A 68 ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 50 B9 ?? ?? ?? ?? E8 90 DE F7 FF",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009DEEE0",
+    "entry": "0x00DDEEE0",
+    "entry_rva": "0x009DEEE0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 53 8B D9 56 57 8B 3D ?? ?? ?? ?? 8D 43 08 89 5D FC 50 89 45 F0 FF D7",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009F6C00",
+    "entry": "0x00DF6C00",
+    "entry_rva": "0x009F6C00",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 83 EC 0C 53 56 8B D9 57 53 89 5C 24 14 FF 15 ?? ?? ?? ?? 8B 7B 30 8B 35 58 26",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009F7370",
+    "entry": "0x00DF7370",
+    "entry_rva": "0x009F7370",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 EC 14 8B 45 08 53 8B D9 89 5D F8 57 ?? ?? ?? ?? 00 85 C0 ?? ?? ?? ?? 00 00 83 78 04",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009F7680",
+    "entry": "0x00DF7680",
+    "entry_rva": "0x009F7680",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 EC 0C 53 57 8B 7D 08 8B D9 89 5D FC 85 FF ?? ?? ?? ?? 00 00 83 7F 04 00 ?? ?? ?? ??",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009F8940",
+    "entry": "0x00DF8940",
+    "entry_rva": "0x009F8940",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 EC 10 33 C0 53 89 45 F8 8B D9 88 45 FF 8B 45 08 89 5D F4 56 57 85 C0 ?? ?? ?? ?? 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009F8C80",
+    "entry": "0x00DF8C80",
+    "entry_rva": "0x009F8C80",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 EC 08 53 56 8B 75 08 33 C0 89 45 F8 57 8B F9 89 7D FC 85 F6 ?? ?? ?? ?? 00 00 57 FF",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009EC650",
+    "entry": "0x00DEC650",
+    "entry_rva": "0x009EC650",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 81 EC 1C 06 00 00 53 56 ?? ?? ?? ?? 00 00 8D 44 24 25 C6 44 24 24 00 8B F9 6A",
+    "bytes": 32
+  },
+  {
+    "name": "sub_009EC8D0",
+    "entry": "0x00DEC8D0",
+    "entry_rva": "0x009EC8D0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 6A FF 68 ?? ?? ?? ?? 64 A1 00 00 00 00 50 64 89 25 00 00 00 00 81 EC 04 09 00 00 57 8B",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B15FA0",
+    "entry": "0x00F15FA0",
+    "entry_rva": "0x00B15FA0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 80 3D ?? ?? ?? ?? 00 89 4D FC ?? ?? ?? ?? 00 00 A1 ?? ?? ?? ?? 85 C0",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B5B700",
+    "entry": "0x00F5B700",
+    "entry_rva": "0x00B5B700",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 8B 45 08 56 57 8B F9 3B ?? ?? ?? ?? 00 74 0E 50 E8 55 5A B0 FF 5F 5E 8B E5 5D",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B58610",
+    "entry": "0x00F58610",
+    "entry_rva": "0x00B58610",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 ?? ?? ?? ?? 00 ?? ?? ?? ?? 00 00 56 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 8B F1 8D 4C",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B5C3A0",
+    "entry": "0x00F5C3A0",
+    "entry_rva": "0x00B5C3A0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 83 EC 38 80 3D ?? ?? ?? ?? 00 F3 0F 7E 05 ?? ?? ?? ?? A1 ?? ?? ?? ?? 89 04 24",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B57B40",
+    "entry": "0x00F57B40",
+    "entry_rva": "0x00B57B40",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 56 57 8B 7D 08 85 FF ?? ?? ?? ?? 00 00 8B ?? ?? ?? ?? 00 05 20 0C 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B606D0",
+    "entry": "0x00F606D0",
+    "entry_rva": "0x00B606D0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 83 EC 08 56 8B F1 57 8B 7D 08 89 7E 28 ?? ?? ?? ?? 00 00 00 C7 ?? ?? ?? ?? 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B60A90",
+    "entry": "0x00F60A90",
+    "entry_rva": "0x00B60A90",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 53 8B D9 ?? ?? ?? ?? 00 00 00 56 57 89 5D F0 ?? ?? ?? ?? 00 00 00 0F",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B5D440",
+    "entry": "0x00F5D440",
+    "entry_rva": "0x00B5D440",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 C0 ?? ?? ?? ?? 00 00 53 8B 5D 14 56 57 8B 7D 08 8B F1 81 FF 18 FC FF FF 75 49 83",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B615F0",
+    "entry": "0x00F615F0",
+    "entry_rva": "0x00B615F0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 ?? ?? ?? ?? 00 00 56 57 6A 7F 8D 44 24 1D C6 44 24 ?? ?? ?? ?? 50 8B F1 E8 0D",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B66400",
+    "entry": "0x00F66400",
+    "entry_rva": "0x00B66400",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 ?? ?? ?? ?? 00 00 56 57 6A 7F 8D 44 24 1D C6 44 24 ?? ?? ?? ?? 50 8B F1 E8 FD",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B65C30",
+    "entry": "0x00F65C30",
+    "entry_rva": "0x00B65C30",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 51 56 8B F1 89 75 FC E8 31 A6 DD FF 68 ?? ?? ?? ?? 6A 58 68 ?? ?? ?? ?? ?? ?? ?? ?? 01",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B65C80",
+    "entry": "0x00F65C80",
+    "entry_rva": "0x00B65C80",
+    "anchor_string": "Tester",
+    "pattern": "55 8B ?? ?? ?? ?? 01 00 00 56 8B F1 ?? ?? ?? ?? 00 00 C7 06 ?? ?? ?? ?? ?? ?? ?? ?? 00 00 74 36",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B73220",
+    "entry": "0x00F73220",
+    "entry_rva": "0x00B73220",
+    "anchor_string": "Tester",
+    "pattern": "55 8B ?? ?? ?? ?? 01 00 00 ?? ?? ?? ?? ?? ?? ?? ?? 68 F0 00 00 00 FF B7 10 10 00 00 FF 15 34 2C",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B73320",
+    "entry": "0x00F73320",
+    "entry_rva": "0x00B73320",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 51 53 8B D9 83 BB 70 18 00 00 00 ?? ?? ?? ?? 00 00 83 ?? ?? ?? ?? 00 00 74 20",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B72020",
+    "entry": "0x00F72020",
+    "entry_rva": "0x00B72020",
+    "anchor_string": "Tester",
+    "pattern": "55 8B ?? ?? ?? ?? 00 00 00 6A FF 68 ?? ?? ?? ?? 50 64 89 25 00 00 00 00 83 EC 28 53 56 57 8B F9",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B78B10",
+    "entry": "0x00F78B10",
+    "entry_rva": "0x00B78B10",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 F8 51 53 56 57 8B F9 33 DB 39 ?? ?? ?? ?? 00 ?? ?? ?? ?? 00 00 33 F6 ?? ?? ?? ??",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B7DA80",
+    "entry": "0x00F7DA80",
+    "entry_rva": "0x00B7DA80",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 7D 08 00 56 8B F1 75 07 33 C0 5E 5D C2 04 00 8B 86 64 38 00 00 53 57 39 86 60 38 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B5DDA0",
+    "entry": "0x00F5DDA0",
+    "entry_rva": "0x00B5DDA0",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 C0 ?? ?? ?? ?? 00 00 53 56 57 8B 7D 08 8B D9 85 FF 0F 84 7F 03 00 00 8D 83 50 4B",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B7B420",
+    "entry": "0x00F7B420",
+    "entry_rva": "0x00B7B420",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 83 E4 C0 81 EC 74 09 00 00 53 56 8B F1 33 C9 57 89 74 24 44 89 4C 24 3C 39 ?? ?? ?? ??",
+    "bytes": 32
+  },
+  {
+    "name": "sub_0093BD30",
+    "entry": "0x00D3BD30",
+    "entry_rva": "0x0093BD30",
+    "anchor_string": "Tester",
+    "pattern": "55 8B EC 6A FF 68 ?? ?? ?? ?? 64 A1 00 00 00 00 50 64 89 25 00 00 00 00 83 EC 18 53 56 8B F1 57",
+    "bytes": 32
+  },
+  {
+    "name": "sub_007C2266",
+    "entry": "0x00BC2266",
+    "entry_rva": "0x007C2266",
+    "anchor_string": "Quote",
+    "pattern": "55 8B EC 51 51 53 8B 5D 08 33 C9 56 57 8B F3 8A 13 EB 1B 80 FA 3D 8B D6 0F 44 C1 8B ?? ?? ?? ??",
+    "bytes": 32
+  },
+  {
+    "name": "sub_008DBEE0",
+    "entry": "0x00CDBEE0",
+    "entry_rva": "0x008DBEE0",
+    "anchor_string": "Quote",
+    "pattern": "55 8B EC 83 E4 C0 ?? ?? ?? ?? 00 00 53 56 8B F1 57 83 BE 1C 19 00 00 00 7F 13 8B 86 68 15 00 00",
+    "bytes": 32
+  },
+  {
+    "name": "sub_00B775A0",
+    "entry": "0x00F775A0",
+    "entry_rva": "0x00B775A0",
+    "anchor_string": "Quote",
+    "pattern": "55 8B EC ?? ?? ?? ?? 00 00 83 7D 08 00 53 56 57 8B F9 89 7D F8 ?? ?? ?? ?? 00 00 8B ?? ?? ?? ??",
+    "bytes": 32
+  }
+]
