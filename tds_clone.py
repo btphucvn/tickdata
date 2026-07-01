@@ -115,7 +115,11 @@ def cmd_build(args):
         sys.exit(1)
 
     # Warm-up: lui ngay bat dau them N ngay (cho indicator co bar truoc test).
-    warmup_days = int(getattr(args, 'warmup', 7) or 0)
+    # *** MAC DINH 0 de KHOP TDS ***: TDS khong lui warmup -> FXT bat dau dung ngay
+    # test (vd 2018-01-01 -> first bar 2018-01-02). Truoc day mac dinh 7 -> clone bat
+    # dau 2017-12-25 -> vol-targeting warmup khac TDS -> lech profit (H4/M1).
+    # EA tu xu ly thieu bar (gVolScale=1.0 den khi du mau), giong het TDS.
+    warmup_days = int(getattr(args, 'warmup', 0) or 0)
     build_from_ms = max(cov[0], from_ms - warmup_days * 86400 * 1000)
 
     # Xac dinh duong dan dau ra: build THANG vao MT4 (khoi copy file lon)
