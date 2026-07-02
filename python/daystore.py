@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import os
 import lzma
+import zlib
 import glob
 import struct
 import sqlite3
@@ -43,7 +44,21 @@ _RECS = struct.Struct("<qdd")             # i64 time_ms, f64 bid, f64 ask
 MS_PER_DAY = 86_400_000
 MAGIC = b"TKD1"
 HDR = 36                                   # magic4+ver4+day8+first8+last8+cnt4
-COMPRESS_PRESET = 1                        # LZMA preset (~5x, nhanh)
+COMPRESS_PRESET = 1                        # (v1 cu) LZMA preset — chi con doc de re-encode
+DEFLATE_LEVEL = 6                          # (v2) raw DEFLATE -> native doc bang puff.c
+VER_LZMA = 1                               # than = LZMA (.xz)  — dinh dang cu
+VER_DEFLATE = 2                            # than = RAW DEFLATE — native (miniz/puff) doc duoc
+
+
+def _deflate(raw):
+    """Nen RAW deflate (khong header zlib) — puff.c giai ma duoc."""
+    co = zlib.compressobj(DEFLATE_LEVEL, zlib.DEFLATED, -15)
+    return co.compress(raw) + co.flush()
+
+
+def _inflate(body, raw_size):
+    """Giai RAW deflate. raw_size = kich thuoc bung (count*24)."""
+    return zlib.decompress(body, -15, raw_size)
 
 _BASE = os.path.dirname(os.path.dirname(__file__))
 STORE_DIR = os.path.join(_BASE, "data", "ticks")
@@ -179,13 +194,13 @@ def _write_day(symbol, day_index, ticks):
     path = _day_file_by_index(sym, day_index)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     raw = _pack_records(ticks)
-    body = lzma.compress(raw, preset=COMPRESS_PRESET)
+    body = _deflate(raw)                    # v2: RAW DEFLATE -> native doc duoc
     day_ms = day_index * MS_PER_DAY
     first_ms, last_ms, cnt = ticks[0][0], ticks[-1][0], len(ticks)
     tmp = path + ".tmp"
     with open(tmp, "wb") as f:
         f.write(MAGIC)
-        f.write(struct.pack("<I", 1))
+        f.write(struct.pack("<I", VER_DEFLATE))
         f.write(struct.pack("<qqq", day_ms, first_ms, last_ms))
         f.write(struct.pack("<I", cnt))
         f.write(body)
@@ -198,19 +213,23 @@ def _write_day(symbol, day_index, ticks):
 
 
 def _read_day_records(symbol, day_index):
-    """Raw 24B record bytes cua 1 ngay (bung LZMA). b'' neu khong co."""
+    """Raw 24B record bytes cua 1 ngay. Doc theo VERSION (v1=LZMA cu, v2=deflate). b'' neu loi."""
     path = _day_file_by_index(symbol, day_index)
     try:
         with open(path, "rb") as f:
-            if f.read(4) != MAGIC:
+            head = f.read(HDR)
+            if len(head) < HDR or head[:4] != MAGIC:
                 return b""
-            f.seek(HDR)
+            ver = struct.unpack_from("<I", head, 4)[0]
+            cnt = struct.unpack_from("<I", head, 32)[0]
             body = f.read()
     except OSError:
         return b""
     try:
-        return lzma.decompress(body)
-    except lzma.LZMAError:
+        if ver == VER_DEFLATE:
+            return _inflate(body, cnt * REC)
+        return lzma.decompress(body)          # v1 cu
+    except (zlib.error, lzma.LZMAError):
         return b""
 
 
@@ -486,6 +505,75 @@ def migrate_all(progress=None):
         if progress:
             progress(i, len(syms), sym)
     return len(syms)
+
+
+def _day_version(path):
+    try:
+        with open(path, "rb") as f:
+            head = f.read(HDR)
+        if len(head) < HDR or head[:4] != MAGIC:
+            return None
+        return struct.unpack_from("<I", head, 4)[0]
+    except OSError:
+        return None
+
+
+def _reencode_file(sym, path):
+    """Doc 1 file .tkd v1 (LZMA) -> ghi lai v2 (raw deflate) cung cho. Tra True neu co doi."""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(HDR)
+            body = f.read()
+    except OSError:
+        return False
+    if len(head) < HDR or head[:4] != MAGIC:
+        return False
+    if struct.unpack_from("<I", head, 4)[0] == VER_DEFLATE:
+        return False
+    try:
+        raw = lzma.decompress(body)
+    except lzma.LZMAError:
+        return False
+    day_index = struct.unpack_from("<q", head, 8)[0] // MS_PER_DAY
+    _write_day(sym, day_index, _unpack_records(raw))   # ghi v2, cap nhat catalog
+    return True
+
+
+def symbols_needing_reencode():
+    """List symbol con file .tkd v1 (LZMA) can chuyen sang v2 (deflate) cho native."""
+    out = []
+    if not os.path.isdir(STORE_DIR):
+        return out
+    for name in sorted(os.listdir(STORE_DIR)):
+        d = os.path.join(STORE_DIR, name)
+        if os.path.isdir(d) and any(
+                _day_version(p) == VER_LZMA for p in glob.glob(os.path.join(d, "*", "*.tkd"))):
+            out.append(name.upper())
+    return out
+
+
+def reencode_all(progress=None):
+    """
+    Chuyen MOI file .tkd v1 (LZMA) -> v2 (raw deflate) — de native doc thang bang puff.c.
+    Idempotent (file da v2 -> bo qua). progress(done, total, path). Tra so file da doi.
+    """
+    files = []
+    if os.path.isdir(STORE_DIR):
+        for name in sorted(os.listdir(STORE_DIR)):
+            d = os.path.join(STORE_DIR, name)
+            if os.path.isdir(d):
+                for p in glob.glob(os.path.join(d, "*", "*.tkd")):
+                    if _day_version(p) == VER_LZMA:
+                        files.append((name.upper(), p))
+    total = len(files)
+    for i, (sym, path) in enumerate(files, 1):
+        _reencode_file(sym, path)
+        _synced.discard(sym)
+        if progress:
+            progress(i, total, path)
+    for sym in {s for s, _ in files}:
+        _rebuild_catalog(sym)
+    return total
 
 
 def _migrate_old_format(symbol):

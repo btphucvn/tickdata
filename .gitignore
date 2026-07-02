@@ -26,3 +26,6 @@ db.7.gbf
 /ghidra_proj_decomp/MT4Decomp.rep/idata/00/~00000000.db/db.8.gbf
 /ghidra_proj_decomp/MT4Decomp.rep/idata/00/~00000000.db/db.9.gbf
 *.gbf
+
+native/test/*.exe
+native/test/*.obj
