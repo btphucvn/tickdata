@@ -1,0 +1,43 @@
+00f7e965  MOVSD qword ptr [ESP + 0x78],XMM1        | f2 0f 11 4c 24 78  <== CLOSE(0x78)
+00f7e97c  MOVSD qword ptr [ESP + 0x78],XMM0        | f2 0f 11 44 24 78  <== CLOSE(0x78)
+00f7eb63  MOVSD qword ptr [EDI + 0x78],XMM0        | f2 0f 11 47 78  <== CLOSE(0x78)
+00f7ebf4  MOVUPS xmmword ptr [EDI + 0x30],XMM0     | 0f 11 47 30  <== SL(0x30)
+00f7ecb1  MOV word ptr [ESP + 0x38],0x2e25         | 66 c7 44 24 38 25 2e  <== TP(0x38)
+00f7ecc5  LEA EAX,[ESP + 0x38]                     | 8d 44 24 38  <== TP(0x38)
+00f7edcb  MOV ECX,dword ptr [ECX + 0x30]           | 8b 49 30  <== SL(0x30)
+00f7ee72  MOV ESI,dword ptr [ESP + 0x38]           | 8b 74 24 38  <== TP(0x38)
+00f7ef31  MOV ECX,dword ptr [ECX + 0x30]           | 8b 49 30  <== SL(0x30)
+00f7f04c  MOVSD XMM0,qword ptr [ESP + 0x78]        | f2 0f 10 44 24 78  <== CLOSE(0x78)
+00f7f15f  MOVSD XMM1,qword ptr [EDI + 0x30]        | f2 0f 10 4f 30  <== SL(0x30)
+00f7f17c  SUBSD XMM0,qword ptr [ESP + 0x78]        | f2 0f 5c 44 24 78  <== CLOSE(0x78)
+00f7f1b9  MOVSD qword ptr [EDI + 0x78],XMM1        | f2 0f 11 4f 78  <== CLOSE(0x78)
+00f7f2ba  MOVSD XMM0,qword ptr [EDI + 0x30]        | f2 0f 10 47 30  <== SL(0x30)
+00f7f34c  MOVSD XMM1,qword ptr [EDI + 0x38]        | f2 0f 10 4f 38  <== TP(0x38)
+00f7f39b  MOVSD qword ptr [EDI + 0x78],XMM1        | f2 0f 11 4f 78  <== CLOSE(0x78)
+00f7f49c  MOVSD XMM0,qword ptr [EDI + 0x38]        | f2 0f 10 47 38  <== TP(0x38)
+
+=== func 0xF7C740 (close-finalize) 24 lenh dau ===
+00f7c740  PUSH EBP                                 | 55
+00f7c741  MOV EBP,ESP                              | 8b ec
+00f7c743  SUB ESP,0x9c4                            | 81 ec c4 09 00 00
+00f7c749  PUSH EBX                                 | 53
+00f7c74a  XORPS XMM0,XMM0                          | 0f 57 c0
+00f7c74d  MOV byte ptr [EBP + -0x50],0x0           | c6 45 b0 00
+00f7c751  PUSH ESI                                 | 56
+00f7c752  MOV ESI,dword ptr [EBP + 0x8]            | 8b 75 08
+00f7c755  MOV EBX,ECX                              | 8b d9
+00f7c757  MOVQ qword ptr [EBP + -0x3f],XMM0        | 66 0f d6 45 c1
+00f7c75c  MOV dword ptr [EBP + -0x37],0x0          | c7 45 c9 00 00 00 00
+00f7c763  MOV word ptr [EBP + -0x33],0x0           | 66 c7 45 cd 00 00
+00f7c769  MOV byte ptr [EBP + -0x31],0x0           | c6 45 cf 00
+00f7c76d  MOV byte ptr [EBP + -0x30],0x0           | c6 45 d0 00
+00f7c771  MOVQ qword ptr [EBP + -0x1f],XMM0        | 66 0f d6 45 e1
+00f7c776  MOV dword ptr [EBP + -0x17],0x0          | c7 45 e9 00 00 00 00
+00f7c77d  MOV word ptr [EBP + -0x13],0x0           | 66 c7 45 ed 00 00
+00f7c783  MOV byte ptr [EBP + -0x11],0x0           | c6 45 ef 00
+00f7c787  PUSH EDI                                 | 57
+00f7c788  MOVUPS xmmword ptr [EBP + -0x4f],XMM0    | 0f 11 45 b1
+00f7c78c  MOVUPS xmmword ptr [EBP + -0x2f],XMM0    | 0f 11 45 d1
+00f7c790  TEST ESI,ESI                             | 85 f6
+00f7c792  JZ 0x00f7cae2                            | 0f 84 4a 03 00 00
+00f7c798  MOV EAX,dword ptr [EBX + 0x6100]         | 8b 83 00 61 00 00

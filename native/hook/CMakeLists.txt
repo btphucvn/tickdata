@@ -1,5 +1,5 @@
 # Module 5B — Hook engine DLL (tdshook.dll). Cần MinHook.
-add_library(tdshook SHARED tdshook.cpp gui_inject.cpp slippage.cpp fxt_patch.cpp)
+add_library(tdshook SHARED tdshook.cpp gui_inject.cpp slippage.cpp fxt_patch.cpp fxt_virtual.cpp)
 set_target_properties(tdshook PROPERTIES PREFIX "" OUTPUT_NAME "tdshook")
 target_link_libraries(tdshook PRIVATE minhook sigscan_lib)
 target_include_directories(tdshook PRIVATE

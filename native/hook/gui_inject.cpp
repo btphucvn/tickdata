@@ -310,15 +310,20 @@ static void PrepareFromTester()
         return;
     }
 
-    wchar_t args[512];
-    swprintf(args, 512,
-        L"prepare --symbol %s --from %s --to %s --period %d "
-        L"& echo. & pause",
-        sym, from, to, period);
-    RunPython(args, false);
-
-    // prepare se ghi data\active.spread (variable spread). Reset hook de map file moi
-    // o tick ke tiep (prepare chay xong truoc khi user bam Start).
+    // --- TDS-FLOW: KHONG build o day. Chi ghi MARKER -> hook (fxt_patch) se tu chay
+    //     `prepare --virtual` LUC START (khi MT4 mo FXT), giong TDS. Tuc thi, khong cmd. ---
+    char csym[64] = {0}, cfrom[32] = {0}, cto[32] = {0};
+    WideCharToMultiByte(CP_ACP, 0, sym, -1, csym, 64, nullptr, nullptr);
+    WideCharToMultiByte(CP_ACP, 0, from, -1, cfrom, 32, nullptr, nullptr);
+    WideCharToMultiByte(CP_ACP, 0, to, -1, cto, 32, nullptr, nullptr);
+    wchar_t mpath[MAX_PATH];
+    swprintf(mpath, MAX_PATH, L"%s\\data\\pending.prep", g_projectRoot);
+    FILE* f = nullptr;
+    if (_wfopen_s(&f, mpath, L"wb") == 0 && f) {
+        fprintf(f, "%s %s %s %d\n", csym, cfrom, cto, period);
+        fclose(f);
+        SetWindowTextW(g_lblStat, L"San sang. Nhan Start -> tu build data (giong TDS).");
+    }
     HookReopenSpread();
 }
 

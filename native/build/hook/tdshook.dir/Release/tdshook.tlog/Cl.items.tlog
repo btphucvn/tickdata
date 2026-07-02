@@ -2,3 +2,4 @@ C:\Users\Phuc\Desktop\tickdata\native\hook\tdshook.cpp;C:\Users\Phuc\Desktop\tic
 C:\Users\Phuc\Desktop\tickdata\native\hook\gui_inject.cpp;C:\Users\Phuc\Desktop\tickdata\native\build\hook\tdshook.dir\Release\gui_inject.obj
 C:\Users\Phuc\Desktop\tickdata\native\hook\slippage.cpp;C:\Users\Phuc\Desktop\tickdata\native\build\hook\tdshook.dir\Release\slippage.obj
 C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_patch.cpp;C:\Users\Phuc\Desktop\tickdata\native\build\hook\tdshook.dir\Release\fxt_patch.obj
+C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_virtual.cpp;C:\Users\Phuc\Desktop\tickdata\native\build\hook\tdshook.dir\Release\fxt_virtual.obj

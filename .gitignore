@@ -10,3 +10,19 @@ db.7.gbf
 /data/ticks/BTCUSD/2020-05.bin
 /data/ticks/XAUUSD/2018-01.bin
 /data/ticks/XAUUSD/2018-02.bin
+# --- Tu dong them: file >100MB (GitHub tu choi) ---
+/data/ticks/BTCUSD/2020-08.bin
+/data/ticks/BTCUSD/2020-09.bin
+/data/ticks/BTCUSD/2020-11.bin
+/data/ticks/BTCUSD/2020-12.bin
+/data/ticks/BTCUSD/2021-01.bin
+/data/ticks/BTCUSD/2021-02.bin
+/data/ticks/BTCUSD/2021-03.bin
+/data/ticks/BTCUSD/2021-04.bin
+/data/ticks/BTCUSD/2021-05.bin
+/data/ticks/BTCUSD/2021-06.bin
+/data/ticks/BTCUSD/2021-07.bin
+/data/ticks/BTCUSD/2021-08.bin
+/ghidra_proj_decomp/MT4Decomp.rep/idata/00/~00000000.db/db.8.gbf
+/ghidra_proj_decomp/MT4Decomp.rep/idata/00/~00000000.db/db.9.gbf
+*.gbf

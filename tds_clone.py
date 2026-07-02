@@ -115,11 +115,14 @@ def cmd_build(args):
         sys.exit(1)
 
     # Warm-up: lui ngay bat dau them N ngay (cho indicator co bar truoc test).
-    # *** MAC DINH 0 de KHOP TDS ***: TDS khong lui warmup -> FXT bat dau dung ngay
-    # test (vd 2018-01-01 -> first bar 2018-01-02). Truoc day mac dinh 7 -> clone bat
-    # dau 2017-12-25 -> vol-targeting warmup khac TDS -> lech profit (H4/M1).
-    # EA tu xu ly thieu bar (gVolScale=1.0 den khi du mau), giong het TDS.
-    warmup_days = int(getattr(args, 'warmup', 0) or 0)
+    # *** MAC DINH 30 ***: phan tich trade-for-trade (cloneh4 vs tdsh4) cho thay
+    # clone khop TDS TUNG LENH ve THOI GIAN+GIA (0/66 lech time), nhung THIEU dung
+    # lenh DAU TIEN cua TDS (2018-01-02 04:00) vi khoi dong lanh (warmup=0) ->
+    # indicator chua san sang -> equity lech -> EA vol-targeting chia lot lech ->
+    # cascade. Them warmup de indicator san sang truoc test start (giong TDS).
+    # "Use date" trong tester gioi han giao dich tu 2018-01-01; bar warmup (thang 12)
+    # chi dung khoi tao indicator, KHONG giao dich (can verify sau khi chay).
+    warmup_days = int(getattr(args, 'warmup', 30) or 30)
     build_from_ms = max(cov[0], from_ms - warmup_days * 86400 * 1000)
 
     # Xac dinh duong dan dau ra: build THANG vao MT4 (khoi copy file lon)
@@ -189,16 +192,30 @@ def cmd_build(args):
     except Exception as e:
         print(f'[!] Khong doc duoc timezone settings: {e}')
 
+    virtual = getattr(args, 'virtual', False)
     try:
-        try:
-            # Duong build NHANH (vectorized numpy/pandas) — ~10-30x nhanh hon.
-            from fxt_builder import build_fxt_fast
-            build_fxt_fast(sym, args.period, out, build_from_ms, to_ms,
-                           gmt_offset=gmt_offset, dst=dst)
-        except ImportError:
-            # Thieu numpy/pandas -> quay ve vong lap Python (cham nhung chac).
-            build_fxt(tick_store.iter_range(sym, build_from_ms, to_ms),
-                      sym, args.period, out, gmt_offset=gmt_offset, dst=dst)
+        if virtual:
+            # --- FXT AO (giong TDS): sparse placeholder + config, KHONG ghi 1.5GB. ---
+            #     tdshook.dll hook ReadFile -> sinh record on-the-fly tu tick_store.
+            import fxt_virtual
+            cfg = os.path.join(os.path.dirname(__file__), 'data', 'active.fxtv')
+            info = fxt_virtual.write_virtual(sym, args.period, cfg, out,
+                                             build_from_ms, to_ms,
+                                             gmt_offset=gmt_offset, dst=dst)
+            print(f'[OK] FXT AO: {info["total"]:,} records, {info["bars"]:,} bars, '
+                  f'logical {info["size"]/1024/1024:.0f} MB (sparse ~0 vat ly), '
+                  f'{info["nbin"]} bin -> {out}')
+            print(f'     config: {cfg}  (hook tdshook.dll se phuc vu record khi MT4 doc)')
+        else:
+            try:
+                # Duong build NHANH (vectorized numpy/pandas) — ~10-30x nhanh hon.
+                from fxt_builder import build_fxt_fast
+                build_fxt_fast(sym, args.period, out, build_from_ms, to_ms,
+                               gmt_offset=gmt_offset, dst=dst)
+            except ImportError:
+                # Thieu numpy/pandas -> quay ve vong lap Python (cham nhung chac).
+                build_fxt(tick_store.iter_range(sym, build_from_ms, to_ms),
+                          sym, args.period, out, gmt_offset=gmt_offset, dst=dst)
     except (PermissionError, OSError) as e:
         print(f'[!!!] Khong ghi duoc FXT: {e}')
         print('      Co the MT4 dang CHAY backtest (khoa file). '
@@ -459,6 +476,7 @@ def main():
     bd.add_argument('--to',        dest='date_to',   required=True)
     bd.add_argument('--period',    type=int, default=1, help='Period minutes (default=1)')
     bd.add_argument('--no-deploy', action='store_true', help='Khong copy vao MT4')
+    bd.add_argument('--virtual', action='store_true', help='FXT ao (sparse+hook, giong TDS): khong ghi 1.5GB')
 
     # --- run (all-in-one) ---
     rn = sub.add_parser('run', help='Download + build + deploy (all-in-one)')
@@ -477,6 +495,7 @@ def main():
     pr.add_argument('--from',    dest='date_from', required=True)
     pr.add_argument('--to',      dest='date_to',   required=True)
     pr.add_argument('--period',  type=int, default=1)
+    pr.add_argument('--virtual', action='store_true', help='FXT ao (sparse+hook, giong TDS)')
 
     # --- restore (cho checkbox khi BO TICK: go FXT/HST cua ta) ---
     rs = sub.add_parser('restore', help='Go FXT/HST cua ta -> MT4 dung data broker')

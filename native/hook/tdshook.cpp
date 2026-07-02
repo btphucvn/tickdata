@@ -28,6 +28,7 @@
 #include "gui_inject.h"
 #include "slippage.h"
 #include "fxt_patch.h"
+#include "fxt_virtual.h"
 
 // ---------------------------------------------------------------------------
 // Shared memory layouts (phai khop voi orchestrator.py)
@@ -132,6 +133,47 @@ static const TDSTick* FindTick(uint32_t time_sec)
 }
 
 // ---------------------------------------------------------------------------
+// GAP-FILL patch (giong TDS): NOP 2 lenh MT4 "kep" gia dong SL/TP ve dung muc
+// SL/TP. Truoc do MT4 da set gia dong = model.ask/bid (gia thi truong cua tick
+// trigger) VO DIEU KIEN @0xF7EB63; 2 lenh nay ghi de lai:
+//   0xF7F1B9: MOVSD [EDI+0x78],XMM1  (close = SL)   bytes: f2 0f 11 4f 78
+//   0xF7F39B: MOVSD [EDI+0x78],XMM1  (close = TP)   bytes: f2 0f 11 4f 78
+// NOP chung -> gia dong giu nguyen gia tick THAT. Khi gia nhay vot qua SL/TP
+// (gap), dong tai gia thi truong that (te hon) giong TDS, thay vi lac quan @SL.
+// Dia chi Ghidra (unpack) = runtime VA (khop FetchNextTick @0xF84FB0).
+static void TryPatchGapFill()
+{
+    static bool done = false;
+    if (done) return;
+    done = true;
+    auto* base = static_cast<uint8_t*>(static_cast<void*>(GetModuleHandleW(nullptr)));
+    const uint32_t rvas[2] = { 0xB7F1B9u, 0xB7F39Bu };   // VA - 0x400000
+    const uint8_t  expect[5] = { 0xF2, 0x0F, 0x11, 0x4F, 0x78 };
+    const char*    tags[2] = { "SL", "TP" };
+    for (int i = 0; i < 2; ++i) {
+        uint8_t* addr = base + rvas[i];
+        __try {
+            if (memcmp(addr, expect, 5) != 0) {
+                HookLog("[gapfill] %s @%p bytes KHAC (%02X %02X %02X %02X %02X) -> BO QUA\n",
+                        tags[i], addr, addr[0], addr[1], addr[2], addr[3], addr[4]);
+                continue;
+            }
+            DWORD oldp;
+            if (VirtualProtect(addr, 5, PAGE_EXECUTE_READWRITE, &oldp)) {
+                memset(addr, 0x90, 5);                 // NOP x5
+                VirtualProtect(addr, 5, oldp, &oldp);
+                FlushInstructionCache(GetCurrentProcess(), addr, 5);
+                HookLog("[gapfill] PATCHED %s clamp @%p -> NOP (fill gia tick that)\n", tags[i], addr);
+            } else {
+                HookLog("[gapfill] VirtualProtect FAILED %s @%p\n", tags[i], addr);
+            }
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            HookLog("[gapfill] EXCEPTION patch %s @%p\n", tags[i], addr);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Hook
 // ---------------------------------------------------------------------------
 static int __fastcall Hook_FetchTick(void* self,
@@ -139,6 +181,42 @@ static int __fastcall Hook_FetchTick(void* self,
                                      void* outRec,
                                      void* outTick)
 {
+    // Patch gap-fill 1 lan (tester dang chay -> code da giai ma, patch an toan).
+    TryPatchGapFill();
+
+    // ===== FIX QUAN TRONG (RE @0xF84FB0) =====
+    // FetchNextTick tinh outTick.ask = record.bid + [self+0x328] RỒI GỌI NGAY
+    // vao tester/TickProc qua vtable (**(self+0x30c)+0x6c / +0x70) — TAT CA
+    // BEN TRONG g_orig, TRUOC khi tra ve. Vi vay override outTick.ask SAU g_orig
+    // la QUA MUON: tick da duoc dua vao fill voi ask = bid + 0.
+    // => Phai set [self+0x328] = spread offset TRUOC khi goi g_orig, giong TDS,
+    //    de MT4 tu tinh ask dung cho ca vcall noi bo lan outTick.
+    if (self && GuiUseMyTickData() && GuiUseMySpread()) {
+        __try {
+            // Record sap xuat: *(self+0x2fc); het record khi >= *(self+0x300).
+            uint8_t* recp = *reinterpret_cast<uint8_t**>(
+                                reinterpret_cast<uint8_t*>(self) + 0x2fc);
+            uint8_t* endp = *reinterpret_cast<uint8_t**>(
+                                reinterpret_cast<uint8_t*>(self) + 0x300);
+            if (recp && recp < endp) {
+                // record+0x30 = ctm (giay, gio SERVER), +0x20 = close = bid.
+                int32_t rectime = *reinterpret_cast<int32_t*>(recp + 0x30);
+                double  rbid    = *reinterpret_cast<double*>(recp + 0x20);
+                // Spread THAT (ask-bid) doc thang tu .bin, khop dung tick bang bid
+                // -> chinh xac ca diem gap (nhieu tick/giay). Giong TDS "use my spread".
+                double sp = vfxt::RealSpreadPrice(rectime, rbid);
+                if (sp >= 0.0)
+                    *reinterpret_cast<double*>(
+                        reinterpret_cast<uint8_t*>(self) + 0x328) = sp;
+                // DIAG: log quanh tick gap 2018-05-09 18:52:11 server (1525891922..1525891942)
+                if (rectime >= 1525891922 && rectime <= 1525891942)
+                    HookLog("[PRE gap] rectime=%d rbid=%.1f RealSpread=%.1f -> off328=%.1f\n",
+                            rectime, rbid, sp,
+                            *reinterpret_cast<double*>(reinterpret_cast<uint8_t*>(self)+0x328));
+            }
+        } __except (EXCEPTION_EXECUTE_HANDLER) {}
+    }
+
     int result = g_orig(self, edx_unused, outRec, outTick);
 
     static long long lastTime = 0;   // theo doi tick cuoi cung xu ly (chan doan crash)
@@ -169,23 +247,26 @@ static int __fastcall Hook_FetchTick(void* self,
             } else if (g_shmMagic == 0x53534454u) {
                 // ---- Mode spread bien dong: chi ap khi chon "use my spread" ----
                 if (!GuiUseMySpread()) return result;
-                auto* h = static_cast<const SpreadHeader*>(g_shm);
-                float sp = LookupSpread((uint32_t)tk->time_sec);
-                if (sp > 0.0f) {
-                    double off = sp * h->point;   // ask offset (gia)
-                    tk->ask = tk->bid + off;      // exact cho tick nay
-                    // DONG BO offset noi bo MT4 (self+0x328) -> report/finalization
-                    // nhat quan (giong TDS: spread offset bien dong, khong phai const 0).
+                // Spread THAT (ask-bid) doc thang .bin, khop dung tick bang bid.
+                // (Pre-hook da set self+0x328 truoc g_orig; day chi dong bo lai outTick
+                //  cho cac lan doc sau, dung CUNG nguon -> nhat quan, dung ca diem gap.)
+                double sp = vfxt::RealSpreadPrice(tk->time_sec, tk->bid);
+                if (sp >= 0.0) {
+                    tk->ask = tk->bid + sp;
                     *reinterpret_cast<double*>(
-                        reinterpret_cast<uint8_t*>(self) + 0x328) = off;
+                        reinterpret_cast<uint8_t*>(self) + 0x328) = sp;
                 }
+                // DIAG: tick THAT da phuc vu quanh gap
+                if (tk->time_sec >= 1525891922 && tk->time_sec <= 1525891942)
+                    HookLog("[POST gap] served time=%d bid=%.1f RealSpread=%.1f -> ask=%.1f\n",
+                            tk->time_sec, tk->bid, sp, tk->ask);
 
                 // Log mau: 5 tick dau + moi 2 trieu tick
                 static long long dbg = 0;
                 ++dbg;
                 if (dbg <= 5 || (dbg % 2000000) == 0)
-                    HookLog("[spread #%lld] t=%d bid=%.1f sp=%.0f -> ask=%.1f off328=%.1f\n",
-                            dbg, tk->time_sec, tk->bid, sp, tk->ask,
+                    HookLog("[spread #%lld] t=%d bid=%.1f -> ask=%.1f off328=%.1f (real .bin)\n",
+                            dbg, tk->time_sec, tk->bid, tk->ask,
                             *reinterpret_cast<double*>(reinterpret_cast<uint8_t*>(self)+0x328));
             }
         } __except (EXCEPTION_EXECUTE_HANDLER) {
