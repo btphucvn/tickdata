@@ -625,6 +625,18 @@ def month_file(symbol, year, month):
     return os.path.join(_scratch_dir(symbol), f"{year:04d}-{month:02d}.bin")
 
 
+def day_paths(symbol, from_ms, to_ms):
+    """
+    List path file .tkd cua cac ngay giao [from_ms, to_ms], theo THU TU thoi gian —
+    cho native (fxt_virtual.cpp giai doan B) doc thang tung ngay (windowed), KHONG
+    can scratch .bin. Chi tra ngay CO data.
+    """
+    sym = symbol.upper(); _ensure(sym)
+    day_lo = from_ms // MS_PER_DAY
+    day_hi = (to_ms - 1) // MS_PER_DAY if to_ms > 0 else -1
+    return [_day_file_by_index(sym, day) for day in _days_in(sym, day_lo, day_hi)]
+
+
 def materialize_paths(symbol, from_ms, to_ms):
     """
     Bung cac thang giao [from_ms, to_ms) ra .bin scratch (data/_materialized) cho native

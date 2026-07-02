@@ -17,8 +17,9 @@ from daystore import (  # noqa: F401
     month_last_ms, month_counts, coverage, has_month, _month_list,
     # --- quan ly ---
     delete_symbol, list_symbols, store_dir, close_all,
-    # --- native (bung scratch .bin) ---
-    month_file, materialize_paths, clean_scratch,
+    # --- native ---
+    day_paths,                    # giai doan B: native doc thang .tkd
+    month_file, materialize_paths, clean_scratch,   # giai doan A: scratch .bin (du phong)
     # --- tuong thich GUI cu (kho .tkd luon nen -> no-op) ---
     is_compressed, compress_month, compress_symbol,
     # --- migration + hang so ---
