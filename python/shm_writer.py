@@ -154,6 +154,55 @@ def write_spread_file(symbol, out_path, from_ms=None, to_ms=None, settings=None)
     return dict(count=count, avg=avg, point=point)
 
 
+def write_spread_file_fast(symbol, out_path, from_ms, to_ms, settings=None):
+    """
+    Nhu write_spread_file nhung VECTORIZED (numpy) — nhanh hon ~10-30x.
+    Doc tick_store bulk, tinh spread + tz-shift vector, ghi 1 lan.
+    """
+    import numpy as np
+    import tick_store
+    from fxt_builder import _tz_shift_vec
+    sym = symbol.upper()
+    meta = symbols_meta.resolve(sym)
+    point = meta.point
+    if settings is None:
+        settings = settings_store.load(sym)
+    gmt, dst = int(settings.gmt_offset), int(settings.dst)
+
+    a = tick_store.load_range_np(sym, from_ms, to_ms)
+    if a is None or len(a) == 0:
+        raise ValueError(f'{sym}: store rong (chua tai data?)')
+
+    real = (a['ask'] - a['bid']) / point                       # spread thuc (points)
+    if getattr(settings, 'use_variable_spread', True):
+        sp = real * settings.spread_multiplier + settings.spread_addition
+        if settings.min_spread > 0: sp = np.maximum(sp, float(settings.min_spread))
+        if settings.max_spread > 0: sp = np.minimum(sp, float(settings.max_spread))
+        sp = np.maximum(sp, 0.0)
+    else:
+        sp = np.full(len(a), float(settings.spread_addition))
+
+    ts = (a['t'] // 1000).astype('int64')
+    if gmt or dst:
+        ts = ts + _tz_shift_vec(ts, gmt, dst)
+    ts = ts.astype('<i4'); sp = sp.astype('<f4')
+
+    n = len(ts)
+    rec = np.empty(n + 2, dtype=[('t', '<i4'), ('sp', '<f4')])   # bao 2 record ±30 ngay
+    rec['t'][1:n+1] = ts;      rec['sp'][1:n+1] = sp
+    rec['t'][0]   = int(ts[0])  - 86400 * 30; rec['sp'][0]   = sp[0]
+    rec['t'][n+1] = int(ts[-1]) + 86400 * 30; rec['sp'][n+1] = sp[-1]
+    count = n + 2
+
+    tmp = out_path + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(struct.pack("<IId", MAGIC_SPREAD, count, point))
+        rec.tofile(f)
+        f.flush(); os.fsync(f.fileno())
+    os.replace(tmp, out_path)
+    return dict(count=count, avg=float(sp.mean()), point=point)
+
+
 def build_tick_from_store(symbol, point=None, from_ms=None, to_ms=None):
     """
     Vung Tick (magic TDST): nhet bid+ask THAT — dung khi KHONG deploy FXT.

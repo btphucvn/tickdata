@@ -285,6 +285,43 @@ def iter_range(symbol, from_ms, to_ms):
         yield t
 
 
+def load_range_np(symbol, from_ms, to_ms):
+    """
+    Doc NHANH tick trong [from_ms, to_ms) -> numpy structured array (t,bid,ask).
+    Dung np.frombuffer (khong loop Python) + chi doc thang giao khoang.
+    Tra None neu rong. Nhanh hon iter_range ~50-100x cho build FXT.
+    """
+    import numpy as np
+    import datetime
+    _migrate_if_needed(symbol)
+    dt = np.dtype([('t', '<i8'), ('bid', '<f8'), ('ask', '<f8')])
+    assert dt.itemsize == REC
+    arrs = []
+    for (y, m) in _month_list(symbol):
+        m0 = int(datetime.datetime(y, m, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
+        ny, nm = (y + 1, 1) if m == 12 else (y, m + 1)
+        m1 = int(datetime.datetime(ny, nm, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
+        if m1 <= from_ms or m0 >= to_ms:
+            continue   # thang ngoai khoang -> bo qua
+        path = month_file(symbol, y, m)
+        try:
+            with open(path, "rb") as f:
+                if f.read(4) != MAGIC:
+                    continue
+                f.seek(HDR)
+                data = f.read()
+        except OSError:
+            continue
+        n = len(data) // REC
+        if n:
+            arrs.append(np.frombuffer(data, dtype=dt, count=n))
+    if not arrs:
+        return None
+    a = arrs[0] if len(arrs) == 1 else np.concatenate(arrs)
+    mask = (a['t'] >= from_ms) & (a['t'] < to_ms)
+    return a[mask]
+
+
 def load_range(symbol, from_ms, to_ms):
     """List tick trong [from_ms, to_ms] (cho range vua phai)."""
     return list(iter_range(symbol, from_ms, to_ms))

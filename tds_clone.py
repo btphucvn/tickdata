@@ -190,8 +190,15 @@ def cmd_build(args):
         print(f'[!] Khong doc duoc timezone settings: {e}')
 
     try:
-        build_fxt(tick_store.iter_range(sym, build_from_ms, to_ms),
-                  sym, args.period, out, gmt_offset=gmt_offset, dst=dst)
+        try:
+            # Duong build NHANH (vectorized numpy/pandas) — ~10-30x nhanh hon.
+            from fxt_builder import build_fxt_fast
+            build_fxt_fast(sym, args.period, out, build_from_ms, to_ms,
+                           gmt_offset=gmt_offset, dst=dst)
+        except ImportError:
+            # Thieu numpy/pandas -> quay ve vong lap Python (cham nhung chac).
+            build_fxt(tick_store.iter_range(sym, build_from_ms, to_ms),
+                      sym, args.period, out, gmt_offset=gmt_offset, dst=dst)
     except (PermissionError, OSError) as e:
         print(f'[!!!] Khong ghi duoc FXT: {e}')
         print('      Co the MT4 dang CHAY backtest (khoa file). '
@@ -208,9 +215,14 @@ def cmd_build(args):
     # --- VARIABLE SPREAD: ghi file spread that cho hook (giong TDS) ---
     if not no_deploy:
         try:
-            from shm_writer import write_spread_file
+            import shm_writer
             spread_path = os.path.join(os.path.dirname(__file__), 'data', 'active.spread')
-            ss = write_spread_file(sym, spread_path, from_ms=build_from_ms, to_ms=to_ms)
+            try:
+                ss = shm_writer.write_spread_file_fast(sym, spread_path,
+                                                       from_ms=build_from_ms, to_ms=to_ms)
+            except (ImportError, AttributeError):
+                ss = shm_writer.write_spread_file(sym, spread_path,
+                                                  from_ms=build_from_ms, to_ms=to_ms)
             print(f'[OK] Spread file: {ss["count"]:,} records, avg {ss["avg"]:.0f}pts '
                   f'-> {spread_path}')
             print(f'     (Inject + tick "Use my tick data" -> hook ap variable spread that)')

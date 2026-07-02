@@ -358,6 +358,104 @@ def build_fxt_from_file(tick_bin_path, symbol, period_min, out_path):
 
 
 # ---------------------------------------------------------------------------
+# BUILD NHANH (vectorized numpy/pandas) — nhanh hon build_fxt ~10-30x
+# ---------------------------------------------------------------------------
+def _tz_shift_vec(t_sec, gmt_offset, dst):
+    """Vector hoa tz_shift_sec: tra mang so giay can cong (GMT + DST)."""
+    import numpy as np
+    off = np.full(t_sec.shape, int(gmt_offset) * 3600, dtype='int64')
+    if dst in (1, 2) and len(t_sec):
+        import datetime, calendar
+        y0 = datetime.datetime.utcfromtimestamp(int(t_sec.min())).year
+        y1 = datetime.datetime.utcfromtimestamp(int(t_sec.max())).year
+        for y in range(y0, y1 + 1):
+            if dst == 1:                        # US: CN thu 2 thang 3 -> CN thu 1 thang 11
+                s, e = _nth_sunday(y, 3, 2), _nth_sunday(y, 11, 1)
+            else:                               # EU: CN cuoi thang 3 -> CN cuoi thang 10
+                def last_sun(mo):
+                    last = calendar.monthrange(y, mo)[1]
+                    d = datetime.date(y, mo, last)
+                    lsd = last - ((d.weekday() - 6) % 7)
+                    return int(datetime.datetime(y, mo, lsd, tzinfo=datetime.timezone.utc).timestamp())
+                s, e = last_sun(3), last_sun(10)
+            off[(t_sec >= s) & (t_sec < e)] += 3600
+    return off
+
+
+def build_fxt_fast(symbol, period_min, out_path, from_ms, to_ms,
+                   server_name=None, model_quality=99.9, gmt_offset=0, dst=0,
+                   swap_long=None, swap_short=None, swap_type=0):
+    """
+    Nhu build_fxt nhung VECTORIZED (numpy+pandas): doc tick_store bulk, tinh OHLC
+    theo nhom bar, ghi 1 lan bang array.tofile. Nhanh hon vong lap Python nhieu lan.
+    Doc thang tu tick_store.load_range_np(symbol, from_ms, to_ms).
+    """
+    import numpy as np, pandas as pd
+    import tick_store
+
+    if server_name is None:
+        server_name = detect_server_name()
+    # Swap: uu tien tham so -> broker symbols.raw -> default (giong build_fxt)
+    if swap_long is None or swap_short is None:
+        bs = _broker_swap(symbol)
+        d  = SWAP_DEFAULTS.get(symbol.upper().split('.')[0], (0.0, 0.0, 0))
+        if swap_long is None:  swap_long  = bs[0] if bs else d[0]
+        if swap_short is None: swap_short = bs[1] if bs else d[1]
+    swap_type = 0   # POINTS
+    point = resolve(symbol).point
+
+    a = tick_store.load_range_np(symbol, from_ms, to_ms)
+    if a is None or len(a) == 0:
+        raise ValueError(f'{symbol}: khong co tick trong khoang')
+
+    t_sec = (a['t'] // 1000).astype('int64')
+    bid   = np.ascontiguousarray(a['bid'], dtype='float64')
+    del a
+    if gmt_offset or dst:
+        t_sec = t_sec + _tz_shift_vec(t_sec, gmt_offset, dst)
+
+    period_sec = period_min * 60
+    bar_time = (t_sec // period_sec) * period_sec
+
+    # OHLC chay theo nhom bar (pandas C-level): high=cummax, low=cummin,
+    # volume=cumcount+1, open=gia dau nhom (transform first).
+    g = pd.Series(bid).groupby(bar_time, sort=False)
+    high  = g.cummax().to_numpy()
+    low   = g.cummin().to_numpy()
+    vol   = g.cumcount().to_numpy().astype('int64') + 1
+    open_ = g.transform('first').to_numpy()
+
+    n = len(bid)
+    rec = np.empty(n, dtype=[('bt', '<i4'), ('pad', '<i4'),
+                             ('o', '<f8'), ('h', '<f8'), ('l', '<f8'), ('c', '<f8'),
+                             ('v', '<i8'), ('tt', '<i4'), ('fl', '<i4')])
+    rec['bt'] = bar_time.astype('<i4'); rec['pad'] = 0
+    rec['o'] = open_; rec['h'] = high; rec['l'] = low; rec['c'] = bid
+    rec['v'] = vol; rec['tt'] = t_sec.astype('<i4'); rec['fl'] = 1
+
+    num_bars = int((np.diff(bar_time) != 0).sum()) + 1
+    from_ts, to_ts = int(t_sec[0]), int(t_sec[-1])
+
+    os.makedirs(os.path.dirname(os.path.abspath(out_path)) or '.', exist_ok=True)
+    if os.path.exists(out_path):
+        _set_readonly(out_path, False)
+    with open(out_path, 'wb') as f:
+        f.write(b'\x00' * HEADER_SIZE)
+        rec.tofile(f)
+        f.seek(0)
+        f.write(_pack_header(symbol, period_min, from_ts, to_ts, num_bars, n,
+                             server_name=server_name, model_quality=model_quality,
+                             swap_long=swap_long, swap_short=swap_short, swap_type=swap_type))
+    ro = _set_readonly(out_path, True)
+    sz = os.path.getsize(out_path)
+    print(f"[OK] FXT(fast): {n:,} ticks, {num_bars:,} bars "
+          f"({datetime.datetime.utcfromtimestamp(from_ts).date()} -> "
+          f"{datetime.datetime.utcfromtimestamp(to_ts).date()})  {sz/1024/1024:.1f} MB -> {out_path}")
+    print(f"[OK] Da set FXT READ-ONLY ({'thanh cong' if ro else 'LOI'}) -> real ticks 99.9%.")
+    return out_path
+
+
+# ---------------------------------------------------------------------------
 # Deployment — copy FXT vao thu muc MT4 tester/history
 # ---------------------------------------------------------------------------
 
