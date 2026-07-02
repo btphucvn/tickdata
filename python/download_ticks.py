@@ -513,21 +513,195 @@ def _fetch_month(symbol, lo, hi, source, max_workers, max_refill, progress_cb):
     return ticks
 
 
-def download_months(symbol, date_from, date_to, save_month_cb=None,
-                    progress_cb=None, month_done_cb=None,
-                    pause_sec=2.0, max_workers=16, max_refill=1, source="auto"):
+def _resolve_source(source):
+    """Quy 'auto' ve nguon cu the 1 lan (khoi hoi lai moi ngay). Tra 'freeserv'|'datafeed'."""
+    if source in ("freeserv", "datafeed"):
+        return source
+    try:
+        import freeserv_fetch
+        if freeserv_fetch.available():
+            return "freeserv"
+    except ImportError:
+        pass
+    return "datafeed"
+
+
+def _fetch_one_day(symbol, y, m, d, resolved):
+    """Tai + parse 1 NGAY tick -> list[(time_ms,bid,ask)] da sort. RAM ~1 ngay."""
+    if resolved == "freeserv":
+        import freeserv_fetch
+        return freeserv_fetch.fetch_range(symbol, datetime.date(y, m, d),
+                                          datetime.date(y, m, d))
+    # datafeed: gom 24 gio (qua cache bi5 + rate limiter)
+    ticks = []
+    for h in range(24):
+        ticks.extend(download_hour_ticks(symbol, y, m, d, h))
+    ticks.sort(key=lambda t: t[0])
+    return ticks
+
+
+# freeserv.dukascopy.com thinh thoang bi throttle -> ham fetch() KHONG co timeout ->
+# treo VO HAN. Dat tran/ngay: qua nguong nay coi nhu treo. Khi treo -> nghi roi THU LAI
+# CHINH freeserv (khong dung datafeed). Van treo sau nhieu lan -> dung sach de resume.
+_DAY_TIMEOUT = 150.0
+_HANG_RETRIES = 3       # so lan thu lai 1 ngay khi freeserv treo
+_HANG_COOLDOWN = 12.0   # giay nghi giua cac lan thu (de throttle giam)
+
+
+def _fetch_day_timed(symbol, y, m, d, resolved, timeout):
     """
-    Tai TUNG THANG, luu sau moi thang (resume duoc), nghi giua cac thang.
+    Tai 1 ngay voi TIMEOUT (chay trong 1 luong rieng). Tra list ticks hoac nem
+    concurrent.futures.TimeoutError neu qua gio. KHONG cho luong treo (shutdown wait=False).
+    """
+    import concurrent.futures as cf
+    ex1 = cf.ThreadPoolExecutor(max_workers=1)
+    fut = ex1.submit(_fetch_one_day, symbol, y, m, d, resolved)
+    try:
+        return fut.result(timeout=timeout)   # nem TimeoutError neu treo
+    finally:
+        ex1.shutdown(wait=False, cancel_futures=True)
+
+
+def download_month_stream(symbol, y, m, lo, hi, source, max_workers,
+                          append_day_cb, last_ms=None, progress_cb=None,
+                          done_base=0, total_hours=0):
+    """
+    Tai 1 thang theo NGAY, LUU TUNG NGAY ngay lap tuc -> RAM thap + resume theo ngay.
+
+    Khac han cach cu (gom ca thang vao RAM roi moi luu 1 lan): o day RAM chi giu
+    ~max_workers ngay, va tien do duoc ghi xuong dia sau MOI ngay -> crash giua chung
+    KHONG mat ca thang.
+
+    - append_day_cb(y, m, day_ticks): luu 1 ngay (caller noi vao tick_store.append_day).
+    - last_ms: timestamp cuoi da co trong store thang -> bo qua ngay da xong (resume),
+      va loc tick <= last_ms de khong trung khi tai lai ngay ghi do dang.
+    Tra tong tick MOI them trong thang.
+    """
+    import concurrent.futures as _cf
+    from concurrent.futures import ThreadPoolExecutor
+
+    resolved = _resolve_source(source)
+
+    days = []
+    d = lo
+    while d <= hi:
+        days.append(d)
+        d += datetime.timedelta(days=1)
+
+    # Resume: bo qua ngay da nam GON trong store (ket thuc <= last_ms).
+    start_idx = 0
+    if last_ms is not None:
+        for i, dd in enumerate(days):
+            day_end = int(datetime.datetime(dd.year, dd.month, dd.day, 23, 59, 59,
+                          tzinfo=datetime.timezone.utc).timestamp() * 1000)
+            if day_end <= last_ms:
+                start_idx = i + 1
+            else:
+                break
+    pending = days[start_idx:]
+    if not pending:
+        return 0
+
+    added = 0
+    cur_last = last_ms
+    done_h = done_base + start_idx * 24
+    nw = max(1, min(max_workers, len(pending)))
+
+    mode = "tuan tu (1 ngay/lan)" if nw == 1 else f"{nw} luong song song"
+    print(f"  [{resolved}] {symbol} thang {y}-{m:02d}: tai {len(pending)} ngay "
+          f"({pending[0]} -> {pending[-1]}), {mode}"
+          + (f"  [resume, bo qua {start_idx} ngay da co]" if start_idx else ""))
+
+    def _get_day(dd, first_future=None):
+        """
+        Lay ticks 1 ngay. first_future: ket qua da submit (che do song song) hoac None
+        (che do tuan tu -> tu chay co timeout). Treo -> nghi + thu lai CHINH freeserv;
+        van treo sau _HANG_RETRIES lan -> raise RateLimitedError (khong dung datafeed).
+        """
+        try:
+            if first_future is not None:
+                return first_future.result(timeout=_DAY_TIMEOUT)
+            return _fetch_day_timed(symbol, dd.year, dd.month, dd.day, resolved, _DAY_TIMEOUT)
+        except _cf.TimeoutError:
+            pass
+        except Exception as e:  # noqa: BLE001
+            print(f"  [LOI] {dd}: {type(e).__name__}: {str(e)[:120]}")
+            return []
+        for attempt in range(1, _HANG_RETRIES + 1):
+            print(f"  [TREO] {dd}: {resolved} qua {_DAY_TIMEOUT:.0f}s khong phan hoi "
+                  f"-> nghi {_HANG_COOLDOWN:.0f}s roi thu lai ({attempt}/{_HANG_RETRIES})")
+            time.sleep(_HANG_COOLDOWN)
+            try:
+                return _fetch_day_timed(symbol, dd.year, dd.month, dd.day, resolved, _DAY_TIMEOUT)
+            except _cf.TimeoutError:
+                continue
+            except Exception as e:  # noqa: BLE001
+                print(f"  [LOI] {dd}: {type(e).__name__}: {str(e)[:120]}")
+                return []
+        raise RateLimitedError(
+            f"Nguon '{resolved}' treo lien tuc o ngay {dd} (da thu {_HANG_RETRIES} lan). "
+            f"Da luu toi truoc do — chay lai de tai tiep.")
+
+    def _store(dd, day_ticks):
+        nonlocal added, cur_last, done_h
+        # Chi giu tick moi hon phan da luu -> append an toan, khong trung.
+        if cur_last is not None and day_ticks:
+            day_ticks = [t for t in day_ticks if t[0] > cur_last]
+        if day_ticks:
+            append_day_cb(dd.year, dd.month, day_ticks)   # ghi xuong dia NGAY
+            added += len(day_ticks)
+            cur_last = day_ticks[-1][0]
+            print(f"  {dd}: {len(day_ticks):,} ticks  | thang +{added:,}")
+        else:
+            print(f"  {dd}: 0 ticks (nghi le/cuoi tuan?)")
+        done_h += 24
+        if progress_cb:
+            progress_cb(done_h, total_hours, added)
+
+    if nw == 1:
+        # TUAN TU — tai tung ngay mot, KHONG chia luong song song.
+        for dd in pending:
+            _store(dd, _get_day(dd))
+    else:
+        # Song song theo LO, nhung APPEND dung THU TU ngay -> file luon sort tang.
+        # KHONG dung 'with' (exit se shutdown wait=True -> treo theo luong freeserv);
+        # tu shutdown(wait=False) o finally de bo luong treo.
+        ex = ThreadPoolExecutor(max_workers=nw)
+        try:
+            i = 0
+            while i < len(pending):
+                batch = pending[i:i + nw]
+                futs = [ex.submit(_fetch_one_day, symbol, dd.year, dd.month, dd.day, resolved)
+                        for dd in batch]
+                for dd, fut in zip(batch, futs):
+                    _store(dd, _get_day(dd, first_future=fut))
+                i += nw
+        finally:
+            ex.shutdown(wait=False, cancel_futures=True)
+
+    return added
+
+
+def download_months(symbol, date_from, date_to, append_day_cb=None,
+                    month_last_ms_cb=None, month_done_cb=None,
+                    progress_cb=None, pause_sec=2.0, max_workers=16,
+                    source="auto", save_month_cb=None, max_refill=1):
+    """
+    Tai TUNG THANG. Uu tien luu TUNG NGAY (RAM thap + resume theo ngay).
+
     source: "auto" (freeserv neu co, else datafeed), "freeserv", "datafeed".
       - freeserv.dukascopy.com: endpoint chart API, KHONG bi chan khi datafeed bi tarpit.
-    - save_month_cb(year, month, ticks_thang): luu data thang NGAY sau khi tai xong.
+
+    Che do streaming (khuyen dung): truyen
+      - append_day_cb(year, month, day_ticks): luu 1 NGAY (noi vao tick_store.append_day).
+      - month_last_ms_cb(year, month) -> int|None: timestamp cuoi da co trong thang (resume).
+    Che do cu (tuong thich): truyen save_month_cb(year, month, ticks_ca_thang).
+
     - progress_cb(done_hours, total_hours, ticks): cho thanh bar.
-    - month_done_cb(year, month, n_ticks, coverage_pct): bao xong 1 thang.
+    - month_done_cb(year, month, n_ticks_moi): bao xong 1 thang.
 
-    Tra (tong_tick, so_thang_xong).
+    Tra (tong_tick_moi, so_thang_xong).
     """
-    from coverage_check import analyze_coverage
-
     months = _iter_months(date_from, date_to)
     total_hours = sum((hi - lo).days * 24 + 24 for (_, _, lo, hi) in months)
     done_hours = 0
@@ -537,22 +711,35 @@ def download_months(symbol, date_from, date_to, save_month_cb=None,
     for idx, (y, m, lo, hi) in enumerate(months):
         base = done_hours
         gt = grand_total
-        def cb(done, total, nticks, _b=base, _g=gt):
-            if progress_cb:
-                progress_cb(_b + done, total_hours, _g + nticks)
 
-        ticks = _fetch_month(symbol, lo, hi, source, max_workers, max_refill, cb)
+        if append_day_cb is not None:
+            def cb(dh, th, nticks, _g=gt):
+                if progress_cb:
+                    progress_cb(dh, total_hours, _g + nticks)
+            last_ms = month_last_ms_cb(y, m) if month_last_ms_cb else None
+            added = download_month_stream(
+                symbol, y, m, lo, hi, source, max_workers,
+                append_day_cb=append_day_cb, last_ms=last_ms,
+                progress_cb=cb, done_base=base, total_hours=total_hours)
+            print(f"[OK] {y}-{m:02d}: +{added:,} ticks moi (luu tung ngay)")
+        else:
+            # Che do cu: gom ca thang roi luu 1 lan (giu tuong thich CLI).
+            from coverage_check import analyze_coverage
+            def cb(done, total, nticks, _b=base, _g=gt):
+                if progress_cb:
+                    progress_cb(_b + done, total_hours, _g + nticks)
+            ticks = _fetch_month(symbol, lo, hi, source, max_workers, max_refill, cb)
+            if save_month_cb:
+                save_month_cb(y, m, ticks)
+            added = len(ticks)
+            cov = analyze_coverage(ticks, lo, hi)
+            print(f"[OK] {y}-{m:02d}: {added:,} ticks  (coverage {cov['coverage_pct']:.0f}%)")
 
-        if save_month_cb:
-            save_month_cb(y, m, ticks)
-        grand_total += len(ticks)
+        grand_total += added
         months_done += 1
         done_hours += (hi - lo).days * 24 + 24
-
-        cov = analyze_coverage(ticks, lo, hi)
-        print(f"[OK] {y}-{m:02d}: {len(ticks):,} ticks  (coverage {cov['coverage_pct']:.0f}%)")
         if month_done_cb:
-            month_done_cb(y, m, len(ticks), cov["coverage_pct"])
+            month_done_cb(y, m, added)
 
         if pause_sec and idx < len(months) - 1:
             time.sleep(pause_sec)

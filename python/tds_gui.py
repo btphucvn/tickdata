@@ -12,6 +12,7 @@ import io
 import time
 import datetime
 import contextlib
+import threading
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -50,22 +51,33 @@ class Worker(QObject):
         sig = self.log
 
         class _Emit(io.TextIOBase):
-            def __init__(s): s.buf = ""; s.last_cr = 0.0
+            # stdout/stderr bi redirect TOAN CUC -> nhieu luong (ThreadPool tai data)
+            # cung goi write() -> PHAI khoa, neu khong 'while "\n" in buf' + split se
+            # dua 2 luong vao race -> ValueError unpack -> CRASH giua chung khi tai.
+            def __init__(s): s.buf = ""; s.last_cr = 0.0; s.lock = threading.Lock()
             def write(s, txt):
-                s.buf += txt
-                # Tach theo \n: dong hoan chinh -> emit (giu lai vinh vien)
-                while "\n" in s.buf:
-                    line, s.buf = s.buf.split("\n", 1)
-                    line = line.split("\r")[-1]
-                    if line.strip():
-                        sig.emit(line.rstrip())
-                # Phan con lai sau \r (dong tien do) -> emit co throttle ~3 lan/giay
-                if "\r" in s.buf:
-                    seg = s.buf.split("\r")[-1]
-                    now = time.time()
-                    if seg.strip() and now - s.last_cr >= 0.3:
-                        s.last_cr = now
-                        sig.emit(seg.rstrip())
+                lines = []
+                seg_emit = None
+                with s.lock:
+                    s.buf += txt
+                    # Tach theo \n: dong hoan chinh -> emit (giu lai vinh vien)
+                    while "\n" in s.buf:
+                        line, s.buf = s.buf.split("\n", 1)
+                        line = line.split("\r")[-1]
+                        if line.strip():
+                            lines.append(line.rstrip())
+                    # Phan con lai sau \r (dong tien do) -> throttle ~3 lan/giay
+                    if "\r" in s.buf:
+                        seg = s.buf.split("\r")[-1]
+                        now = time.time()
+                        if seg.strip() and now - s.last_cr >= 0.3:
+                            s.last_cr = now
+                            seg_emit = seg.rstrip()
+                # emit NGOAI khoa (tranh giu lock khi qua Qt event loop)
+                for ln in lines:
+                    sig.emit(ln)
+                if seg_emit is not None:
+                    sig.emit(seg_emit)
                 return len(txt)
             def flush(s): pass
 
@@ -101,8 +113,16 @@ class MainWindow(QMainWindow):
         self.resize(820, 600)
         self._thread = None
         self._worker = None
+        # Widget cua lan chay _run hien tai (slot worker dung, xem _run).
+        self._cur_btn = self._cur_bar = self._cur_log = None
 
         self._svc = None   # TDSService (tab Service)
+
+        # Don vung tam backtest cu (thang nen duoc bung ra day, khong phai store).
+        try:
+            tick_store.clean_scratch()
+        except Exception:
+            pass
 
         tabs = QTabWidget()
         tabs.addTab(self._tab_download(), "1. Download")
@@ -149,13 +169,22 @@ class MainWindow(QMainWindow):
         self.dl_source.addItem("datafeed.dukascopy.com (bi5, nhanh hon)", "datafeed")
         form.addRow("Server:", self.dl_source)
 
-        # So luong tai song song
+        # So luong tai song song. 1 = tuan tu (1 ngay/lan) — freeserv it treo nhat.
         self.dl_workers = QSpinBox()
         self.dl_workers.setRange(1, 32)
-        self.dl_workers.setValue(8)   # 8 = can bang toc do vs bi rate-limit (Dukascopy chan manh)
-        self.dl_workers.setToolTip("So gio tai dong thoi. Cao = nhanh hon nhung DE BI CHAN hon. "
-                                   "Neu bi chan (rate-limit), giam con 4-6.")
-        form.addRow("So luong:", self.dl_workers)
+        self.dl_workers.setValue(1)   # 1 = tuan tu, khong chia luong -> freeserv on dinh
+        self.dl_workers.setToolTip("So ngay tai dong thoi. 1 = TUAN TU (khong chia luong). "
+                                   "Nay freeserv da co timeout tu-khoi-phuc + keep-alive nen dat "
+                                   "3-4 van an toan va nhanh hon 3-4 lan. Qua cao (>6) moi de bi chan.")
+        form.addRow("So luong (1 = tuan tu):", self.dl_workers)
+
+        # Tu nen sau moi thang (giong TDS: luu tru nen, bung khi backtest) -> dia nho ~5x.
+        self.dl_autocompress = QCheckBox("Tu nen data sau moi thang (tiet kiem dia ~5x, giong TDS)")
+        self.dl_autocompress.setChecked(True)
+        self.dl_autocompress.setToolTip("Tai xong thang nao thi nen thang do ngay (LZMA, khong mat "
+                                        "tick). Khi backtest/publish se tu bung ra .bin cho MT4. "
+                                        "Tat neu muon giu file .bin thô (doc nhanh hon, ton dia hon).")
+        form.addRow("", self.dl_autocompress)
         root.addWidget(box)
 
         self.dl_btn = QPushButton("Tai data (tu dong lap day gio trong)")
@@ -188,6 +217,7 @@ class MainWindow(QMainWindow):
         source = self.dl_source.currentData()
         source_label = self.dl_source.currentText()
         workers = self.dl_workers.value()
+        autocompress = self.dl_autocompress.isChecked()   # doc TRUOC khi vao thread
         total_hours = ((d_to - d_from).days + 1) * 24
         self.dl_log.clear()
         self.dl_log.appendPlainText(f"Symbol {sym} -> Dukascopy code {meta.code}  "
@@ -198,17 +228,21 @@ class MainWindow(QMainWindow):
         def task(progress_cb):
             import time as _t
             from download_ticks import download_months, _iter_months, RateLimitedError
-            existing = set(tick_store.month_counts(sym).keys())
+            # Thang da HOAN TAT = moi thang co data TRU thang cao nhat (thang cao nhat
+            # co the dang do neu lan truoc crash giua chung -> de resume theo ngay).
+            _mcounts = {k for k, v in tick_store.month_counts(sym).items() if v > 0}
+            _sorted = sorted(_mcounts)
+            existing = set(_sorted[:-1]) if _sorted else set()
 
-            def save_month(y, m, ticks):
-                if ticks:
-                    n = tick_store.save_month(sym, y, m, ticks)
-                    print(f"   [luu] {y}-{m:02d}: ghi {len(ticks):,} ticks vao store "
-                          f"(tong thang: {n:,})")
+            def save_day(y, m, day_ticks):
+                # Luu TUNG NGAY ngay lap tuc: RAM thap, tien do khong mat khi crash.
+                tick_store.append_day(sym, y, m, day_ticks)
 
-            def month_done(y, m, n, cov_pct):
-                q = "EXCELLENT" if cov_pct >= 99 else ("TOT" if cov_pct >= 95 else "TAM")
-                print(f"=== XONG {y}-{m:02d}: {n:,} ticks  |  coverage {cov_pct:.1f}% [{q}] ===")
+            def month_last_ms(y, m):
+                return tick_store.month_last_ms(sym, y, m)
+
+            def month_done(y, m, n):
+                print(f"=== XONG {y}-{m:02d}: +{n:,} ticks moi (da luu tung ngay) ===")
 
             months = _iter_months(d_from, d_to)
             t_start = _t.time()
@@ -233,7 +267,8 @@ class MainWindow(QMainWindow):
                     print(f"\n--- Thang {y}-{m:02d} ({lo} -> {hi}) [{idx+1}/{len(months)}] ---")
                     base = done_h
                     g, md = download_months(
-                        sym, lo, hi, save_month_cb=save_month,
+                        sym, lo, hi, append_day_cb=save_day,
+                        month_last_ms_cb=month_last_ms,
                         month_done_cb=month_done, source=source,
                         max_workers=workers,
                         progress_cb=lambda d, t, n, b=base, gg=grand:
@@ -241,6 +276,16 @@ class MainWindow(QMainWindow):
                         pause_sec=0)
                     grand += g
                     done_h += ((hi - lo).days + 1) * 24
+                    # TU NEN thang vua xong (giong TDS: luon giu data o dang nen,
+                    # bung lai khi backtest). Giu dia luon nho SUOT qua trinh tai.
+                    if autocompress:
+                        try:
+                            b, a = tick_store.compress_month(sym, y, m)
+                            if b:
+                                print(f"   [nen] {y}-{m:02d}: {b/1024/1024:.0f} -> "
+                                      f"{a/1024/1024:.1f} MB  (x{b/max(a,1):.1f} nho hon)")
+                        except Exception as e:   # noqa: BLE001
+                            print(f"   [nen][LOI] {y}-{m:02d}: {e}")
                     if idx < len(months) - 1:
                         _t.sleep(2.0)
             except RateLimitedError as e:
@@ -276,11 +321,19 @@ class MainWindow(QMainWindow):
         b_refresh = QPushButton("Lam moi"); b_refresh.clicked.connect(self._refresh_table)
         b_months  = QPushButton("Xem thang da tai"); b_months.clicked.connect(self._on_months)
         b_verify  = QPushButton("Kiem tra quality"); b_verify.clicked.connect(self._on_verify)
+        self.mg_compress_btn = QPushButton("Nen (tiet kiem dia)")
+        self.mg_compress_btn.setToolTip("Nen cac thang cua symbol da chon (LZMA, ~5x nho hon, "
+                                        "khong mat tick nao). Tu bung lai khi backtest/publish.")
+        self.mg_compress_btn.clicked.connect(self._on_compress)
         b_delete  = QPushButton("Xoa symbol da chon"); b_delete.clicked.connect(self._on_delete)
         b_delete.setStyleSheet("color:#b00;")
         row.addWidget(b_refresh); row.addWidget(b_months); row.addWidget(b_verify)
+        row.addWidget(self.mg_compress_btn)
         row.addStretch(); row.addWidget(b_delete)
         root.addLayout(row)
+
+        self.mg_bar = QProgressBar(); self.mg_bar.setRange(0, 0); self.mg_bar.hide()
+        root.addWidget(self.mg_bar)
 
         # Bang luoi thang da tai cua symbol dang chon
         self.mg_months = QPlainTextEdit(); self.mg_months.setReadOnly(True)
@@ -340,7 +393,11 @@ class MainWindow(QMainWindow):
                 incomplete = have < span
             else:
                 f = t = "-"; months_str = "0"; incomplete = False
-            vals = [sym, f, t, months_str, f"{r['count']:,}", f"{r['size_mb']:.1f} MB"]
+            n_comp = r.get("compressed", 0)
+            size_str = f"{r['size_mb']:.1f} MB"
+            if n_comp:
+                size_str += f"  (nen {n_comp})"
+            vals = [sym, f, t, months_str, f"{r['count']:,}", size_str]
             for j, v in enumerate(vals):
                 it = QTableWidgetItem(v)
                 if j >= 3:
@@ -369,6 +426,31 @@ class MainWindow(QMainWindow):
         tick_store.delete_symbol(sym)
         self._refresh_table()
         self.mg_lbl.setText(f"Da xoa {sym}.")
+
+    def _on_compress(self):
+        sym = self._selected_symbol()
+        if not sym:
+            return
+        # So thang raw can nen (de biet co viec khong)
+        raw_months = [(y, m) for (y, m) in tick_store._month_list(sym)
+                      if not tick_store.is_compressed(sym, y, m)]
+        if not raw_months:
+            QMessageBox.information(self, "Nen", f"{sym}: tat ca thang da nen roi.")
+            return
+
+        def task(progress_cb):
+            print(f"[nen] {sym}: nen {len(raw_months)} thang raw...")
+            def prog(done, total, y, m):
+                progress_cb(done, total)
+                print(f"   [nen] {y}-{m:02d}  ({done}/{total})")
+            before, after = tick_store.compress_symbol(sym, progress=prog)
+            saved = (before - after) / 1024 / 1024
+            print(f"[nen] {sym}: {before/1024/1024:.0f} -> {after/1024/1024:.0f} MB "
+                  f"(tiet kiem {saved:.0f} MB, x{before/max(after,1):.1f})")
+            return f"{sym}: nen xong, tiet kiem {saved:.0f} MB (x{before/max(after,1):.1f} nho hon)"
+
+        self._run(task, self.mg_compress_btn, self.mg_bar, self.glog,
+                  total_hint=len(raw_months))
 
     def _on_verify(self):
         sym = self._selected_symbol()
@@ -611,9 +693,17 @@ class MainWindow(QMainWindow):
         return w
 
     # ---- Worker helper ---------------------------------------------------
+    # QUAN TRONG: slot PHAI la METHOD cua MainWindow (QObject o main thread) — KHONG
+    # duoc dung closure. QueuedConnection toi closure (khong co QObject chu) KHONG
+    # marshal ve main thread -> slot chay tren worker thread -> cham widget tu non-GUI
+    # thread -> ACCESS VIOLATION (crash). Dung bound method thi Qt marshal dung main
+    # thread. Widget cua lan chay hien tai luu vao self._cur_* de slot dung.
     def _run(self, fn, btn, bar, log_widget, total_hint=0):
         if self._thread:
             return
+        self._cur_btn = btn
+        self._cur_bar = bar
+        self._cur_log = log_widget
         btn.setEnabled(False)
         if total_hint > 0:
             bar.setRange(0, total_hint); bar.setValue(0)   # xac dinh ngay: thay 0/N
@@ -624,30 +714,43 @@ class MainWindow(QMainWindow):
         self._worker = Worker(fn)
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
-
-        def on_log(line):
-            log_widget.appendPlainText(line)
-            self.glog.appendPlainText(line)
-        def on_progress(done, total):
-            if bar.maximum() != total:
-                bar.setRange(0, total)
-            bar.setValue(done)
-        def on_done(ok, msg):
-            btn.setEnabled(True); bar.hide(); bar.reset()
-            log_widget.appendPlainText(("[OK] " if ok else "[X] ") + msg)
-            self._thread.quit(); self._thread.wait()
-            self._thread = None; self._worker = None
-            self._refresh_table()
-            # Bao ro neu bi rate-limit
-            if not ok and ("chan" in msg or "rate-limit" in msg.lower()):
-                QMessageBox.warning(self, "IP bi chan tam thoi",
-                    "Dukascopy dang chan IP nay (do tai qua nhieu).\n\n"
-                    "Hay doi ~15-20 phut roi thu lai.\n"
-                    "Data da tai van duoc luu (cache), khong mat.")
-        self._worker.log.connect(on_log, Qt.QueuedConnection)
-        self._worker.progress.connect(on_progress, Qt.QueuedConnection)
-        self._worker.done.connect(on_done, Qt.QueuedConnection)
+        self._worker.log.connect(self._wk_log, Qt.QueuedConnection)
+        self._worker.progress.connect(self._wk_progress, Qt.QueuedConnection)
+        self._worker.done.connect(self._wk_done, Qt.QueuedConnection)
         self._thread.start()
+
+    def _wk_log(self, line):
+        if self._cur_log is not None:
+            self._cur_log.appendPlainText(line)
+        self.glog.appendPlainText(line)
+
+    def _wk_progress(self, done, total):
+        bar = self._cur_bar
+        if bar is None:
+            return
+        if bar.maximum() != total:
+            bar.setRange(0, total)
+        bar.setValue(done)
+
+    def _wk_done(self, ok, msg):
+        btn = self._cur_btn; bar = self._cur_bar; log_widget = self._cur_log
+        if btn is not None:
+            btn.setEnabled(True)
+        if bar is not None:
+            bar.hide(); bar.reset()
+        if log_widget is not None:
+            log_widget.appendPlainText(("[OK] " if ok else "[X] ") + msg)
+        if self._thread is not None:
+            self._thread.quit(); self._thread.wait()
+        self._thread = None; self._worker = None
+        self._cur_btn = self._cur_bar = self._cur_log = None
+        self._refresh_table()
+        # Bao ro neu bi rate-limit
+        if not ok and ("chan" in msg or "rate-limit" in msg.lower()):
+            QMessageBox.warning(self, "IP bi chan tam thoi",
+                "Dukascopy dang chan IP nay (do tai qua nhieu).\n\n"
+                "Hay doi ~15-20 phut roi thu lai.\n"
+                "Data da tai van duoc luu (cache), khong mat.")
 
 
 def main():

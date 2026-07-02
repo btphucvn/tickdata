@@ -97,16 +97,12 @@ def _dst_intervals(y0, y1, dst):
 
 
 def _months_in_range(symbol, from_ms, to_ms):
-    """Danh sach path .bin cua cac thang giao [from_ms,to_ms) — khop load_range_np."""
-    paths = []
-    for (y, m) in tick_store._month_list(symbol):
-        m0 = int(datetime.datetime(y, m, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
-        ny, nm = (y + 1, 1) if m == 12 else (y, m + 1)
-        m1 = int(datetime.datetime(ny, nm, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
-        if m1 <= from_ms or m0 >= to_ms:
-            continue
-        paths.append(tick_store.month_file(symbol, y, m))
-    return paths
+    """
+    Danh sach path .bin cua cac thang giao [from_ms,to_ms) cho native MMAP.
+    Thang nen (.tkz) duoc BUNG ra VUNG TAM (data/_materialized), store GIU NGUYEN nen
+    -> backtest KHONG lam phinh store, KHONG can nen lai sau backtest (giong TDS).
+    """
+    return tick_store.materialize_paths(symbol, from_ms, to_ms)
 
 
 def write_virtual(symbol, period_min, cfg_path, placeholder_fxt,

@@ -10,15 +10,52 @@ fetch() tra DataFrame co ca bidPrice + askPrice -> 1 lan goi du ca 2 gia.
 
 import datetime
 
+# Timeout (giay) cho MOI request phan trang cua thu vien freeserv. Thu vien goc goi
+# requests.get() KHONG co timeout -> 1 request ket la treo VO HAN. Tiem timeout vao ->
+# qua han thi requests ne loi -> vong retry co san cua thu vien (_stream, max_retries=7)
+# tu thu lai -> tu khoi phuc, KHONG treo. Nho vay chay song song nhe van an toan.
+REQ_TIMEOUT = 25.0
+
 _dk = None
 _ins = None
+
+
+class _ReqTimeoutShim:
+    """
+    Chuyen tiep moi thuoc tinh sang 'requests' that, nhung .get() duoc:
+      1) THEM timeout  -> khong treo vo han.
+      2) di qua 1 Session (keep-alive) -> tai dung ket noi TCP/TLS thay vi bat tay
+         lai moi request -> NHANH hon (moi ngay ~12-15 request nen an nhieu).
+    """
+    def __init__(self, real):
+        self._real = real
+        self._sess = real.Session()
+        # Pool rong de nhieu luong (neu chay song song) van keep-alive tot.
+        try:
+            adapter = real.adapters.HTTPAdapter(pool_connections=8, pool_maxsize=16)
+            self._sess.mount("https://", adapter)
+        except Exception:
+            pass
+    def __getattr__(self, name):
+        return getattr(self._real, name)
+    def get(self, *args, **kwargs):
+        kwargs.setdefault("timeout", REQ_TIMEOUT)
+        return self._sess.get(*args, **kwargs)
+
 
 def _lazy():
     global _dk, _ins
     if _dk is None:
         import logging
+        import requests
         import dukascopy_python
         import dukascopy_python.instruments as ins
+        # Tiem timeout: thay 'requests' trong namespace thu vien bang shim (chi anh
+        # huong thu vien, khong dong toi requests toan cuc).
+        try:
+            dukascopy_python.requests = _ReqTimeoutShim(requests)
+        except Exception:
+            pass
         # Tat log INFO on cua thu vien (dat SAU khi import de khong bi ghi de)
         lg = logging.getLogger("DUKASCRIPT")
         lg.setLevel(logging.ERROR)
