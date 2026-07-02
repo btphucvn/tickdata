@@ -177,14 +177,8 @@ class MainWindow(QMainWindow):
                                    "Nay freeserv da co timeout tu-khoi-phuc + keep-alive nen dat "
                                    "3-4 van an toan va nhanh hon 3-4 lan. Qua cao (>6) moi de bi chan.")
         form.addRow("So luong (1 = tuan tu):", self.dl_workers)
-
-        # Tu nen sau moi thang (giong TDS: luu tru nen, bung khi backtest) -> dia nho ~5x.
-        self.dl_autocompress = QCheckBox("Tu nen data sau moi thang (tiet kiem dia ~5x, giong TDS)")
-        self.dl_autocompress.setChecked(True)
-        self.dl_autocompress.setToolTip("Tai xong thang nao thi nen thang do ngay (LZMA, khong mat "
-                                        "tick). Khi backtest/publish se tu bung ra .bin cho MT4. "
-                                        "Tat neu muon giu file .bin thô (doc nhanh hon, ton dia hon).")
-        form.addRow("", self.dl_autocompress)
+        # Kho tick gio la file nen mot-file-moi-NGAY (.tkd, clone kien truc TDS) ->
+        # data LUON nen san ~5x, khong con buoc nen rieng.
         root.addWidget(box)
 
         self.dl_btn = QPushButton("Tai data (tu dong lap day gio trong)")
@@ -217,7 +211,6 @@ class MainWindow(QMainWindow):
         source = self.dl_source.currentData()
         source_label = self.dl_source.currentText()
         workers = self.dl_workers.value()
-        autocompress = self.dl_autocompress.isChecked()   # doc TRUOC khi vao thread
         total_hours = ((d_to - d_from).days + 1) * 24
         self.dl_log.clear()
         self.dl_log.appendPlainText(f"Symbol {sym} -> Dukascopy code {meta.code}  "
@@ -276,16 +269,7 @@ class MainWindow(QMainWindow):
                         pause_sec=0)
                     grand += g
                     done_h += ((hi - lo).days + 1) * 24
-                    # TU NEN thang vua xong (giong TDS: luon giu data o dang nen,
-                    # bung lai khi backtest). Giu dia luon nho SUOT qua trinh tai.
-                    if autocompress:
-                        try:
-                            b, a = tick_store.compress_month(sym, y, m)
-                            if b:
-                                print(f"   [nen] {y}-{m:02d}: {b/1024/1024:.0f} -> "
-                                      f"{a/1024/1024:.1f} MB  (x{b/max(a,1):.1f} nho hon)")
-                        except Exception as e:   # noqa: BLE001
-                            print(f"   [nen][LOI] {y}-{m:02d}: {e}")
+                    # Kho .tkd luu tung ngay da nen san -> khong con buoc nen rieng.
                     if idx < len(months) - 1:
                         _t.sleep(2.0)
             except RateLimitedError as e:
@@ -321,10 +305,11 @@ class MainWindow(QMainWindow):
         b_refresh = QPushButton("Lam moi"); b_refresh.clicked.connect(self._refresh_table)
         b_months  = QPushButton("Xem thang da tai"); b_months.clicked.connect(self._on_months)
         b_verify  = QPushButton("Kiem tra quality"); b_verify.clicked.connect(self._on_verify)
-        self.mg_compress_btn = QPushButton("Nen (tiet kiem dia)")
-        self.mg_compress_btn.setToolTip("Nen cac thang cua symbol da chon (LZMA, ~5x nho hon, "
-                                        "khong mat tick nao). Tu bung lai khi backtest/publish.")
-        self.mg_compress_btn.clicked.connect(self._on_compress)
+        self.mg_compress_btn = QPushButton("Chuyen kho -> .tkd")
+        self.mg_compress_btn.setToolTip("Chuyen data format cu (.tkz/.bin per-thang) sang kho moi "
+                                        ".tkd (file nen mot-file-moi-ngay, clone kien truc TDS). "
+                                        "Chay 1 lan; data giu bit-exact.")
+        self.mg_compress_btn.clicked.connect(self._on_migrate)
         b_delete  = QPushButton("Xoa symbol da chon"); b_delete.clicked.connect(self._on_delete)
         b_delete.setStyleSheet("color:#b00;")
         row.addWidget(b_refresh); row.addWidget(b_months); row.addWidget(b_verify)
@@ -393,11 +378,7 @@ class MainWindow(QMainWindow):
                 incomplete = have < span
             else:
                 f = t = "-"; months_str = "0"; incomplete = False
-            n_comp = r.get("compressed", 0)
-            size_str = f"{r['size_mb']:.1f} MB"
-            if n_comp:
-                size_str += f"  (nen {n_comp})"
-            vals = [sym, f, t, months_str, f"{r['count']:,}", size_str]
+            vals = [sym, f, t, months_str, f"{r['count']:,}", f"{r['size_mb']:.1f} MB"]
             for j, v in enumerate(vals):
                 it = QTableWidgetItem(v)
                 if j >= 3:
@@ -427,30 +408,28 @@ class MainWindow(QMainWindow):
         self._refresh_table()
         self.mg_lbl.setText(f"Da xoa {sym}.")
 
-    def _on_compress(self):
-        sym = self._selected_symbol()
-        if not sym:
+    def _on_migrate(self):
+        import daystore
+        pending = daystore.symbols_needing_migration()
+        if not pending:
+            QMessageBox.information(self, "Chuyen kho",
+                                    "Tat ca da o dinh dang moi (.tkd). Khong co gi de chuyen.")
             return
-        # So thang raw can nen (de biet co viec khong)
-        raw_months = [(y, m) for (y, m) in tick_store._month_list(sym)
-                      if not tick_store.is_compressed(sym, y, m)]
-        if not raw_months:
-            QMessageBox.information(self, "Nen", f"{sym}: tat ca thang da nen roi.")
+        if QMessageBox.question(self, "Chuyen kho -> .tkd",
+                f"Chuyen {len(pending)} symbol ({', '.join(pending)}) sang kho .tkd "
+                f"(file nen mot-file-moi-ngay, giong TDS)?\nData giu bit-exact, format cu se bi xoa.") \
+                != QMessageBox.Yes:
             return
 
         def task(progress_cb):
-            print(f"[nen] {sym}: nen {len(raw_months)} thang raw...")
-            def prog(done, total, y, m):
+            print(f"[chuyen] {len(pending)} symbol: {', '.join(pending)}")
+            def prog(done, total, sym):
                 progress_cb(done, total)
-                print(f"   [nen] {y}-{m:02d}  ({done}/{total})")
-            before, after = tick_store.compress_symbol(sym, progress=prog)
-            saved = (before - after) / 1024 / 1024
-            print(f"[nen] {sym}: {before/1024/1024:.0f} -> {after/1024/1024:.0f} MB "
-                  f"(tiet kiem {saved:.0f} MB, x{before/max(after,1):.1f})")
-            return f"{sym}: nen xong, tiet kiem {saved:.0f} MB (x{before/max(after,1):.1f} nho hon)"
+                print(f"   [chuyen] {sym}  ({done}/{total})")
+            n = daystore.migrate_all(progress=prog)
+            return f"Da chuyen {n} symbol sang kho .tkd (clone kien truc TDS)."
 
-        self._run(task, self.mg_compress_btn, self.mg_bar, self.glog,
-                  total_hint=len(raw_months))
+        self._run(task, self.mg_compress_btn, self.mg_bar, self.glog, total_hint=len(pending))
 
     def _on_verify(self):
         sym = self._selected_symbol()
