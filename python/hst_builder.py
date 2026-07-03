@@ -42,6 +42,73 @@ def _pack_header(symbol, period_min, digits):
     return bytes(buf)
 
 
+def build_hst_fast(symbol, period_min, from_ms, to_ms, out_path):
+    """
+    *** TOC DO (2026-07): VECTORIZED — thay vong lap Python 400M tick. ***
+    Build HST theo THANG (RAM thap ~1 thang), moi thang groupby numpy/pandas -> bar OHLC.
+    Bucket period<=D1 canh nua-dem UTC -> KHONG vat qua ranh thang -> ghi noi tiep an toan.
+    Ket qua khop build_hst cu (bar UTC-aligned, spread = round(mean (ask-bid)/point)).
+    """
+    import numpy as np, pandas as pd
+    import tick_store
+    meta = resolve(symbol)
+    digits, point = meta.digits, meta.point
+    period_sec = period_min * 60
+
+    dt = np.dtype([('ctm', '<i8'), ('o', '<f8'), ('h', '<f8'), ('l', '<f8'),
+                   ('c', '<f8'), ('v', '<i8'), ('sp', '<i4'), ('rv', '<i8')])
+    assert dt.itemsize == 60
+
+    MS_PER_DAY = 86_400_000
+    day_lo = from_ms // MS_PER_DAY
+    day_hi = (to_ms - 1) // MS_PER_DAY if to_ms > 0 else -1
+    # danh sach thang giao [from,to]
+    months = []
+    d = datetime.date(1970, 1, 1) + datetime.timedelta(days=day_lo)
+    end = datetime.date(1970, 1, 1) + datetime.timedelta(days=day_hi)
+    y, m = d.year, d.month
+    while (y, m) <= (end.year, end.month):
+        months.append((y, m))
+        m += 1
+        if m > 12: m = 1; y += 1
+
+    os.makedirs(os.path.dirname(os.path.abspath(out_path)) or ".", exist_ok=True)
+    tmp = out_path + ".tmp"
+    nbar = 0
+    with open(tmp, "wb") as f:
+        f.write(_pack_header(symbol, period_min, digits))
+        for (yy, mm) in months:
+            m0 = int(datetime.datetime(yy, mm, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
+            ny, nm = (yy + 1, 1) if mm == 12 else (yy, mm + 1)
+            m1 = int(datetime.datetime(ny, nm, 1, tzinfo=datetime.timezone.utc).timestamp() * 1000)
+            lo = max(m0, from_ms); hi = min(m1, to_ms)
+            if lo >= hi:
+                continue
+            a = tick_store.load_range_np(symbol, lo, hi)
+            if a is None or len(a) == 0:
+                continue
+            ts = (a['t'] // 1000).astype('int64')
+            bt = (ts // period_sec) * period_sec
+            df = pd.DataFrame({'bt': bt, 'bid': a['bid'],
+                               'sp': (a['ask'] - a['bid']) / point})
+            g = df.groupby('bt', sort=True)
+            o = g['bid'].first().to_numpy(); h = g['bid'].max().to_numpy()
+            l = g['bid'].min().to_numpy();   c = g['bid'].last().to_numpy()
+            vol = g['bid'].size().to_numpy(); spm = g['sp'].mean().to_numpy()
+            bts = np.sort(df['bt'].unique())
+            n = len(bts)
+            rec = np.empty(n, dtype=dt)
+            rec['ctm'] = bts; rec['o'] = o; rec['h'] = h; rec['l'] = l; rec['c'] = c
+            rec['v'] = vol.astype('<i8'); rec['sp'] = np.rint(spm).astype('<i4'); rec['rv'] = 0
+            rec.tofile(f)
+            nbar += n
+        f.flush(); os.fsync(f.fileno())
+    os.replace(tmp, out_path)
+    sz = os.path.getsize(out_path)
+    print(f"[OK] HST(fast): {nbar:,} bars  {sz/1024/1024:.1f} MB  -> {out_path}")
+    return out_path
+
+
 def build_hst(ticks, symbol, period_min, out_path):
     """
     Build HST tu iterable tick (time_ms, bid, ask) -> bar OHLC theo BID.

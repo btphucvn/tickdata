@@ -189,19 +189,20 @@ def cmd_build(args):
     # Build HST truoc FXT -> FXT moi hon HST -> MT4 uu tien dung FXT tick-accurate cua ta.
     if not no_deploy:
         try:
-            from hst_builder import build_hst, find_mt4_history_dirs, deploy_hst
+            from hst_builder import build_hst_fast, find_mt4_history_dirs, deploy_hst
             hdirs = find_mt4_history_dirs()
             if hdirs:
                 server_dir = hdirs[0][1]
                 hst_out = os.path.join(server_dir, f'{sym}{args.period}.hst')
-                sig = _prep_sig('hst')
-                if _cache_ok(hst_out, sig):
-                    print(f'[cache] HST {d_from}->{d_to} khong doi -> bo qua build')
+                # HST phu TOAN BO coverage (superset) -> MOI range con lai tai dung (khong
+                # build lai khi doi range). Cache theo version-data (cov). Build vectorized.
+                hsig = f"hst|{sym}|{args.period}|{cov[0]}|{cov[1]}|{cov[2]}"
+                if _cache_ok(hst_out, hsig):
+                    print(f'[cache] HST superset khong doi -> bo qua build')
                 else:
-                    print(f'[*] Build HST M{args.period} {d_from} -> {d_to} -> {hst_out}')
-                    build_hst(tick_store.iter_range(sym, build_from_ms, to_ms),
-                              sym, args.period, hst_out)
-                    _cache_write(hst_out, sig)
+                    print(f'[*] Build HST M{args.period} (superset toan store) -> {hst_out}')
+                    build_hst_fast(sym, args.period, cov[0], cov[1] + 1, hst_out)
+                    _cache_write(hst_out, hsig)
             else:
                 print('[!] Khong tim thay history/<server> -> bo qua HST '
                       '(MT4 co the bao "no history data").')
