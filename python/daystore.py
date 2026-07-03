@@ -823,20 +823,19 @@ def materialize_paths(symbol, from_ms, to_ms):
         # *** TOC DO: tai dung .bin cu neu SO RECORD khop catalog — KHONG giai nen. ***
         if os.path.exists(p) and (os.path.getsize(p) - _OLD_HDR) // REC == want:
             paths.append(p); continue
-        ticks = load_month(sym, y, m)   # cache miss -> moi giai nen
-        if not ticks:
+        # *** TOC DO (2026-07): VECTORIZED — .bin body = raw record .tkd (<qdd> 24B) y het,
+        # nen ghi thang mang numpy (tofile), BO vong lap Python per-tick (~10x nhanh hon). ***
+        lo, hi = _month_day_range(y, m)
+        a = load_range_np(sym, lo * MS_PER_DAY, hi * MS_PER_DAY)
+        if a is None or len(a) == 0:
             continue
-        want = len(ticks)
         os.makedirs(os.path.dirname(p), exist_ok=True)
-        buf = bytearray()
-        for t in ticks:
-            buf += _RECS.pack(t[0], t[1], t[2])
         tmp = p + ".tmp"
         with open(tmp, "wb") as f:
             f.write(_OLD_MAGIC)
             f.write(struct.pack("<I", 1))
-            f.write(struct.pack("<Q", want))
-            f.write(bytes(buf))
+            f.write(struct.pack("<Q", len(a)))
+            a.tofile(f)
             f.flush(); os.fsync(f.fileno())
         os.replace(tmp, p)
         paths.append(p)

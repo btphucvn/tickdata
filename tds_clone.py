@@ -253,27 +253,18 @@ def cmd_build(args):
               f'"no history data". Hay giai phong o dia hoac chon khoang ngay ngan hon.')
         sys.exit(1)
 
-    # --- VARIABLE SPREAD: ghi file spread that cho hook (giong TDS) ---
+    # --- VARIABLE SPREAD: hook lay spread on-demand tu .bin (vfxt::RealSpreadPrice),
+    #     KHONG doc than file -> chi can ghi STUB header 'TDSS' (tuc thi, bo build 240MB
+    #     moi range). Ket qua backtest y het (than file la dead-code o mode nay). ---
     if not no_deploy:
         try:
             import shm_writer
             spread_path = os.path.join(os.path.dirname(__file__), 'data', 'active.spread')
-            sig = _prep_sig('spread')
-            if _cache_ok(spread_path, sig):
-                print(f'[cache] Spread {d_from}->{d_to} khong doi -> bo qua build')
-            else:
-                try:
-                    ss = shm_writer.write_spread_file_fast(sym, spread_path,
-                                                           from_ms=build_from_ms, to_ms=to_ms)
-                except (ImportError, AttributeError):
-                    ss = shm_writer.write_spread_file(sym, spread_path,
-                                                      from_ms=build_from_ms, to_ms=to_ms)
-                _cache_write(spread_path, sig)
-                print(f'[OK] Spread file: {ss["count"]:,} records, avg {ss["avg"]:.0f}pts '
-                      f'-> {spread_path}')
-                print(f'     (Inject + tick "Use my tick data" -> hook ap variable spread that)')
+            shm_writer.write_spread_stub(sym, spread_path)
+            print(f'[OK] Spread: stub TDSS -> {spread_path} '
+                  f'(spread that on-demand tu .bin qua hook RealSpreadPrice)')
         except Exception as e:
-            print(f'[!] Khong ghi duoc spread file: {e}')
+            print(f'[!] Khong ghi duoc spread stub: {e}')
 
     if not no_deploy:
         print(f'[OK] Da build FXT+HST thang vao MT4: {out}  ({sz/1024/1024:.1f} MB)')

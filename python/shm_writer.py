@@ -203,6 +203,31 @@ def write_spread_file_fast(symbol, out_path, from_ms, to_ms, settings=None):
     return dict(count=count, avg=float(sp.mean()), point=point)
 
 
+def write_spread_stub(symbol, out_path, settings=None):
+    """
+    Ghi active.spread TI HON (chi header TDSS + 2 record bien), KHONG nap/giai nen data.
+
+    *** TOC DO (2026-07) ***: o mode variable-spread ('TDSS'), hook (tdshook.cpp)
+    KHONG doc than file — LookupSpread la DEAD CODE; spread that lay tu
+    vfxt::RealSpreadPrice() doc thang .bin on-demand (khop tick bang bid, dung ca diem
+    gap). Hook chi can header (magic 'TDSS' -> chon mode) + file map duoc (OpenShm).
+    Vi vay ghi 23.7M record moi range la LANG PHI -> ghi stub. KET QUA BACKTEST Y HET
+    (than file khong duoc doc). Neu can lai full body (vd debug LookupSpread) dung
+    write_spread_file_fast.
+    """
+    sym = symbol.upper()
+    point = symbols_meta.resolve(sym).point
+    # 2 record bien phu toan mien thoi gian (neu co cong cu nao do doc -> tra 0).
+    rec = struct.pack("<ifif", 0, 0.0, 0x7FFFFFFF, 0.0)
+    tmp = out_path + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(struct.pack("<IId", MAGIC_SPREAD, 2, point))
+        f.write(rec)
+        f.flush(); os.fsync(f.fileno())
+    os.replace(tmp, out_path)
+    return dict(count=2, avg=0.0, point=point, stub=True)
+
+
 def build_tick_from_store(symbol, point=None, from_ms=None, to_ms=None):
     """
     Vung Tick (magic TDST): nhet bid+ask THAT — dung khi KHONG deploy FXT.
