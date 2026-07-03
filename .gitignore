@@ -29,3 +29,7 @@ db.7.gbf
 
 native/test/*.exe
 native/test/*.obj
+
+native/build/**/*.tlog
+native/build/**/*.log
+native/build/**/tdshook.dir/
