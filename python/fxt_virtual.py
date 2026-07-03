@@ -145,12 +145,14 @@ def write_virtual(symbol, period_min, cfg_path, placeholder_fxt,
     total_size = HEADER_SIZE + total * RECORD_SIZE
     _make_sparse_placeholder(placeholder_fxt, header, total_size)
 
-    # Config cho hook C++
+    # Config cho hook C++ — VER 2 (windowed .tkd giong TDS): liet ke day .tkd + bounds,
+    # KHONG materialize .bin (bo 11GB scratch). Native giai nen theo ngay (LRU) -> chay
+    # 10+ nam trong MT4 32-bit (khong mmap toan bo).
     dst_iv = _dst_intervals(y0, y1, dst)
-    paths = _months_in_range(sym, from_ms, to_ms)
+    days = tick_store.day_paths_meta(sym, from_ms, to_ms)
     with open(cfg_path, 'wb') as f:
         f.write(MAGIC)
-        f.write(struct.pack('<II', 1, HEADER_SIZE))
+        f.write(struct.pack('<II', 2, HEADER_SIZE))      # ver=2
         f.write(header)
         f.write(struct.pack('<ii', period_sec, int(gmt_offset)))
         f.write(struct.pack('<I', len(dst_iv)))
@@ -163,14 +165,16 @@ def write_virtual(symbol, period_min, cfg_path, placeholder_fxt,
         phname = os.path.basename(placeholder_fxt).encode('utf-8')
         f.write(struct.pack('<I', len(phname)))
         f.write(phname)
-        f.write(struct.pack('<I', len(paths)))
-        for p in paths:
+        # nday | { pathlen, path_utf8, first_ms(i64), last_ms(i64), count(u32) }*nday
+        f.write(struct.pack('<I', len(days)))
+        for (p, fms, lms, cnt) in days:
             pb = p.encode('utf-8')
             f.write(struct.pack('<I', len(pb)))
             f.write(pb)
+            f.write(struct.pack('<qqI', fms, lms, cnt))
 
     return dict(total=total, bars=num_bars, size=total_size,
-                nbin=len(paths), placeholder=placeholder_fxt, cfg=cfg_path)
+                nbin=len(days), placeholder=placeholder_fxt, cfg=cfg_path)
 
 
 if __name__ == '__main__':

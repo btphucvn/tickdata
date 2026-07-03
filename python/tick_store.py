@@ -19,7 +19,7 @@ from daystore import (  # noqa: F401
     # --- quan ly ---
     delete_symbol, list_symbols, store_dir, close_all,
     # --- native ---
-    day_paths,                    # giai doan B: native doc thang .tkd
+    day_paths, day_paths_meta,    # giai doan B: native doc thang .tkd (windowed + bounds)
     month_file, materialize_paths, clean_scratch,   # giai doan A: scratch .bin (du phong)
     # --- tuong thich GUI cu (kho .tkd luon nen -> no-op) ---
     is_compressed, compress_month, compress_symbol,

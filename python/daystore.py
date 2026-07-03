@@ -803,6 +803,27 @@ def day_paths(symbol, from_ms, to_ms):
     return [_day_file_by_index(sym, day) for day in _days_in(sym, day_lo, day_hi)]
 
 
+def day_paths_meta(symbol, from_ms, to_ms):
+    """
+    List (path, first_ms, last_ms, count) cua cac ngay giao [from_ms, to_ms], theo THU
+    TU thoi gian — cho native windowed .tkd (fxt_virtual.cpp): route theo bounds + giai
+    nen theo ngay (LRU), KHONG can scratch .bin. Bounds lay tu catalog (khong mo file).
+    Chi tra ngay CO data.
+    """
+    sym = symbol.upper(); _ensure(sym)
+    day_lo = from_ms // MS_PER_DAY
+    day_hi = (to_ms - 1) // MS_PER_DAY if to_ms > 0 else -1
+    c = _catalog()
+    out = []
+    for day in _days_in(sym, day_lo, day_hi):
+        row = c.execute("SELECT first_ms, last_ms, cnt FROM datainfo WHERE name=? AND day=?",
+                        (sym, day)).fetchone()
+        if not row or not row[2]:
+            continue
+        out.append((_day_file_by_index(sym, day), int(row[0]), int(row[1]), int(row[2])))
+    return out
+
+
 def materialize_paths(symbol, from_ms, to_ms):
     """
     Bung cac thang giao [from_ms, to_ms) ra .bin scratch (data/_materialized) cho native
