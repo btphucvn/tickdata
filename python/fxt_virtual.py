@@ -98,11 +98,11 @@ def _dst_intervals(y0, y1, dst):
 
 def _months_in_range(symbol, from_ms, to_ms):
     """
-    Danh sach path file NGAY .tkd giao [from_ms,to_ms) cho native (fxt_virtual.cpp
-    giai doan B) doc thang tung ngay (giai nen puff, windowed) — KHONG scratch, KHONG
-    lam phinh kho. (Ten ham giu nguyen de tuong thich; thuc chat tra path ngay .tkd.)
+    Danh sach path .bin cua cac thang giao [from_ms,to_ms) cho native MMAP.
+    Thang nen (.tkz) duoc BUNG ra VUNG TAM (data/_materialized), store GIU NGUYEN nen
+    -> backtest KHONG lam phinh store, KHONG can nen lai sau backtest (giong TDS).
     """
-    return tick_store.day_paths(symbol, from_ms, to_ms)
+    return tick_store.materialize_paths(symbol, from_ms, to_ms)
 
 
 def write_virtual(symbol, period_min, cfg_path, placeholder_fxt,

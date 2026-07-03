@@ -9,9 +9,6 @@ namespace vfxt {
 // Nạp/refresh config data\active.fxtv (tính đường dẫn từ module DLL). Trả true nếu active.
 bool Load(HMODULE hMod);
 
-// Nạp config từ đường dẫn cụ thể (dùng cho unit-test standalone). Trả true nếu active.
-bool LoadPath(const wchar_t* cfgPath);
-
 // Đang ở chế độ FXT ảo?
 bool Active();
 
