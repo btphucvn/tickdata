@@ -191,6 +191,33 @@ static void ReadTesterDates(wchar_t* fromStr, wchar_t* toStr)
         swprintf(toStr, 16, L"%04d-%02d-%02d", st.wYear, st.wMonth, st.wDay);
 }
 
+// ---------------------------------------------------------------------------
+// Doc TRUC TIEP tham so tester HIEN TAI (symbol/from/to/period) ra chuoi ACP.
+// Hook (fxt_patch) goi ham nay LUC START de prepare FXT ao dung KHOANG NGAY dang
+// chon trong MT4 — range "dong" theo GUI, giong TDS. Tra true neu doc du sym+from+to.
+// ---------------------------------------------------------------------------
+bool GuiReadTesterParams(char* sym, int symN, char* from, int fromN,
+                         char* to, int toN, int* period)
+{
+    if (sym) sym[0] = 0;
+    if (from) from[0] = 0;
+    if (to) to[0] = 0;
+    if (period) *period = 0;
+    if (!g_panel) return false;
+
+    wchar_t wsym[64] = {0}, wfrom[32] = {0}, wto[32] = {0};
+    ReadTesterSymbol(wsym, 64);
+    ReadTesterDates(wfrom, wto);
+    int p = ReadTesterPeriod();
+
+    if (!wsym[0] || !wfrom[0] || !wto[0]) return false;
+    if (sym)  WideCharToMultiByte(CP_ACP, 0, wsym,  -1, sym,  symN,  nullptr, nullptr);
+    if (from) WideCharToMultiByte(CP_ACP, 0, wfrom, -1, from, fromN, nullptr, nullptr);
+    if (to)   WideCharToMultiByte(CP_ACP, 0, wto,   -1, to,   toN,   nullptr, nullptr);
+    if (period) *period = p;
+    return true;
+}
+
 // ===========================================================================
 // SETTINGS DIALOG (modeless popup)
 // ===========================================================================

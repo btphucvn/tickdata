@@ -4,9 +4,11 @@
 //       hook ReadFile phuc vu record THAT sinh on-the-fly tu tick_store (vfxt::Serve).
 #include "fxt_patch.h"
 #include "fxt_virtual.h"
+#include "gui_inject.h"
 #include "MinHook.h"
 #include <string>
 #include <cwctype>
+#include <cstring>
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
@@ -86,22 +88,51 @@ namespace {
 
     volatile bool g_preparing = false;
 
-    // TDS-FLOW: neu co marker data\pending.prep -> chay `prepare --virtual` NGAY LUC
-    // START (khi MT4 mo FXT), roi moi cho MT4 doc. Giong TDS: build tai Start, khong
-    // build o luc tick checkbox. Chay 1 lan cho moi lan tick (xong thi xoa marker).
+    // Khoang da prepare gan nhat ("sym from to period") -> tranh build lai thua khi
+    // MT4 mo FXT nhieu lan trong CUNG mot lan Start. Doi tham so -> build lai.
+    char g_lastPrep[160] = {0};
+
+    // TDS-FLOW (range DONG theo MT4): moi lan Start (MT4 mo FXT), DOC TRUC TIEP
+    // symbol/from/to/period HIEN TAI tu GUI tester roi chay `prepare --virtual` cho
+    // dung khoang do. Khong con phu thuoc marker one-shot -> doi ngay trong MT4 la
+    // backtest tu build lai dung range (giong TDS). Marker pending.prep chi con la
+    // fallback (vd doc GUI that bai).
     void MaybePrepareAtStart() {
         if (g_preparing) return;
         wchar_t root[MAX_PATH];
         if (!ProjectRoot(root, MAX_PATH)) return;
         wchar_t mpath[MAX_PATH];
         swprintf(mpath, MAX_PATH, L"%s\\data\\pending.prep", root);
-        FILE* f = nullptr;
-        if (_wfopen_s(&f, mpath, L"rb") != 0 || !f) return;      // khong co marker -> thoi
-        char buf[512]; size_t nn = fread(buf, 1, sizeof(buf) - 1, f); fclose(f); buf[nn] = 0;
+
         char sym[64] = {0}, from[32] = {0}, to[32] = {0}; int period = 0;
-        if (sscanf_s(buf, "%63s %31s %31s %d",
-                     sym, (unsigned)sizeof(sym), from, (unsigned)sizeof(from),
-                     to, (unsigned)sizeof(to), &period) < 4) { DeleteFileW(mpath); return; }
+        bool haveMarker = false;
+
+        // 1) Uu tien: doc THANG tu GUI tester (chi khi "Use my tick data" dang bat).
+        bool live = GuiUseMyTickData() &&
+                    GuiReadTesterParams(sym, sizeof(sym), from, sizeof(from),
+                                        to, sizeof(to), &period);
+        // 2) Fallback: marker pending.prep (tuong thich flow cu / khi khong doc duoc GUI).
+        if (!live) {
+            FILE* f = nullptr;
+            if (_wfopen_s(&f, mpath, L"rb") != 0 || !f) return;  // khong GUI, khong marker -> thoi
+            char buf[512]; size_t nn = fread(buf, 1, sizeof(buf) - 1, f); fclose(f); buf[nn] = 0;
+            if (sscanf_s(buf, "%63s %31s %31s %d",
+                         sym, (unsigned)sizeof(sym), from, (unsigned)sizeof(from),
+                         to, (unsigned)sizeof(to), &period) < 4) { DeleteFileW(mpath); return; }
+            haveMarker = true;
+        } else {
+            // Con marker cu? xoa (da co GUI live) de khoi nham.
+            haveMarker = (GetFileAttributesW(mpath) != INVALID_FILE_ATTRIBUTES);
+        }
+        if (period <= 0) period = 1;
+
+        // Da build cho dung khoang nay roi + config con active -> khoi build lai.
+        char key[160];
+        _snprintf_s(key, sizeof(key), _TRUNCATE, "%s %s %s %d", sym, from, to, period);
+        if (vfxt::Active() && strcmp(key, g_lastPrep) == 0) {
+            if (haveMarker) DeleteFileW(mpath);
+            return;
+        }
 
         g_preparing = true;
         GuardLog("VIRTUAL FXT: BUILD tai Start (prepare --virtual)...");
@@ -122,10 +153,11 @@ namespace {
             WaitForSingleObject(pi.hProcess, 300000);   // cho toi 5 phut build
             CloseHandle(pi.hProcess); CloseHandle(pi.hThread);
             GuardLog("VIRTUAL FXT: BUILD xong.");
+            strcpy_s(g_lastPrep, sizeof(g_lastPrep), key);   // nho khoang da build
         } else {
             GuardLog("VIRTUAL FXT: LOI spawn python prepare");
         }
-        DeleteFileW(mpath);          // build 1 lan / moi lan tick checkbox
+        if (haveMarker) DeleteFileW(mpath);   // marker chi la fallback -> don sau khi dung
         vfxt::Load(SelfModule());    // nap config vua build
         g_preparing = false;
     }

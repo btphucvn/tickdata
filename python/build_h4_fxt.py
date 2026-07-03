@@ -21,17 +21,48 @@ PERIOD = 240   # H4
 def ms(y, mo, d):
     return int(datetime.datetime(y, mo, d, tzinfo=datetime.timezone.utc).timestamp() * 1000)
 
+def _parse_day(s):
+    return int(datetime.datetime.fromisoformat(s).replace(
+        tzinfo=datetime.timezone.utc).timestamp() * 1000)
+
 def main():
+    # *** RANGE DONG (2026-07): KHONG con hardcode 2017-12..2019-06. ***
+    # Range lay tu tham so dong lenh; range dung nhat = KHOANG TEST ban chon trong MT4.
+    #   python build_h4_fxt.py <from YYYY-MM-DD> <to YYYY-MM-DD>
+    # Bo qua tham so -> in coverage + huong dan (tranh build nham/toan bo store 25GB).
+    #
+    # LUU Y: file nay build FXT THAT (khong sparse) -> range dai = file rat lon. De
+    # range "tu dong theo MT4" ma KHONG ton dia, dung flow FXT ao: tick "Use my tick
+    # data" trong tester (hook doc From/To GUI -> prepare --virtual dung khoang do).
+    cov = tick_store.coverage(SYM)
+    if not cov:
+        print(f'[!] Chua co data {SYM}.'); sys.exit(1)
+    cov_from = datetime.datetime.utcfromtimestamp(cov[0]/1000).date()
+    cov_to   = datetime.datetime.utcfromtimestamp(cov[1]/1000).date()
+
+    argv = [a for a in sys.argv[1:] if not a.startswith('-')]
+    if len(argv) >= 2:
+        from_ms, to_ms = _parse_day(argv[0]), _parse_day(argv[1])
+    else:
+        print(f'[i] Store {SYM} co data: {cov_from} .. {cov_to}')
+        print(f'    Dung: python build_h4_fxt.py <from YYYY-MM-DD> <to YYYY-MM-DD>')
+        print(f'    (Vd: python build_h4_fxt.py 2018-01-01 2026-07-02)')
+        print(f'    Hoac tot hon: tick "Use my tick data" trong MT4 -> FXT ao dung range GUI.')
+        sys.exit(1)
+
+    # Kep trong pham vi store
+    from_ms = max(from_ms, cov[0]); to_ms = min(to_ms, cov[1])
+    d_from = datetime.datetime.utcfromtimestamp(from_ms/1000).date()
+    d_to   = datetime.datetime.utcfromtimestamp(to_ms/1000).date()
+
     s = settings_store.load(SYM)
     gmt, dst = int(s.gmt_offset), int(s.dst)
-    print(f'[*] tz: GMT{gmt:+d} DST={dst} (giong M1 FXT da khop TDS)')
+    print(f'[*] tz: GMT{gmt:+d} DST={dst} (giong TDS)')
 
-    # Range = khop M1 FXT: 2017-12-25 .. 2019-06-01 (UTC). Bao warmup vol-target.
-    from_ms, to_ms = ms(2017, 12, 25), ms(2019, 6, 1)
     proj = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out = os.path.join(proj, 'data', 'fxt', f'{SYM}{PERIOD}_0.fxt')
 
-    print(f'[*] Build H4 FXT {SYM} range {datetime.date(2017,12,25)}..{datetime.date(2019,6,1)} ...')
+    print(f'[*] Build H4 FXT {SYM} range {d_from}..{d_to} ...')
     t0 = time.time()
     ticks = tick_store.iter_range(SYM, from_ms, to_ms)
     fxt_builder.build_fxt(ticks, SYM, PERIOD, out, gmt_offset=gmt, dst=dst)
