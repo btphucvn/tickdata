@@ -22,6 +22,6 @@ from daystore import (  # noqa: F401
     month_file, materialize_paths, clean_scratch,   # giai doan A: scratch .bin (du phong)
     # --- tuong thich GUI cu (kho .tkd luon nen -> no-op) ---
     is_compressed, compress_month, compress_symbol,
-    # --- migration + hang so ---
-    migrate_all, MS_PER_DAY, REC,
+    # --- migration + lam sach + hang so ---
+    migrate_all, clean_crossed_all, clean_symbol, MS_PER_DAY, REC,
 )

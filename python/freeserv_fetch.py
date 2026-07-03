@@ -125,9 +125,15 @@ def fetch_range(symbol, date_from, date_to, progress_cb=None):
     times_ms = (df.index.view("int64") // 1_000_000)        # ns -> ms
     bids = df["bidPrice"].to_numpy()
     asks = df["askPrice"].to_numpy()
-    ticks = [(int(t), float(b), float(a))
-             for t, b, a in zip(times_ms.tolist(), bids.tolist(), asks.tolist())
-             if b > 0 and a > 0]
+    # crossed-quote (bid>ask, feed loi) -> SWAP giong TDS
+    ticks = []
+    for t, b, a in zip(times_ms.tolist(), bids.tolist(), asks.tolist()):
+        b = float(b); a = float(a)
+        if b <= 0 or a <= 0:
+            continue
+        if b > a:
+            b, a = a, b
+        ticks.append((int(t), b, a))
     ticks.sort(key=lambda t: t[0])
     if progress_cb:
         progress_cb(1, 1, len(ticks))

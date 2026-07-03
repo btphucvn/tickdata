@@ -188,6 +188,23 @@ def _unpack_records(raw):
     return [_RECS.unpack_from(raw, off) for off in range(0, len(raw) - REC + 1, REC)]
 
 
+def _clean_ticks(ticks):
+    """
+    Lam sach crossed-quote GIONG TDS: khi bid>ask (bao gia dao/loi cua feed Dukascopy),
+    SWAP bid<->ask (khong xoa). Da chung minh 10/10 khop TDS + ATR lenh #1 khop chinh
+    xac (xem BFC/crossed RE). Idempotent (tick bid<=ask khong doi). Tra (list_moi, so_swap).
+    """
+    out = []
+    nsw = 0
+    for t in ticks:
+        if t[1] > t[2]:                     # bid > ask -> crossed
+            out.append((t[0], t[2], t[1]))  # swap: bid=ask cu, ask=bid cu
+            nsw += 1
+        else:
+            out.append(t)
+    return out, nsw
+
+
 def _write_day(symbol, day_index, ticks):
     """Ghi 1 file ngay ATOMIC (ticks da sort, cung 1 ngay). Cap nhat catalog."""
     sym = symbol.upper()
@@ -246,6 +263,7 @@ def append_day(symbol, year, month, ticks):
         return 0
     sym = symbol.upper()
     _ensure(sym)
+    ticks, _ = _clean_ticks(ticks)          # bat bien kho: swap crossed (giong TDS)
     by_day: dict[int, list] = {}
     for t in ticks:
         by_day.setdefault(_day_index_of(t[0]), []).append(t)
@@ -574,6 +592,59 @@ def reencode_all(progress=None):
     for sym in {s for s, _ in files}:
         _rebuild_catalog(sym)
     return total
+
+
+def _clean_file(sym, path):
+    """Swap crossed-quote trong 1 file .tkd, ghi lai (v2) neu co doi. Tra so tick da swap."""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(HDR); body = f.read()
+    except OSError:
+        return 0
+    if len(head) < HDR or head[:4] != MAGIC:
+        return 0
+    ver = struct.unpack_from("<I", head, 4)[0]
+    cnt = struct.unpack_from("<I", head, 32)[0]
+    try:
+        raw = _inflate(body, cnt * REC) if ver == VER_DEFLATE else lzma.decompress(body)
+    except (zlib.error, lzma.LZMAError):
+        return 0
+    new, nsw = _clean_ticks(_unpack_records(raw))
+    if nsw:
+        day_index = struct.unpack_from("<q", head, 8)[0] // MS_PER_DAY
+        _write_day(sym, day_index, new)     # ghi lai v2 + cap nhat catalog
+    return nsw
+
+
+def clean_symbol(symbol, progress=None):
+    """Swap crossed trong MOI ngay cua 1 symbol. Tra (so_file, so_tick_swap)."""
+    sym = symbol.upper()
+    files = sorted(glob.glob(os.path.join(store_dir(sym), "*", "*.tkd")))
+    tot_sw = 0
+    for i, p in enumerate(files, 1):
+        tot_sw += _clean_file(sym, p)
+        if progress:
+            progress(i, len(files), sym)
+    _synced.discard(sym)
+    return len(files), tot_sw
+
+
+def clean_crossed_all(progress=None):
+    """Swap crossed-quote (giong TDS) trong TOAN BO kho .tkd. Tra (so_file, so_tick_swap)."""
+    files = []
+    if os.path.isdir(STORE_DIR):
+        for name in sorted(os.listdir(STORE_DIR)):
+            d = os.path.join(STORE_DIR, name)
+            if os.path.isdir(d):
+                for p in glob.glob(os.path.join(d, "*", "*.tkd")):
+                    files.append((name.upper(), p))
+    tot_sw = 0
+    for i, (sym, path) in enumerate(files, 1):
+        tot_sw += _clean_file(sym, path)
+        if progress:
+            progress(i, len(files), path)
+    _synced.clear()
+    return len(files), tot_sw
 
 
 def _migrate_old_format(symbol):

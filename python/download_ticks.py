@@ -256,6 +256,8 @@ def download_hour_ticks(symbol, year, month, day, hour, retries=3, use_cache=Tru
         ask = ask_raw / divisor
         if bid <= 0 or ask <= 0:
             continue
+        if bid > ask:            # crossed-quote (feed loi) -> SWAP giong TDS
+            bid, ask = ask, bid
         ticks.append((base_ms + ms_off, bid, ask))
 
     return ticks

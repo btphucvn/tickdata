@@ -310,10 +310,15 @@ class MainWindow(QMainWindow):
                                         ".tkd (file nen mot-file-moi-ngay, clone kien truc TDS). "
                                         "Chay 1 lan; data giu bit-exact.")
         self.mg_compress_btn.clicked.connect(self._on_migrate)
+        self.mg_clean_btn = QPushButton("Lam sach tick (swap crossed)")
+        self.mg_clean_btn.setToolTip("Sua crossed-quote GIONG TDS: swap bid<->ask khi bid>ask "
+                                     "(feed Dukascopy loi). Da chung minh 10/10 khop TDS + ATR "
+                                     "khop chinh xac. Giu nguyen so tick.")
+        self.mg_clean_btn.clicked.connect(self._on_clean)
         b_delete  = QPushButton("Xoa symbol da chon"); b_delete.clicked.connect(self._on_delete)
         b_delete.setStyleSheet("color:#b00;")
         row.addWidget(b_refresh); row.addWidget(b_months); row.addWidget(b_verify)
-        row.addWidget(self.mg_compress_btn)
+        row.addWidget(self.mg_compress_btn); row.addWidget(self.mg_clean_btn)
         row.addStretch(); row.addWidget(b_delete)
         root.addLayout(row)
 
@@ -430,6 +435,32 @@ class MainWindow(QMainWindow):
             return f"Da chuyen {n} symbol sang kho .tkd (clone kien truc TDS)."
 
         self._run(task, self.mg_compress_btn, self.mg_bar, self.glog, total_hint=len(pending))
+
+    def _on_clean(self):
+        import daystore
+        sym = self._selected_symbol_quiet()   # None -> lam sach TAT CA
+        target = sym if sym else "TAT CA symbol"
+        if QMessageBox.question(self, "Lam sach tick (swap crossed)",
+                f"Sua crossed-quote (swap bid<->ask khi bid>ask) cho {target}?\n"
+                f"Giong TDS (da chung minh khop). Giu nguyen so tick, chi sua gia tri.") \
+                != QMessageBox.Yes:
+            return
+
+        def task(progress_cb):
+            def prog(done, total, path):
+                progress_cb(done, total)
+                if done % 50 == 0 or done == total:
+                    print(f"   [lam sach] {done}/{total} file")
+            if sym:
+                nf, nsw = daystore.clean_symbol(sym, progress=prog)
+                print(f"[lam sach] {sym}: {nf} file, swap {nsw:,} tick crossed")
+                return f"{sym}: da swap {nsw:,} tick crossed (giong TDS)."
+            nf, nsw = daystore.clean_crossed_all(progress=prog)
+            print(f"[lam sach] TAT CA: {nf} file, swap {nsw:,} tick crossed")
+            return f"Da swap {nsw:,} tick crossed tren {nf} file (giong TDS)."
+
+        # total_hint ~ so file (uoc luong 0 -> vo dinh)
+        self._run(task, self.mg_clean_btn, self.mg_bar, self.glog, total_hint=0)
 
     def _on_verify(self):
         sym = self._selected_symbol()
