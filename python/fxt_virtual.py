@@ -117,27 +117,17 @@ def write_virtual(symbol, period_min, cfg_path, placeholder_fxt,
     point = meta.point
     period_sec = period_min * 60
 
-    # Quet tick (numpy) chi de tinh metadata header (num_bars, total, from/to shifted).
-    a = tick_store.load_range_np(sym, from_ms, to_ms)
-    if a is None or len(a) == 0:
-        raise ValueError(f'{sym}: khong co tick trong khoang')
-    tsec = (a['t'] // 1000).astype('int64')
-    if gmt_offset or dst:
-        tsec = tsec + fxt_builder._tz_shift_vec(tsec, gmt_offset, dst)
-    # Loc cuoi tuan (server time) — PHAI khop y het C++ NextTick (fxt_virtual.cpp):
-    # bo tick Sat(6)/Sun(0) de khong sinh bar/lenh cuoi tuan (lich phien broker, giong TDS).
-    wd = ((tsec // 86400) + 4) % 7          # 0=Sun .. 6=Sat
-    keep = (wd != 0) & (wd != 6)
-    tsec = tsec[keep]
-    if len(tsec) == 0:
-        raise ValueError(f'{sym}: khong con tick sau khi loc cuoi tuan')
-    period_arr = (tsec // period_sec) * period_sec
-    num_bars = int((np.diff(period_arr) != 0).sum()) + 1
-    total = int(len(tsec))
-    from_ts, to_ts = int(tsec[0]), int(tsec[-1])
-    y0 = datetime.datetime.utcfromtimestamp(int(a['t'][0] // 1000)).year
-    y1 = datetime.datetime.utcfromtimestamp(int(a['t'][-1] // 1000)).year
-    del a, tsec, period_arr
+    # *** TOC DO (2026-07): metadata header lay tu daymeta (cache SQLite) — CONG theo
+    # ngay O(so ngay), KHONG giai nen toan range moi Start. Ket qua (total/num_bars/
+    # from_ts/to_ts) khop Y HET vong numpy cu (loc cuoi tuan gio server + bucket period;
+    # bucket <=D1 khong vat qua ranh ngay -> sum per-day = tong distinct bucket). ***
+    total, num_bars, from_ts, to_ts = tick_store.range_meta(
+        sym, from_ms, to_ms, period_min, gmt_offset, dst)
+    if total == 0:
+        raise ValueError(f'{sym}: khong co tick trong khoang (sau loc cuoi tuan)')
+    # y0..y1 cho _dst_intervals: dung nam UTC cua from/to (superset khoang tick) -> du.
+    y0 = datetime.datetime.utcfromtimestamp(from_ms / 1000).year
+    y1 = datetime.datetime.utcfromtimestamp(max(from_ms, to_ms - 1) / 1000).year
 
     # Header (dung _pack_header giong build_fxt -> byte-identical)
     if server_name is None:

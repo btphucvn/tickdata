@@ -15,6 +15,7 @@ from daystore import (  # noqa: F401
     load_month, load_all, load_range, load_range_np, iter_all, iter_range,
     # --- metadata ---
     month_last_ms, month_counts, coverage, has_month, _month_list,
+    range_meta, day_meta,          # precompute header O(days) — khong giai nen toan range
     # --- quan ly ---
     delete_symbol, list_symbols, store_dir, close_all,
     # --- native ---

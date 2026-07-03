@@ -152,6 +152,10 @@ def _rebuild_catalog(symbol):
         if h and h[3] > 0:
             rows.append((sym, h[0], h[1], h[2], h[3], h[4]))
     c.execute("DELETE FROM datainfo WHERE name=?", (sym,))
+    try:
+        c.execute("DELETE FROM daymeta WHERE name=?", (sym,))   # catalog rebuild -> daymeta stale
+    except sqlite3.OperationalError:
+        pass
     if rows:
         c.executemany("INSERT OR REPLACE INTO datainfo VALUES(?,?,?,?,?,?)", rows)
     c.commit()
@@ -226,6 +230,11 @@ def _write_day(symbol, day_index, ticks):
     c = _catalog()
     c.execute("INSERT OR REPLACE INTO datainfo VALUES(?,?,?,?,?,?)",
               (sym, day_index, first_ms, last_ms, cnt, os.path.getsize(path)))
+    # Ngay doi -> bo cache daymeta cua ngay do (tinh lai khi can).
+    try:
+        c.execute("DELETE FROM daymeta WHERE name=? AND day=?", (sym, day_index))
+    except sqlite3.OperationalError:
+        pass                                # bang daymeta chua tao -> khong co gi de xoa
     c.commit()
 
 
@@ -344,6 +353,92 @@ def coverage(symbol):
     if not r or r[2] == 0 or r[0] is None:
         return None
     return r[0], r[1], int(r[2])
+
+
+# ===========================================================================
+#  DAYMETA — precompute per-ngay (kept_ticks, bars) cho (period,gmt,dst) de tinh
+#  header FXT bang CONG-THEO-NGAY O(so ngay), KHONG giai nen toan range moi Start.
+#
+#  kept/bars khop Y HET write_virtual cu + native NextTick (loc cuoi tuan gio server,
+#  bucket theo period). Bucket period<=D1 khong vat qua ranh ngay -> sum per-day =
+#  tong distinct bucket. Cache trong SQLite -> chi giai nen 1 ngay 1 lan (moi bo
+#  period/gmt/dst), sau do moi range chi la phep cong.
+# ===========================================================================
+def _daymeta_ensure():
+    c = _catalog()
+    c.execute("""CREATE TABLE IF NOT EXISTS daymeta(
+                    name TEXT NOT NULL, day INTEGER NOT NULL,
+                    period INTEGER NOT NULL, gmt INTEGER NOT NULL, dst INTEGER NOT NULL,
+                    kept INTEGER, bars INTEGER, first_srv INTEGER, last_srv INTEGER,
+                    PRIMARY KEY(name, day, period, gmt, dst))""")
+    return c
+
+
+def _compute_day_meta(symbol, day_index, period_min, gmt, dst):
+    """Giai nen 1 ngay -> (kept, bars, first_srv, last_srv). Loc cuoi tuan gio server."""
+    import numpy as np
+    from fxt_builder import _tz_shift_vec
+    raw = _read_day_records(symbol, day_index)
+    n = len(raw) // REC
+    if n == 0:
+        return (0, 0, 0, 0)
+    t_ms = np.frombuffer(raw, dtype='<i8', count=n * 3)[0::3]   # cot time_ms (stride 24B)
+    tsec = (t_ms // 1000).astype('int64')
+    if gmt or dst:
+        tsec = tsec + _tz_shift_vec(tsec, gmt, dst)
+    wd = ((tsec // 86400) + 4) % 7          # 0=Sun .. 6=Sat
+    tsec = tsec[(wd != 0) & (wd != 6)]
+    kept = int(len(tsec))
+    if kept == 0:
+        return (0, 0, 0, 0)
+    buckets = tsec // (period_min * 60)
+    bars = int((np.diff(buckets) != 0).sum()) + 1
+    return (kept, bars, int(tsec[0]), int(tsec[-1]))
+
+
+def day_meta(symbol, day_index, period_min, gmt, dst):
+    """(kept, bars, first_srv, last_srv) cho 1 ngay — cache SQLite (tinh 1 lan)."""
+    sym = symbol.upper()
+    c = _daymeta_ensure()
+    row = c.execute("SELECT kept,bars,first_srv,last_srv FROM daymeta "
+                    "WHERE name=? AND day=? AND period=? AND gmt=? AND dst=?",
+                    (sym, day_index, period_min, gmt, dst)).fetchone()
+    if row is not None:
+        return row
+    m = _compute_day_meta(sym, day_index, period_min, gmt, dst)
+    c.execute("INSERT OR REPLACE INTO daymeta VALUES(?,?,?,?,?,?,?,?,?)",
+              (sym, day_index, period_min, gmt, dst, m[0], m[1], m[2], m[3]))
+    c.commit()
+    return m
+
+
+def range_meta(symbol, from_ms, to_ms, period_min, gmt, dst):
+    """
+    (total_kept, num_bars, first_srv, last_srv) cho [from_ms,to_ms) — CONG per-day tu
+    daymeta (cache). Khop write_virtual cu (load_range_np doc full-day trong
+    [day_lo,day_hi]); khi from/to canh nua-dem UTC == khop native NextTick clip.
+    """
+    sym = symbol.upper(); _ensure(sym)
+    period_sec = period_min * 60
+    day_lo = from_ms // MS_PER_DAY
+    day_hi = (to_ms - 1) // MS_PER_DAY if to_ms > 0 else -1
+    total = bars = 0
+    first_srv = last_srv = 0
+    prev_last_bucket = None
+    for day in _days_in(sym, day_lo, day_hi):
+        kept, b, fs, ls = day_meta(sym, day, period_min, gmt, dst)
+        if kept == 0:
+            continue
+        total += kept; bars += b
+        # tz shift (vd +2h) khien bucket period cuoi cua ngay UTC nay = bucket dau cua
+        # ngay UTC sau (vat qua nua-dem UTC) -> da dem 2 lan -> tru 1. (dung cho period<=D1)
+        if prev_last_bucket is not None and (fs // period_sec) == prev_last_bucket:
+            bars -= 1
+        prev_last_bucket = ls // period_sec
+        if first_srv == 0:
+            first_srv = fs
+        last_srv = ls
+    return (total, bars, first_srv, last_srv)
 
 
 # ===========================================================================
@@ -718,16 +813,20 @@ def materialize_paths(symbol, from_ms, to_ms):
     months = sorted({(d.year, d.month) for d in
                      (_day_to_date(day) for day in _days_in(sym, from_ms // MS_PER_DAY,
                                                             (to_ms - 1) // MS_PER_DAY if to_ms > 0 else -1))})
+    counts = month_counts(sym)      # so tick/thang tu CATALOG -> check cache khong giai nen
     paths = []
     for (y, m) in months:
-        ticks = load_month(sym, y, m)
+        want = int(counts.get((y, m), 0))
+        if want == 0:
+            continue
+        p = month_file(sym, y, m)
+        # *** TOC DO: tai dung .bin cu neu SO RECORD khop catalog — KHONG giai nen. ***
+        if os.path.exists(p) and (os.path.getsize(p) - _OLD_HDR) // REC == want:
+            paths.append(p); continue
+        ticks = load_month(sym, y, m)   # cache miss -> moi giai nen
         if not ticks:
             continue
         want = len(ticks)
-        p = month_file(sym, y, m)
-        # tai dung neu da bung dung so record
-        if os.path.exists(p) and (os.path.getsize(p) - _OLD_HDR) // REC == want:
-            paths.append(p); continue
         os.makedirs(os.path.dirname(p), exist_ok=True)
         buf = bytearray()
         for t in ticks:

@@ -158,6 +158,33 @@ def cmd_build(args):
     d_from = datetime.datetime.utcfromtimestamp(build_from_ms / 1000).date()
     d_to   = datetime.datetime.utcfromtimestamp(to_ms / 1000).date()
 
+    # tz (giong TDS GMTOffset/DST) — can SOM cho ca cache-sig cua HST/spread.
+    gmt_offset, dst = 0, 0
+    try:
+        import settings_store
+        st = settings_store.load(sym)
+        gmt_offset, dst = int(st.gmt_offset), int(st.dst)
+    except Exception as e:
+        print(f'[!] Khong doc duoc timezone settings: {e}')
+
+    # --- CACHE (2026-07): bo qua rebuild HST/spread neu range + version-data khong doi.
+    #     sig = symbol|period|gmt|dst|from|to|last_ms|total  (cov[1..2] = version data).
+    def _prep_sig(kind):
+        return (f"{kind}|{sym}|{args.period}|{gmt_offset}|{dst}"
+                f"|{build_from_ms}|{to_ms}|{cov[1]}|{cov[2]}")
+    def _cache_ok(path, sig):
+        try:
+            return os.path.exists(path) and \
+                   open(path + '.sig', encoding='utf-8').read().strip() == sig
+        except OSError:
+            return False
+    def _cache_write(path, sig):
+        try:
+            with open(path + '.sig', 'w', encoding='utf-8') as f:
+                f.write(sig)
+        except OSError:
+            pass
+
     # --- LOP 1: Build HST TRUOC (de MT4 luon co history -> KHONG "no history data").
     # Build HST truoc FXT -> FXT moi hon HST -> MT4 uu tien dung FXT tick-accurate cua ta.
     if not no_deploy:
@@ -167,9 +194,14 @@ def cmd_build(args):
             if hdirs:
                 server_dir = hdirs[0][1]
                 hst_out = os.path.join(server_dir, f'{sym}{args.period}.hst')
-                print(f'[*] Build HST M{args.period} {d_from} -> {d_to} -> {hst_out}')
-                build_hst(tick_store.iter_range(sym, build_from_ms, to_ms),
-                          sym, args.period, hst_out)
+                sig = _prep_sig('hst')
+                if _cache_ok(hst_out, sig):
+                    print(f'[cache] HST {d_from}->{d_to} khong doi -> bo qua build')
+                else:
+                    print(f'[*] Build HST M{args.period} {d_from} -> {d_to} -> {hst_out}')
+                    build_hst(tick_store.iter_range(sym, build_from_ms, to_ms),
+                              sym, args.period, hst_out)
+                    _cache_write(hst_out, sig)
             else:
                 print('[!] Khong tim thay history/<server> -> bo qua HST '
                       '(MT4 co the bao "no history data").')
@@ -181,16 +213,8 @@ def cmd_build(args):
     # --- LOP 2: Build FXT tick-accurate (MT4 dung lam du lieu test).
     print(f'[*] Build FXT M{args.period} khoang {d_from} -> {d_to} '
           f'(warm-up {warmup_days} ngay) -> {out}')
-    # Doc timezone/DST tu settings (giong TDS GMTOffset/DST) -> bar align khop TDS
-    gmt_offset, dst = 0, 0
-    try:
-        import settings_store
-        st = settings_store.load(sym)
-        gmt_offset, dst = int(st.gmt_offset), int(st.dst)
-        if gmt_offset or dst:
-            print(f'[*] Timezone: GMT+{gmt_offset} DST={dst} (giong TDS) -> dich tick sang gio broker')
-    except Exception as e:
-        print(f'[!] Khong doc duoc timezone settings: {e}')
+    if gmt_offset or dst:
+        print(f'[*] Timezone: GMT+{gmt_offset} DST={dst} (giong TDS) -> dich tick sang gio broker')
 
     virtual = getattr(args, 'virtual', False)
     try:
@@ -234,15 +258,20 @@ def cmd_build(args):
         try:
             import shm_writer
             spread_path = os.path.join(os.path.dirname(__file__), 'data', 'active.spread')
-            try:
-                ss = shm_writer.write_spread_file_fast(sym, spread_path,
-                                                       from_ms=build_from_ms, to_ms=to_ms)
-            except (ImportError, AttributeError):
-                ss = shm_writer.write_spread_file(sym, spread_path,
-                                                  from_ms=build_from_ms, to_ms=to_ms)
-            print(f'[OK] Spread file: {ss["count"]:,} records, avg {ss["avg"]:.0f}pts '
-                  f'-> {spread_path}')
-            print(f'     (Inject + tick "Use my tick data" -> hook ap variable spread that)')
+            sig = _prep_sig('spread')
+            if _cache_ok(spread_path, sig):
+                print(f'[cache] Spread {d_from}->{d_to} khong doi -> bo qua build')
+            else:
+                try:
+                    ss = shm_writer.write_spread_file_fast(sym, spread_path,
+                                                           from_ms=build_from_ms, to_ms=to_ms)
+                except (ImportError, AttributeError):
+                    ss = shm_writer.write_spread_file(sym, spread_path,
+                                                      from_ms=build_from_ms, to_ms=to_ms)
+                _cache_write(spread_path, sig)
+                print(f'[OK] Spread file: {ss["count"]:,} records, avg {ss["avg"]:.0f}pts '
+                      f'-> {spread_path}')
+                print(f'     (Inject + tick "Use my tick data" -> hook ap variable spread that)')
         except Exception as e:
             print(f'[!] Khong ghi duoc spread file: {e}')
 
