@@ -87,7 +87,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -112,10 +112,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";tdshook_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -168,10 +168,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";tdshook_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -198,7 +198,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -224,10 +224,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";tdshook_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -254,7 +254,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -279,10 +279,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";tdshook_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Phuc\Desktop\tickdata\native\sigscan;C:\Users\Phuc\Desktop\tickdata\native\third_party\minhook\include;C:\Users\Phuc\Desktop\tickdata\native\third_party\puff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -370,6 +370,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\slippage.cpp" />
     <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_patch.cpp" />
     <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\hook\fxt_virtual.cpp" />
+    <ClCompile Include="C:\Users\Phuc\Desktop\tickdata\native\third_party\puff\puff.c" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

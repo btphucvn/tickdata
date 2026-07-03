@@ -898,3 +898,394 @@
 [spread #24000000] t=1552523868 bid=3785.1 -> ask=3904.3 off328=119.2 (real .bin)
 [spread #26000000] t=1557943828 bid=7950.4 -> ask=8065.4 off328=115.0 (real .bin)
 [done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[vfxt] Load: active=0 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=0 ph=btcusd240_0.fxt
+[install] base=00590000 target=01114FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=004A0F80 -> EnableHook...
+[install] Hook @ 01114FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=00BA1662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00590000 rva=0x611662
+[CRASH]   recurse_ret=00EAD960 rva=0x91D960  xuat_hien=10 lan (Eip=00BA1662 Esp=001BE334)
+[combo] Spread combobox hwnd=00100C7A id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[combo] Spread combobox hwnd=00160904 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[vfxt] Load: active=0 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=0 ph=btcusd240_0.fxt
+[install] base=00590000 target=01114FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=07330F80 -> EnableHook...
+[install] Hook @ 01114FB0 ENABLED OK
+[vfxt] Load: active=1 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=18 ph=btcusd240_0.fxt
+[gapfill] PATCHED SL clamp @0110F1B9 -> NOP (fill gia tick that)
+[gapfill] PATCHED TP clamp @0110F39B -> NOP (fill gia tick that)
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 -> ask=13598.7 off328=102.6 (real .bin)
+[spread #2] t=1514851275 bid=13497.0 -> ask=13599.6 off328=102.6 (real .bin)
+[spread #3] t=1514851275 bid=13496.6 -> ask=13599.2 off328=102.6 (real .bin)
+[spread #4] t=1514851276 bid=13496.9 -> ask=13599.5 off328=102.6 (real .bin)
+[spread #5] t=1514851277 bid=13495.4 -> ask=13598.0 off328=102.6 (real .bin)
+[spread #2000000] t=1518028574 bid=7974.9 -> ask=8075.0 off328=100.1 (real .bin)
+[spread #4000000] t=1520581228 bid=8620.9 -> ask=8770.9 off328=150.0 (real .bin)
+[spread #6000000] t=1522911652 bid=6684.4 -> ask=6829.5 off328=145.1 (real .bin)
+[spread #8000000] t=1525418201 bid=9538.6 -> ask=9683.2 off328=144.6 (real .bin)
+[PRE gap] rectime=1525891922 rbid=9226.3 RealSpread=143.9 -> off328=143.9
+[POST gap] served time=1525891922 bid=9226.3 RealSpread=143.9 -> ask=9370.2
+[PRE gap] rectime=1525891922 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891922 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891923 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891923 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891931 rbid=9397.2 RealSpread=280.1 -> off328=280.1
+[POST gap] served time=1525891931 bid=9397.2 RealSpread=280.1 -> ask=9677.3
+[PRE gap] rectime=1525891931 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891931 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891932 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9225.0 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891932 bid=9225.0 RealSpread=145.1 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891939 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891939 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[PRE gap] rectime=1525891942 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891942 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[spread #10000000] t=1528376978 bid=7640.6 -> ask=7770.7 off328=130.1 (real .bin)
+[spread #12000000] t=1531160429 bid=6665.5 -> ask=6785.6 off328=120.1 (real .bin)
+[spread #14000000] t=1533858434 bid=6439.4 -> ask=6559.5 off328=120.1 (real .bin)
+[spread #16000000] t=1536925513 bid=6471.7 -> ask=6591.7 off328=120.0 (real .bin)
+[spread #18000000] t=1543013344 bid=4162.5 -> ask=4280.7 off328=118.2 (real .bin)
+[spread #20000000] t=1545352991 bid=3998.3 -> ask=4108.7 off328=110.4 (real .bin)
+[spread #22000000] t=1548413790 bid=3483.1 -> ask=3603.2 off328=120.1 (real .bin)
+[spread #24000000] t=1552523868 bid=3785.1 -> ask=3904.3 off328=119.2 (real .bin)
+[spread #26000000] t=1557943828 bid=7950.4 -> ask=8065.4 off328=115.0 (real .bin)
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[vfxt] Load: active=0 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=0 ph=btcusd240_0.fxt
+[install] base=00A40000 target=015C4FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=03C50F80 -> EnableHook...
+[install] Hook @ 015C4FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01051662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00A40000 rva=0x611662
+[CRASH]   recurse_ret=0135D960 rva=0x91D960  xuat_hien=10 lan (Eip=01051662 Esp=0387E5D0)
+[combo] Spread combobox hwnd=000B0710 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[combo] Spread combobox hwnd=002B0B02 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[vfxt] Load: active=0 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=0 ph=btcusd240_0.fxt
+[install] base=00A40000 target=015C4FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=0E560F80 -> EnableHook...
+[install] Hook @ 015C4FB0 ENABLED OK
+[vfxt] Load: active=1 total=30449195 bars_hdr period=14400 gmt=2 dst=3 bins=18 ph=btcusd240_0.fxt
+[gapfill] PATCHED SL clamp @015BF1B9 -> NOP (fill gia tick that)
+[gapfill] PATCHED TP clamp @015BF39B -> NOP (fill gia tick that)
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 -> ask=13598.7 off328=102.6 (real .bin)
+[spread #2] t=1514851275 bid=13497.0 -> ask=13599.6 off328=102.6 (real .bin)
+[spread #3] t=1514851275 bid=13496.6 -> ask=13599.2 off328=102.6 (real .bin)
+[spread #4] t=1514851276 bid=13496.9 -> ask=13599.5 off328=102.6 (real .bin)
+[spread #5] t=1514851277 bid=13495.4 -> ask=13598.0 off328=102.6 (real .bin)
+[spread #2000000] t=1518028574 bid=7974.9 -> ask=8075.0 off328=100.1 (real .bin)
+[spread #4000000] t=1520581228 bid=8620.9 -> ask=8770.9 off328=150.0 (real .bin)
+[spread #6000000] t=1522911652 bid=6684.4 -> ask=6829.5 off328=145.1 (real .bin)
+[spread #8000000] t=1525418201 bid=9538.6 -> ask=9683.2 off328=144.6 (real .bin)
+[PRE gap] rectime=1525891922 rbid=9226.3 RealSpread=143.9 -> off328=143.9
+[POST gap] served time=1525891922 bid=9226.3 RealSpread=143.9 -> ask=9370.2
+[PRE gap] rectime=1525891922 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891922 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891923 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891923 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891931 rbid=9397.2 RealSpread=280.1 -> off328=280.1
+[POST gap] served time=1525891931 bid=9397.2 RealSpread=280.1 -> ask=9677.3
+[PRE gap] rectime=1525891931 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891931 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891932 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9225.0 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891932 bid=9225.0 RealSpread=145.1 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891939 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891939 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[PRE gap] rectime=1525891942 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891942 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[spread #10000000] t=1528376978 bid=7640.6 -> ask=7770.7 off328=130.1 (real .bin)
+[spread #12000000] t=1531160429 bid=6665.5 -> ask=6785.6 off328=120.1 (real .bin)
+[spread #14000000] t=1533858434 bid=6439.4 -> ask=6559.5 off328=120.1 (real .bin)
+[spread #16000000] t=1536925513 bid=6471.7 -> ask=6591.7 off328=120.0 (real .bin)
+[spread #18000000] t=1543013344 bid=4162.5 -> ask=4280.7 off328=118.2 (real .bin)
+[spread #20000000] t=1545352991 bid=3998.3 -> ask=4108.7 off328=110.4 (real .bin)
+[spread #22000000] t=1548413790 bid=3483.1 -> ask=3603.2 off328=120.1 (real .bin)
+[spread #24000000] t=1552523868 bid=3785.1 -> ask=3904.3 off328=119.2 (real .bin)
+[spread #26000000] t=1557943828 bid=7950.4 -> ask=8065.4 off328=115.0 (real .bin)
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[spread #28000000] t=1515982854 bid=13608.8 -> ask=13708.9 off328=100.1 (real .bin)
+[spread #30000000] t=1518746140 bid=10005.5 -> ask=10115.8 off328=110.3 (real .bin)
+[spread #32000000] t=1521541633 bid=8406.5 -> ask=8556.5 off328=150.0 (real .bin)
+[spread #34000000] t=1523615090 bid=7852.2 -> ask=7996.5 off328=144.3 (real .bin)
+[PRE gap] rectime=1525891922 rbid=9226.3 RealSpread=143.9 -> off328=143.9
+[POST gap] served time=1525891922 bid=9226.3 RealSpread=143.9 -> ask=9370.2
+[PRE gap] rectime=1525891922 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891922 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891923 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891923 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891931 rbid=9397.2 RealSpread=280.1 -> off328=280.1
+[POST gap] served time=1525891931 bid=9397.2 RealSpread=280.1 -> ask=9677.3
+[PRE gap] rectime=1525891931 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891931 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891932 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9225.0 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891932 bid=9225.0 RealSpread=145.1 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891939 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891939 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[PRE gap] rectime=1525891942 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891942 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[spread #36000000] t=1526297056 bid=8312.6 -> ask=8442.7 off328=130.1 (real .bin)
+[spread #38000000] t=1529053752 bid=6521.2 -> ask=6651.2 off328=130.0 (real .bin)
+[spread #40000000] t=1531888471 bid=7283.5 -> ask=7403.6 off328=120.1 (real .bin)
+[spread #42000000] t=1534496528 bid=6371.3 -> ask=6491.3 off328=120.0 (real .bin)
+[spread #44000000] t=1538088615 bid=6560.3 -> ask=6680.3 off328=120.0 (real .bin)
+[spread #46000000] t=1543554645 bid=4201.4 -> ask=4319.4 off328=118.0 (real .bin)
+[spread #48000000] t=1545947290 bid=3551.7 -> ask=3670.5 off328=118.8 (real .bin)
+[spread #50000000] t=1549623241 bid=3315.1 -> ask=3433.2 off328=118.1 (real .bin)
+[spread #52000000] t=1554762274 bid=5157.4 -> ask=5272.5 off328=115.1 (real .bin)
+[spread #54000000] t=1558405257 bid=7925.5 -> ask=8039.5 off328=114.0 (real .bin)
+[vfxt] Load: active=1 bars_hdr=260016 period=14400 gmt=2 dst=1 days=6 total_rec=260016 ph=ph.fxt
+[combo] Spread combobox hwnd=00130AB8 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[vfxt] Load: active=0 bars_hdr=30449195 period=14400 gmt=2 dst=3 days=0 total_rec=0 ph=btcusd240_0.fxt
+[install] base=00A40000 target=015C4FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=0C060F80 -> EnableHook...
+[install] Hook @ 015C4FB0 ENABLED OK
+[vfxt] Load: active=1 bars_hdr=30449195 period=14400 gmt=2 dst=3 days=486 total_rec=31571386 ph=btcusd240_0.fxt
+[gapfill] PATCHED SL clamp @015BF1B9 -> NOP (fill gia tick that)
+[gapfill] PATCHED TP clamp @015BF39B -> NOP (fill gia tick that)
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 -> ask=13598.7 off328=102.6 (real .bin)
+[spread #2] t=1514851275 bid=13497.0 -> ask=13599.6 off328=102.6 (real .bin)
+[spread #3] t=1514851275 bid=13496.6 -> ask=13599.2 off328=102.6 (real .bin)
+[spread #4] t=1514851276 bid=13496.9 -> ask=13599.5 off328=102.6 (real .bin)
+[spread #5] t=1514851277 bid=13495.4 -> ask=13598.0 off328=102.6 (real .bin)
+[spread #2000000] t=1518028574 bid=7974.9 -> ask=8075.0 off328=100.1 (real .bin)
+[spread #4000000] t=1520581228 bid=8620.9 -> ask=8770.9 off328=150.0 (real .bin)
+[spread #6000000] t=1522911652 bid=6684.4 -> ask=6829.5 off328=145.1 (real .bin)
+[spread #8000000] t=1525418201 bid=9538.6 -> ask=9683.2 off328=144.6 (real .bin)
+[PRE gap] rectime=1525891922 rbid=9226.3 RealSpread=143.9 -> off328=143.9
+[POST gap] served time=1525891922 bid=9226.3 RealSpread=143.9 -> ask=9370.2
+[PRE gap] rectime=1525891922 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891922 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891923 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891923 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891931 rbid=9397.2 RealSpread=280.1 -> off328=280.1
+[POST gap] served time=1525891931 bid=9397.2 RealSpread=280.1 -> ask=9677.3
+[PRE gap] rectime=1525891931 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891931 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891932 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9225.0 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891932 bid=9225.0 RealSpread=145.1 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891939 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891939 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[PRE gap] rectime=1525891942 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891942 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[spread #10000000] t=1528376978 bid=7640.6 -> ask=7770.7 off328=130.1 (real .bin)
+[spread #12000000] t=1531160429 bid=6665.5 -> ask=6785.6 off328=120.1 (real .bin)
+[spread #14000000] t=1533858434 bid=6439.4 -> ask=6559.5 off328=120.1 (real .bin)
+[spread #16000000] t=1536925513 bid=6471.7 -> ask=6591.7 off328=120.0 (real .bin)
+[spread #18000000] t=1543013344 bid=4162.5 -> ask=4280.7 off328=118.2 (real .bin)
+[spread #20000000] t=1545352991 bid=3998.3 -> ask=4108.7 off328=110.4 (real .bin)
+[spread #22000000] t=1548413790 bid=3483.1 -> ask=3603.2 off328=120.1 (real .bin)
+[spread #24000000] t=1552523868 bid=3785.1 -> ask=3904.3 off328=119.2 (real .bin)
+[spread #26000000] t=1557943828 bid=7950.4 -> ask=8065.4 off328=115.0 (real .bin)
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[vfxt] Load: active=1 bars_hdr=30449195 period=14400 gmt=2 dst=3 days=486 total_rec=31571386 ph=btcusd240_0.fxt
+[install] base=00A40000 target=015C4FB0 bytes=55 8B EC 83 E4 C0 83 EC 34
+[install] CreateHook OK, g_orig=009A0F80 -> EnableHook...
+[install] Hook @ 015C4FB0 ENABLED OK
+[CRASH] code=0xC000001D addr=01051662 mod=C:\Program Files (x86)\Dukascopy MetaTrader 4\terminal.exe base=00A40000 rva=0x611662
+[CRASH] code=0xC0000005 addr=64C41464 mod=C:\Users\Phuc\Desktop\tickdata\native\build\hook\Release\tdshook.dll base=64C40000 rva=0x1464
+[CRASH] code=0xC0000005 addr=64C41464 mod=C:\Users\Phuc\Desktop\tickdata\native\build\hook\Release\tdshook.dll base=64C40000 rva=0x1464
+[combo] Spread combobox hwnd=005D09B4 id=1207 count=7 cursel=0
+[combo]   item[0]=Current  <== SELECTED
+[combo]   item[1]=2
+[combo]   item[2]=5
+[combo]   item[3]=10
+[combo]   item[4]=30
+[combo]   item[5]=50
+[combo]   item[6]=100
+[vfxt] Load: active=1 bars_hdr=30449195 period=14400 gmt=2 dst=3 days=486 total_rec=31571386 ph=btcusd240_0.fxt
+[gapfill] PATCHED SL clamp @015BF1B9 -> NOP (fill gia tick that)
+[gapfill] PATCHED TP clamp @015BF39B -> NOP (fill gia tick that)
+[open] Spread file MAPPED: magic=0x53534454 count=31571388 point=0.1000 path=C:\Users\Phuc\Desktop\tickdata\data\active.spread
+[spread #1] t=1514851274 bid=13496.1 -> ask=13598.7 off328=102.6 (real .bin)
+[spread #2] t=1514851275 bid=13497.0 -> ask=13599.6 off328=102.6 (real .bin)
+[spread #3] t=1514851275 bid=13496.6 -> ask=13599.2 off328=102.6 (real .bin)
+[spread #4] t=1514851276 bid=13496.9 -> ask=13599.5 off328=102.6 (real .bin)
+[spread #5] t=1514851277 bid=13495.4 -> ask=13598.0 off328=102.6 (real .bin)
+[spread #2000000] t=1518028574 bid=7974.9 -> ask=8075.0 off328=100.1 (real .bin)
+[spread #4000000] t=1520581228 bid=8620.9 -> ask=8770.9 off328=150.0 (real .bin)
+[spread #6000000] t=1522911652 bid=6684.4 -> ask=6829.5 off328=145.1 (real .bin)
+[spread #8000000] t=1525418201 bid=9538.6 -> ask=9683.2 off328=144.6 (real .bin)
+[PRE gap] rectime=1525891922 rbid=9226.3 RealSpread=143.9 -> off328=143.9
+[POST gap] served time=1525891922 bid=9226.3 RealSpread=143.9 -> ask=9370.2
+[PRE gap] rectime=1525891922 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891922 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891923 rbid=9226.5 RealSpread=143.7 -> off328=143.7
+[POST gap] served time=1525891923 bid=9226.5 RealSpread=143.7 -> ask=9370.2
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891929 rbid=9227.7 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891929 bid=9227.7 RealSpread=144.5 -> ask=9372.2
+[PRE gap] rectime=1525891931 rbid=9397.2 RealSpread=280.1 -> off328=280.1
+[POST gap] served time=1525891931 bid=9397.2 RealSpread=280.1 -> ask=9677.3
+[PRE gap] rectime=1525891931 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891931 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9398.3 RealSpread=279.0 -> off328=279.0
+[POST gap] served time=1525891932 bid=9398.3 RealSpread=279.0 -> ask=9677.3
+[PRE gap] rectime=1525891932 rbid=9225.0 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891932 bid=9225.0 RealSpread=145.1 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9226.3 RealSpread=143.8 -> off328=143.8
+[POST gap] served time=1525891932 bid=9226.3 RealSpread=143.8 -> ask=9370.1
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891932 rbid=9227.1 RealSpread=144.5 -> off328=144.5
+[POST gap] served time=1525891932 bid=9227.1 RealSpread=144.5 -> ask=9371.6
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891937 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891937 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.9 RealSpread=144.3 -> off328=144.3
+[POST gap] served time=1525891939 bid=9227.9 RealSpread=144.3 -> ask=9372.2
+[PRE gap] rectime=1525891939 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891939 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[PRE gap] rectime=1525891942 rbid=9227.4 RealSpread=145.1 -> off328=145.1
+[POST gap] served time=1525891942 bid=9227.4 RealSpread=145.1 -> ask=9372.5
+[spread #10000000] t=1528376978 bid=7640.6 -> ask=7770.7 off328=130.1 (real .bin)
+[spread #12000000] t=1531160429 bid=6665.5 -> ask=6785.6 off328=120.1 (real .bin)
+[spread #14000000] t=1533858434 bid=6439.4 -> ask=6559.5 off328=120.1 (real .bin)
+[spread #16000000] t=1536925513 bid=6471.7 -> ask=6591.7 off328=120.0 (real .bin)
+[spread #18000000] t=1543013344 bid=4162.5 -> ask=4280.7 off328=118.2 (real .bin)
+[spread #20000000] t=1545352991 bid=3998.3 -> ask=4108.7 off328=110.4 (real .bin)
+[spread #22000000] t=1548413790 bid=3483.1 -> ask=3603.2 off328=120.1 (real .bin)
+[spread #24000000] t=1552523868 bid=3785.1 -> ask=3904.3 off328=119.2 (real .bin)
+[spread #26000000] t=1557943828 bid=7950.4 -> ask=8065.4 off328=115.0 (real .bin)
+[done] Xu ly tick XONG (result=0), tick cuoi t=1559260799

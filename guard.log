@@ -221,3 +221,49 @@
 [Thu Jul  2 20:21:41 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
 [Thu Jul  2 20:21:41 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
 [Thu Jul  2 20:21:41 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Thu Jul  2 22:46:04 2026] === HOOK ReadFile OK (FXT ao) ===
+[Thu Jul  2 22:46:04 2026] === HOOK CloseHandle OK ===
+[Thu Jul  2 22:46:04 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Thu Jul  2 22:47:36 2026] === HOOK ReadFile OK (FXT ao) ===
+[Thu Jul  2 22:47:36 2026] === HOOK CloseHandle OK ===
+[Thu Jul  2 22:47:36 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Thu Jul  2 22:47:43 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Thu Jul  2 22:47:43 2026] VIRTUAL FXT: BUILD tai Start (prepare --virtual)...
+[Thu Jul  2 22:48:58 2026] VIRTUAL FXT: BUILD xong.
+[Thu Jul  2 22:48:58 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Thu Jul  2 22:48:58 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Thu Jul  2 22:48:58 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:38:48 2026] === HOOK ReadFile OK (FXT ao) ===
+[Fri Jul  3 00:38:48 2026] === HOOK CloseHandle OK ===
+[Fri Jul  3 00:38:48 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Fri Jul  3 00:39:56 2026] === HOOK ReadFile OK (FXT ao) ===
+[Fri Jul  3 00:39:56 2026] === HOOK CloseHandle OK ===
+[Fri Jul  3 00:39:56 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Fri Jul  3 00:40:02 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:40:02 2026] VIRTUAL FXT: BUILD tai Start (prepare --virtual)...
+[Fri Jul  3 00:41:30 2026] VIRTUAL FXT: BUILD xong.
+[Fri Jul  3 00:41:30 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:41:30 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:41:30 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:53:01 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:53:01 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:53:01 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 00:53:01 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:44:19 2026] === HOOK ReadFile OK (FXT ao) ===
+[Fri Jul  3 06:44:19 2026] === HOOK CloseHandle OK ===
+[Fri Jul  3 06:44:19 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Fri Jul  3 06:44:25 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:44:25 2026] VIRTUAL FXT: BUILD tai Start (prepare --virtual)...
+[Fri Jul  3 06:45:01 2026] VIRTUAL FXT: BUILD xong.
+[Fri Jul  3 06:45:01 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:45:01 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:45:01 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:48:56 2026] === HOOK ReadFile OK (FXT ao) ===
+[Fri Jul  3 06:48:56 2026] === HOOK CloseHandle OK ===
+[Fri Jul  3 06:48:56 2026] === GUARD LOADED OK (CreateFileW + ReadFile + CloseHandle) ===
+[Fri Jul  3 06:50:52 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:50:52 2026] VIRTUAL FXT: BUILD tai Start (prepare --virtual)...
+[Fri Jul  3 06:51:24 2026] VIRTUAL FXT: BUILD xong.
+[Fri Jul  3 06:51:24 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:51:24 2026] READ FXT that cua ta : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
+[Fri Jul  3 06:51:24 2026] VIRTUAL FXT: track handle -> serve records tu tick_store : C:\Users\Phuc\AppData\Roaming\MetaQuotes\Terminal\ADB94438A57B9692806EA638441107AB\tester\history\BTCUSD240_0.fxt
